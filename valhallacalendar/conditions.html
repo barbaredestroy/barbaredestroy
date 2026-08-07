@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Valhalla Calendar — Conditions d'utilisation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--glow:94,234,182;--glow2:52,199,140}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
+    body{font-family:Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+
+    .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:64px 24px 34px;background:linear-gradient(180deg,rgba(2,8,11,.5),rgba(2,5,8,.95)),radial-gradient(circle at 50% -10%,#123d2c 0,#0a1f16 31%,#05090d 67%)}
+
+    #particles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .spark{position:absolute;bottom:-10px;border-radius:50%;background:rgb(var(--glow));box-shadow:0 0 6px 1px rgba(var(--glow),.8);animation-name:rise;animation-timing-function:ease-out;animation-iteration-count:infinite;opacity:0}
+    @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+    @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
+
+    .lang{position:absolute;top:24px;right:24px;z-index:5}
+    .lang-btn{width:120px;height:120px;border:none;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+    .lang-btn:hover,.lang-btn:focus-visible{outline:none}
+    .lang-btn img{width:120px;height:120px;object-fit:contain;border-radius:3px;display:block}
+    .lang-menu{position:absolute;top:100px;right:0;min-width:170px;background:rgba(10,26,31,.97);border:1px solid rgba(var(--glow),.28);border-radius:10px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.5);display:none;max-height:280px;overflow-y:auto}
+    .lang-menu.open{display:block}
+    .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
+    .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+
+    .back{position:absolute;top:24px;left:24px;z-index:5;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8fa7a0;transition:color .3s ease}
+    .back:hover{color:#5eeab6}
+
+    main.content{position:relative;z-index:2;max-width:680px;margin:0 auto;padding-top:120px}
+    h1{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.5rem,3.4vw,2rem);color:#ede6d6;margin:0 0 40px;text-align:center}
+    p.para{font-size:14.5px;line-height:1.85;color:#c9e6da;margin:0 0 22px}
+    p.para a{color:#5eeab6}
+
+    footer{border-top:1px solid rgba(255,255,255,.06);margin-top:3rem;padding:28px 0 6px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;text-align:center}
+    footer a{font-size:12px;color:#8fa7a0;transition:color .3s ease}
+    footer a:hover{color:#5eeab6}
+    footer .copyright{width:100%;color:#556b60;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
+
+    @media(max-width:760px){.page{padding:100px 16px 28px}main.content{padding-top:60px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div id="particles" aria-hidden="true"></div>
+
+    <a class="back" href="index.html" data-i18n="backApp">← Valhalla Calendar</a>
+
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+        <img src="assetscalendar/langue.png" alt="">
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="fr">Français</button>
+        <button role="menuitem" data-lang="de">Deutsch</button>
+        <button role="menuitem" data-lang="en">English</button>
+        <button role="menuitem" data-lang="es">Español</button>
+        <button role="menuitem" data-lang="hi">हिन्दी</button>
+        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+        <button role="menuitem" data-lang="it">Italiano</button>
+        <button role="menuitem" data-lang="pt">Português</button>
+        <button role="menuitem" data-lang="ru">Русский</button>
+        <button role="menuitem" data-lang="ur">اردو</button>
+        <button role="menuitem" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <main class="content">
+      <h1 data-i18n="title">Conditions d'utilisation – Valhalla Calendar</h1>
+      <p class="para" data-i18n="p1">L'utilisation de Valhalla Calendar implique l'acceptation pleine et entière des présentes conditions d'utilisation.</p>
+      <p class="para" data-i18n="p2">Valhalla Calendar est une application permettant de consulter, créer, modifier et supprimer les événements de votre agenda Google Agenda directement depuis votre téléphone.</p>
+      <p class="para" data-i18n="p3">L'application nécessite une connexion à votre compte Google pour fonctionner. Vous restez seul propriétaire de vos données et de votre compte Google.</p>
+      <p class="para" data-i18n="p4">L'application est fournie « en l'état ». L'éditeur ne saurait être tenu responsable d'une perte de données, d'une erreur de synchronisation, ou d'un dysfonctionnement lié à un changement des services Google.</p>
+      <p class="para" data-i18n="p5">Valhalla Calendar ne remplace pas l'application officielle Google Agenda et ne garantit pas une disponibilité continue en cas d'interruption des services Google.</p>
+      <p class="para" data-i18n="p6">Ces conditions peuvent évoluer avec les mises à jour de l'application. La version en vigueur est celle publiée sur cette page.</p>
+      <p class="para"><span data-i18n="p7">Pour toute question, contactez-moi à :</span> <a href="mailto:barbaredestroy@gmail.com">barbaredestroy@gmail.com</a></p>
+    </main>
+
+    <footer>
+      <a href="index.html" data-i18n="backApp">← Valhalla Calendar</a>
+      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
+      <a href="../index.html" data-i18n="footerHome">← Accueil</a>
+      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+    </footer>
+  </main>
+
+<script>
+  var translations = {
+    fr:{title:"Conditions d'utilisation – Valhalla Calendar",p1:"L'utilisation de Valhalla Calendar implique l'acceptation pleine et entière des présentes conditions d'utilisation.",p2:"Valhalla Calendar est une application permettant de consulter, créer, modifier et supprimer les événements de votre agenda Google Agenda directement depuis votre téléphone.",p3:"L'application nécessite une connexion à votre compte Google pour fonctionner. Vous restez seul propriétaire de vos données et de votre compte Google.",p4:"L'application est fournie « en l'état ». L'éditeur ne saurait être tenu responsable d'une perte de données, d'une erreur de synchronisation, ou d'un dysfonctionnement lié à un changement des services Google.",p5:"Valhalla Calendar ne remplace pas l'application officielle Google Agenda et ne garantit pas une disponibilité continue en cas d'interruption des services Google.",p6:"Ces conditions peuvent évoluer avec les mises à jour de l'application. La version en vigueur est celle publiée sur cette page.",p7:"Pour toute question, contactez-moi à :",backApp:"← Valhalla Calendar",footerPrivacy:"Politique de confidentialité",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{title:"Nutzungsbedingungen – Valhalla Calendar",p1:"Die Nutzung von Valhalla Calendar setzt die vollständige und uneingeschränkte Annahme dieser Nutzungsbedingungen voraus.",p2:"Valhalla Calendar ist eine App, mit der du die Termine deines Google Kalenders direkt von deinem Telefon aus ansehen, erstellen, bearbeiten und löschen kannst.",p3:"Die App benötigt eine Verbindung zu deinem Google-Konto, um zu funktionieren. Du bleibst alleiniger Eigentümer deiner Daten und deines Google-Kontos.",p4:"Die App wird „wie besehen\" bereitgestellt. Der Herausgeber haftet nicht für Datenverlust, Synchronisierungsfehler oder Störungen, die durch eine Änderung der Google-Dienste verursacht werden.",p5:"Valhalla Calendar ersetzt nicht die offizielle Google Kalender-App und garantiert keine kontinuierliche Verfügbarkeit bei einer Unterbrechung der Google-Dienste.",p6:"Diese Bedingungen können sich mit den Updates der App ändern. Es gilt die auf dieser Seite veröffentlichte Version.",p7:"Bei Fragen erreichst du mich unter:",backApp:"← Valhalla Calendar",footerPrivacy:"Datenschutzerklärung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{title:"Terms of use – Valhalla Calendar",p1:"Using Valhalla Calendar implies full and unreserved acceptance of these terms of use.",p2:"Valhalla Calendar is an app that lets you view, create, edit and delete your Google Calendar events directly from your phone.",p3:"The app requires a connection to your Google account to work. You remain the sole owner of your data and your Google account.",p4:"The app is provided \"as is\". The publisher cannot be held liable for data loss, a synchronisation error, or a malfunction related to a change in Google's services.",p5:"Valhalla Calendar does not replace the official Google Calendar app and does not guarantee continuous availability in the event of a Google service interruption.",p6:"These terms may change with app updates. The version in force is the one published on this page.",p7:"For any question, contact me at:",backApp:"← Valhalla Calendar",footerPrivacy:"Privacy policy",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{title:"Condiciones de uso – Valhalla Calendar",p1:"El uso de Valhalla Calendar implica la aceptación plena e incondicional de las presentes condiciones de uso.",p2:"Valhalla Calendar es una aplicación que te permite consultar, crear, modificar y eliminar los eventos de tu Google Calendar directamente desde tu teléfono.",p3:"La aplicación necesita una conexión a tu cuenta de Google para funcionar. Sigues siendo el único propietario de tus datos y de tu cuenta de Google.",p4:"La aplicación se proporciona «tal cual». El editor no podrá ser considerado responsable de una pérdida de datos, un error de sincronización o un mal funcionamiento relacionado con un cambio en los servicios de Google.",p5:"Valhalla Calendar no sustituye a la aplicación oficial de Google Calendar y no garantiza una disponibilidad continua en caso de interrupción de los servicios de Google.",p6:"Estas condiciones pueden evolucionar con las actualizaciones de la aplicación. La versión vigente es la publicada en esta página.",p7:"Para cualquier pregunta, contáctame en:",backApp:"← Valhalla Calendar",footerPrivacy:"Política de privacidad",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{title:"उपयोग की शर्तें – वाल्हाला कैलेंडर",p1:"वाल्हाला कैलेंडर का उपयोग करने का अर्थ है इन उपयोग की शर्तों को पूर्ण और बिना शर्त स्वीकार करना।",p2:"वाल्हाला कैलेंडर एक ऐसा ऐप है जो आपको सीधे अपने फोन से अपने गूगल कैलेंडर के इवेंट देखने, बनाने, संशोधित करने और हटाने की सुविधा देता है।",p3:"काम करने के लिए ऐप को आपके गूगल खाते से कनेक्शन की आवश्यकता होती है। आप अपने डेटा और अपने गूगल खाते के एकमात्र स्वामी बने रहते हैं।",p4:"ऐप को \"जैसा है\" के आधार पर प्रदान किया जाता है। प्रकाशक डेटा हानि, सिंक्रोनाइज़ेशन त्रुटि, या गूगल सेवाओं में बदलाव से संबंधित किसी खराबी के लिए उत्तरदायी नहीं होगा।",p5:"वाल्हाला कैलेंडर आधिकारिक गूगल कैलेंडर ऐप का विकल्प नहीं है और गूगल सेवाओं में रुकावट की स्थिति में निरंतर उपलब्धता की गारंटी नहीं देता।",p6:"ये शर्तें ऐप के अपडेट के साथ बदल सकती हैं। लागू संस्करण वही है जो इस पृष्ठ पर प्रकाशित है।",p7:"किसी भी प्रश्न के लिए, मुझसे यहाँ संपर्क करें:",backApp:"← वाल्हाला कैलेंडर",footerPrivacy:"गोपनीयता नीति",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{title:"Syarat penggunaan – Valhalla Calendar",p1:"Menggunakan Valhalla Calendar berarti menerima sepenuhnya dan tanpa syarat ketentuan penggunaan ini.",p2:"Valhalla Calendar adalah aplikasi yang memungkinkanmu melihat, membuat, mengedit, dan menghapus acara Google Kalendermu langsung dari ponselmu.",p3:"Aplikasi ini memerlukan koneksi ke akun Google-mu agar dapat berfungsi. Kamu tetap menjadi satu-satunya pemilik data dan akun Google-mu.",p4:"Aplikasi ini disediakan \"apa adanya\". Penerbit tidak dapat dimintai pertanggungjawaban atas kehilangan data, kesalahan sinkronisasi, atau gangguan yang terkait dengan perubahan pada layanan Google.",p5:"Valhalla Calendar tidak menggantikan aplikasi resmi Google Kalender dan tidak menjamin ketersediaan yang berkelanjutan jika terjadi gangguan pada layanan Google.",p6:"Ketentuan ini dapat berubah seiring dengan pembaruan aplikasi. Versi yang berlaku adalah yang dipublikasikan di halaman ini.",p7:"Untuk pertanyaan apa pun, hubungi saya di:",backApp:"← Valhalla Calendar",footerPrivacy:"Kebijakan privasi",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{title:"Termini di utilizzo – Valhalla Calendar",p1:"L'utilizzo di Valhalla Calendar implica l'accettazione piena e incondizionata dei presenti termini di utilizzo.",p2:"Valhalla Calendar è un'app che ti permette di consultare, creare, modificare ed eliminare gli eventi del tuo Google Calendar direttamente dal tuo telefono.",p3:"L'app richiede una connessione al tuo account Google per funzionare. Rimani l'unico proprietario dei tuoi dati e del tuo account Google.",p4:"L'app viene fornita «così com'è». L'editore non potrà essere ritenuto responsabile di una perdita di dati, di un errore di sincronizzazione o di un malfunzionamento legato a un cambiamento dei servizi Google.",p5:"Valhalla Calendar non sostituisce l'app ufficiale di Google Calendar e non garantisce una disponibilità continua in caso di interruzione dei servizi Google.",p6:"Questi termini possono evolvere con gli aggiornamenti dell'app. La versione in vigore è quella pubblicata su questa pagina.",p7:"Per qualsiasi domanda, contattami a:",backApp:"← Valhalla Calendar",footerPrivacy:"Informativa sulla privacy",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{title:"Termos de utilização – Valhalla Calendar",p1:"A utilização do Valhalla Calendar implica a aceitação plena e incondicional dos presentes termos de utilização.",p2:"O Valhalla Calendar é uma aplicação que te permite consultar, criar, editar e eliminar os eventos da tua Google Agenda diretamente a partir do teu telemóvel.",p3:"A aplicação necessita de uma ligação à tua conta Google para funcionar. Continuas a ser o único proprietário dos teus dados e da tua conta Google.",p4:"A aplicação é fornecida «tal como está». O editor não poderá ser responsabilizado por uma perda de dados, um erro de sincronização ou uma avaria relacionada com uma alteração dos serviços Google.",p5:"O Valhalla Calendar não substitui a aplicação oficial do Google Agenda e não garante uma disponibilidade contínua em caso de interrupção dos serviços Google.",p6:"Estes termos podem evoluir com as atualizações da aplicação. A versão em vigor é a publicada nesta página.",p7:"Para qualquer questão, contacta-me em:",backApp:"← Valhalla Calendar",footerPrivacy:"Política de privacidade",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{title:"Условия использования – Valhalla Calendar",p1:"Использование Valhalla Calendar подразумевает полное и безоговорочное принятие настоящих условий использования.",p2:"Valhalla Calendar — это приложение, позволяющее просматривать, создавать, изменять и удалять события вашего Google Календаря прямо с телефона.",p3:"Для работы приложения требуется подключение к вашему аккаунту Google. Вы остаётесь единственным владельцем своих данных и своего аккаунта Google.",p4:"Приложение предоставляется «как есть». Издатель не несёт ответственности за потерю данных, ошибку синхронизации или сбой, связанный с изменением сервисов Google.",p5:"Valhalla Calendar не заменяет официальное приложение Google Календарь и не гарантирует непрерывную доступность в случае перебоев в работе сервисов Google.",p6:"Эти условия могут изменяться вместе с обновлениями приложения. Действующей считается версия, опубликованная на этой странице.",p7:"По любым вопросам обращайтесь ко мне по адресу:",backApp:"← Valhalla Calendar",footerPrivacy:"Политика конфиденциальности",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{title:"استعمال کی شرائط – والہلا کیلنڈر",p1:"والہلا کیلنڈر کا استعمال ان شرائطِ استعمال کی مکمل اور غیر مشروط قبولیت کو ظاہر کرتا ہے۔",p2:"والہلا کیلنڈر ایک ایسی ایپ ہے جو آپ کو براہ راست اپنے فون سے اپنے گوگل کیلنڈر کے ایونٹس دیکھنے، بنانے، ترمیم کرنے اور حذف کرنے کی اجازت دیتی ہے۔",p3:"کام کرنے کے لیے ایپ کو آپ کے گوگل اکاؤنٹ سے کنکشن کی ضرورت ہوتی ہے۔ آپ اپنے ڈیٹا اور اپنے گوگل اکاؤنٹ کے واحد مالک رہتے ہیں۔",p4:"ایپ \"جیسی ہے ویسی ہی\" کی بنیاد پر فراہم کی جاتی ہے۔ ناشر ڈیٹا کے نقصان، ہم وقتی کی خرابی، یا گوگل سروسز میں تبدیلی سے متعلق کسی خرابی کا ذمہ دار نہیں ہوگا۔",p5:"والہلا کیلنڈر سرکاری گوگل کیلنڈر ایپ کا متبادل نہیں ہے اور گوگل سروسز میں رکاوٹ کی صورت میں مسلسل دستیابی کی ضمانت نہیں دیتا۔",p6:"یہ شرائط ایپ کی اپ ڈیٹس کے ساتھ تبدیل ہو سکتی ہیں۔ نافذ العمل ورژن وہی ہے جو اس صفحے پر شائع ہوا ہے۔",p7:"کسی بھی سوال کے لیے، مجھ سے یہاں رابطہ کریں:",backApp:"← والہلا کیلنڈر",footerPrivacy:"پرائیویسی پالیسی",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{title:"使用条款 – Valhalla Calendar",p1:"使用 Valhalla Calendar 即表示您完全且无条件地接受本使用条款。",p2:"Valhalla Calendar 是一款应用程序，可让您直接从手机查看、创建、修改和删除您谷歌日历中的日程。",p3:"该应用需要连接您的谷歌账户才能运行。您始终是您数据和谷歌账户的唯一所有者。",p4:"该应用按“现状”提供。对于因谷歌服务变更而导致的数据丢失、同步错误或功能故障，发布者概不负责。",p5:"Valhalla Calendar 并非谷歌日历官方应用的替代品，也不保证在谷歌服务中断时持续可用。",p6:"本条款可能随应用更新而变化。以本页面发布的版本为准。",p7:"如有任何问题，请通过以下方式联系我：",backApp:"← Valhalla Calendar",footerPrivacy:"隐私政策",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+  };
+
+  var rtlLangs = ["ur"];
+
+  function applyLang(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        el.textContent = dict[key];
+        el.dir = dir;
+      }
+    });
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = langMenu.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+      langMenu.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var box = document.getElementById('particles');
+  var n = 26;
+  for (var i = 0; i < n; i++) {
+    var s = document.createElement('div');
+    s.className = 'spark';
+    var size = 2 + Math.random() * 2.5;
+    var left = Math.random() * 100;
+    var dur = 6 + Math.random() * 6;
+    var delay = Math.random() * 10;
+    var drift = (Math.random() * 80 - 40) + 'px';
+    s.style.left = left + 'vw';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--drift', drift);
+    s.style.animationDuration = dur + 's';
+    s.style.animationDelay = delay + 's';
+    box.appendChild(s);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Valhalla Calendar — Politique de confidentialité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--glow:94,234,182;--glow2:52,199,140}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
+    body{font-family:Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+
+    .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:64px 24px 34px;background:linear-gradient(180deg,rgba(2,8,11,.5),rgba(2,5,8,.95)),radial-gradient(circle at 50% -10%,#123d2c 0,#0a1f16 31%,#05090d 67%)}
+
+    #particles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .spark{position:absolute;bottom:-10px;border-radius:50%;background:rgb(var(--glow));box-shadow:0 0 6px 1px rgba(var(--glow),.8);animation-name:rise;animation-timing-function:ease-out;animation-iteration-count:infinite;opacity:0}
+    @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+    @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
+
+    .lang{position:absolute;top:24px;right:24px;z-index:5}
+    .lang-btn{width:120px;height:120px;border:none;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+    .lang-btn:hover,.lang-btn:focus-visible{outline:none}
+    .lang-btn img{width:120px;height:120px;object-fit:contain;border-radius:3px;display:block}
+    .lang-menu{position:absolute;top:100px;right:0;min-width:170px;background:rgba(10,26,31,.97);border:1px solid rgba(var(--glow),.28);border-radius:10px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.5);display:none;max-height:280px;overflow-y:auto}
+    .lang-menu.open{display:block}
+    .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
+    .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+
+    .back{position:absolute;top:24px;left:24px;z-index:5;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8fa7a0;transition:color .3s ease}
+    .back:hover{color:#5eeab6}
+
+    main.content{position:relative;z-index:2;max-width:680px;margin:0 auto;padding-top:120px}
+    h1{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.5rem,3.4vw,2rem);color:#ede6d6;margin:0 0 40px;text-align:center}
+    p.para{font-size:14.5px;line-height:1.85;color:#c9e6da;margin:0 0 22px}
+    p.para a{color:#5eeab6}
+
+    footer{border-top:1px solid rgba(255,255,255,.06);margin-top:3rem;padding:28px 0 6px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;text-align:center}
+    footer a{font-size:12px;color:#8fa7a0;transition:color .3s ease}
+    footer a:hover{color:#5eeab6}
+    footer .copyright{width:100%;color:#556b60;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
+
+    @media(max-width:760px){.page{padding:100px 16px 28px}main.content{padding-top:60px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div id="particles" aria-hidden="true"></div>
+
+    <a class="back" href="index.html" data-i18n="backApp">← Valhalla Calendar</a>
+
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+        <img src="assetscalendar/langue.png" alt="">
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="fr">Français</button>
+        <button role="menuitem" data-lang="de">Deutsch</button>
+        <button role="menuitem" data-lang="en">English</button>
+        <button role="menuitem" data-lang="es">Español</button>
+        <button role="menuitem" data-lang="hi">हिन्दी</button>
+        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+        <button role="menuitem" data-lang="it">Italiano</button>
+        <button role="menuitem" data-lang="pt">Português</button>
+        <button role="menuitem" data-lang="ru">Русский</button>
+        <button role="menuitem" data-lang="ur">اردو</button>
+        <button role="menuitem" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <main class="content">
+      <h1 data-i18n="title">Politique de confidentialité – Valhalla Calendar</h1>
+      <p class="para" data-i18n="p1">Valhalla Calendar se connecte à votre compte Google, avec votre autorisation, pour accéder à votre agenda Google Agenda.</p>
+      <p class="para" data-i18n="p2">Cette connexion permet à l'application d'afficher vos événements, de vous notifier avant un rendez-vous, et de créer, modifier ou supprimer un événement directement depuis votre téléphone.</p>
+      <p class="para" data-i18n="p3">L'utilisation et le transfert des informations reçues des API Google par Valhalla Calendar respectent la politique d'utilisation des données utilisateur des API Google (Google API Services User Data Policy), y compris les exigences d'utilisation limitée (Limited Use).</p>
+      <p class="para" data-i18n="p4">Aucune donnée n'est vendue, partagée avec des tiers à des fins publicitaires, ni utilisée pour un autre objectif que l'affichage de votre agenda dans l'application.</p>
+      <p class="para" data-i18n="p5">Pour un affichage plus fluide, un fichier est créé localement sur votre appareil afin d'enregistrer une copie des événements du mois en cours. Ce fichier reste sur votre téléphone et n'est jamais transmis ailleurs.</p>
+      <p class="para" data-i18n="p6">Valhalla Calendar ne contient aucune publicité et n'intègre aucun outil de suivi (tracking).</p>
+      <p class="para" data-i18n="p7">Vous pouvez révoquer l'accès de l'application à votre compte Google à tout moment depuis les paramètres de sécurité de votre compte Google.</p>
+      <p class="para"><span data-i18n="p8">Pour toute question, contactez-moi à :</span> <a href="mailto:barbaredestroy@gmail.com">barbaredestroy@gmail.com</a></p>
+    </main>
+
+    <footer>
+      <a href="index.html" data-i18n="backApp">← Valhalla Calendar</a>
+      <a href="conditions.html" data-i18n="footerTerms">Conditions d'utilisation</a>
+      <a href="../index.html" data-i18n="footerHome">← Accueil</a>
+      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+    </footer>
+  </main>
+
+<script>
+  var translations = {
+    fr:{title:"Politique de confidentialité – Valhalla Calendar",p1:"Valhalla Calendar se connecte à votre compte Google, avec votre autorisation, pour accéder à votre agenda Google Agenda.",p2:"Cette connexion permet à l'application d'afficher vos événements, de vous notifier avant un rendez-vous, et de créer, modifier ou supprimer un événement directement depuis votre téléphone.",p3:"L'utilisation et le transfert des informations reçues des API Google par Valhalla Calendar respectent la politique d'utilisation des données utilisateur des API Google (Google API Services User Data Policy), y compris les exigences d'utilisation limitée (Limited Use).",p4:"Aucune donnée n'est vendue, partagée avec des tiers à des fins publicitaires, ni utilisée pour un autre objectif que l'affichage de votre agenda dans l'application.",p5:"Pour un affichage plus fluide, un fichier est créé localement sur votre appareil afin d'enregistrer une copie des événements du mois en cours. Ce fichier reste sur votre téléphone et n'est jamais transmis ailleurs.",p6:"Valhalla Calendar ne contient aucune publicité et n'intègre aucun outil de suivi (tracking).",p7:"Vous pouvez révoquer l'accès de l'application à votre compte Google à tout moment depuis les paramètres de sécurité de votre compte Google.",p8:"Pour toute question, contactez-moi à :",backApp:"← Valhalla Calendar",footerTerms:"Conditions d'utilisation",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{title:"Datenschutzerklärung – Valhalla Calendar",p1:"Valhalla Calendar verbindet sich mit deiner Erlaubnis mit deinem Google-Konto, um auf deinen Google Kalender zuzugreifen.",p2:"Diese Verbindung ermöglicht es der App, deine Termine anzuzeigen, dich vor einem Termin zu benachrichtigen und direkt von deinem Telefon aus einen Termin zu erstellen, zu ändern oder zu löschen.",p3:"Die Nutzung und Übertragung von Informationen, die Valhalla Calendar von Google APIs erhält, entspricht der Google API Services User Data Policy, einschließlich der Limited-Use-Anforderungen.",p4:"Keine Daten werden verkauft, zu Werbezwecken an Dritte weitergegeben oder für einen anderen Zweck als die Anzeige deines Kalenders in der App verwendet.",p5:"Für eine flüssigere Anzeige wird lokal auf deinem Gerät eine Datei erstellt, um eine Kopie der Termine des laufenden Monats zu speichern. Diese Datei verbleibt auf deinem Telefon und wird niemals woanders hin übertragen.",p6:"Valhalla Calendar enthält keine Werbung und integriert keine Tracking-Tools.",p7:"Du kannst den Zugriff der App auf dein Google-Konto jederzeit über die Sicherheitseinstellungen deines Google-Kontos widerrufen.",p8:"Bei Fragen erreichst du mich unter:",backApp:"← Valhalla Calendar",footerTerms:"Nutzungsbedingungen",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{title:"Privacy policy – Valhalla Calendar",p1:"Valhalla Calendar connects to your Google account, with your permission, to access your Google Calendar.",p2:"This connection lets the app display your events, notify you before an appointment, and create, edit or delete an event directly from your phone.",p3:"Valhalla Calendar's use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements.",p4:"No data is sold, shared with third parties for advertising purposes, or used for any purpose other than displaying your calendar in the app.",p5:"For smoother display, a file is created locally on your device to store a copy of the current month's events. This file stays on your phone and is never sent anywhere else.",p6:"Valhalla Calendar contains no advertising and includes no tracking tools.",p7:"You can revoke the app's access to your Google account at any time from your Google account's security settings.",p8:"For any question, contact me at:",backApp:"← Valhalla Calendar",footerTerms:"Terms of use",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{title:"Política de privacidad – Valhalla Calendar",p1:"Valhalla Calendar se conecta a tu cuenta de Google, con tu permiso, para acceder a tu Google Calendar.",p2:"Esta conexión permite que la aplicación muestre tus eventos, te notifique antes de una cita, y cree, modifique o elimine un evento directamente desde tu teléfono.",p3:"El uso y la transferencia de la información recibida de las API de Google por parte de Valhalla Calendar cumple con la Política de datos de usuario de los servicios de API de Google, incluidos los requisitos de uso limitado.",p4:"Ningún dato se vende, se comparte con terceros con fines publicitarios, ni se utiliza para ningún propósito distinto de mostrar tu calendario en la aplicación.",p5:"Para una visualización más fluida, se crea un archivo localmente en tu dispositivo para guardar una copia de los eventos del mes en curso. Este archivo permanece en tu teléfono y nunca se envía a ningún otro lugar.",p6:"Valhalla Calendar no contiene publicidad ni incorpora ninguna herramienta de seguimiento.",p7:"Puedes revocar el acceso de la aplicación a tu cuenta de Google en cualquier momento desde la configuración de seguridad de tu cuenta de Google.",p8:"Para cualquier pregunta, contáctame en:",backApp:"← Valhalla Calendar",footerTerms:"Condiciones de uso",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{title:"गोपनीयता नीति – वाल्हाला कैलेंडर",p1:"वाल्हाला कैलेंडर आपकी अनुमति से आपके गूगल खाते से जुड़ता है ताकि आपके गूगल कैलेंडर तक पहुँच सके।",p2:"यह कनेक्शन ऐप को आपके इवेंट दिखाने, किसी अपॉइंटमेंट से पहले आपको सूचित करने, और सीधे आपके फोन से किसी इवेंट को बनाने, संशोधित करने या हटाने की अनुमति देता है।",p3:"वाल्हाला कैलेंडर द्वारा गूगल API से प्राप्त जानकारी का उपयोग और स्थानांतरण गूगल API सेवा उपयोगकर्ता डेटा नीति (Limited Use आवश्यकताओं सहित) का पालन करता है।",p4:"कोई भी डेटा बेचा नहीं जाता, विज्ञापन उद्देश्यों के लिए तीसरे पक्षों के साथ साझा नहीं किया जाता, और ऐप में आपके कैलेंडर को दिखाने के अलावा किसी अन्य उद्देश्य के लिए उपयोग नहीं किया जाता।",p5:"अधिक तेज़ प्रदर्शन के लिए, आपके डिवाइस पर स्थानीय रूप से एक फ़ाइल बनाई जाती है ताकि चालू महीने के इवेंट की एक प्रति सहेजी जा सके। यह फ़ाइल आपके फोन पर ही रहती है और कभी कहीं और नहीं भेजी जाती।",p6:"वाल्हाला कैलेंडर में कोई विज्ञापन नहीं है और कोई ट्रैकिंग टूल शामिल नहीं है।",p7:"आप किसी भी समय अपने गूगल खाते की सुरक्षा सेटिंग्स से ऐप की अपने गूगल खाते तक पहुँच रद्द कर सकते हैं।",p8:"किसी भी प्रश्न के लिए, मुझसे यहाँ संपर्क करें:",backApp:"← वाल्हाला कैलेंडर",footerTerms:"उपयोग की शर्तें",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{title:"Kebijakan privasi – Valhalla Calendar",p1:"Valhalla Calendar terhubung ke akun Google-mu, dengan izinmu, untuk mengakses Google Kalendermu.",p2:"Koneksi ini memungkinkan aplikasi menampilkan acaramu, memberitahumu sebelum janji temu, serta membuat, mengedit, atau menghapus acara langsung dari ponselmu.",p3:"Penggunaan dan transfer informasi yang diterima dari Google API oleh Valhalla Calendar mematuhi Google API Services User Data Policy, termasuk persyaratan Limited Use.",p4:"Tidak ada data yang dijual, dibagikan kepada pihak ketiga untuk tujuan iklan, atau digunakan untuk tujuan apa pun selain menampilkan kalendermu di aplikasi.",p5:"Untuk tampilan yang lebih lancar, sebuah berkas dibuat secara lokal di perangkatmu untuk menyimpan salinan acara bulan berjalan. Berkas ini tetap berada di ponselmu dan tidak pernah dikirim ke tempat lain.",p6:"Valhalla Calendar tidak mengandung iklan dan tidak menyertakan alat pelacakan apa pun.",p7:"Kamu dapat mencabut akses aplikasi ke akun Google-mu kapan saja melalui pengaturan keamanan akun Google-mu.",p8:"Untuk pertanyaan apa pun, hubungi saya di:",backApp:"← Valhalla Calendar",footerTerms:"Syarat penggunaan",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{title:"Informativa sulla privacy – Valhalla Calendar",p1:"Valhalla Calendar si collega al tuo account Google, con il tuo permesso, per accedere al tuo Google Calendar.",p2:"Questa connessione consente all'app di mostrare i tuoi eventi, avvisarti prima di un appuntamento e creare, modificare o eliminare un evento direttamente dal tuo telefono.",p3:"L'uso e il trasferimento delle informazioni ricevute dalle API di Google da parte di Valhalla Calendar rispettano la Google API Services User Data Policy, compresi i requisiti di uso limitato (Limited Use).",p4:"Nessun dato viene venduto, condiviso con terze parti a fini pubblicitari, né utilizzato per scopi diversi dalla visualizzazione del tuo calendario nell'app.",p5:"Per una visualizzazione più fluida, viene creato localmente sul tuo dispositivo un file per salvare una copia degli eventi del mese in corso. Questo file resta sul tuo telefono e non viene mai inviato altrove.",p6:"Valhalla Calendar non contiene pubblicità e non integra alcuno strumento di tracciamento.",p7:"Puoi revocare in qualsiasi momento l'accesso dell'app al tuo account Google dalle impostazioni di sicurezza del tuo account Google.",p8:"Per qualsiasi domanda, contattami a:",backApp:"← Valhalla Calendar",footerTerms:"Termini di utilizzo",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{title:"Política de privacidade – Valhalla Calendar",p1:"O Valhalla Calendar liga-se à tua conta Google, com a tua permissão, para aceder ao teu Google Agenda.",p2:"Esta ligação permite que a aplicação mostre os teus eventos, te notifique antes de um compromisso, e crie, edite ou elimine um evento diretamente a partir do teu telemóvel.",p3:"O uso e a transferência de informações recebidas das APIs Google pelo Valhalla Calendar respeitam a Política de Dados do Utilizador dos Serviços de API Google, incluindo os requisitos de Uso Limitado.",p4:"Nenhum dado é vendido, partilhado com terceiros para fins publicitários, nem usado para qualquer outro fim que não seja mostrar a tua agenda na aplicação.",p5:"Para uma visualização mais fluida, é criado localmente no teu dispositivo um ficheiro para guardar uma cópia dos eventos do mês em curso. Este ficheiro permanece no teu telemóvel e nunca é enviado para outro lugar.",p6:"O Valhalla Calendar não contém publicidade nem integra qualquer ferramenta de rastreamento.",p7:"Podes revogar o acesso da aplicação à tua conta Google a qualquer momento a partir das definições de segurança da tua conta Google.",p8:"Para qualquer questão, contacta-me em:",backApp:"← Valhalla Calendar",footerTerms:"Termos de utilização",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{title:"Политика конфиденциальности – Valhalla Calendar",p1:"Valhalla Calendar подключается к вашему аккаунту Google, с вашего разрешения, для доступа к вашему Google Календарю.",p2:"Это подключение позволяет приложению показывать ваши события, уведомлять вас перед встречей, а также создавать, изменять или удалять событие прямо с вашего телефона.",p3:"Использование и передача информации, полученной от API Google, приложением Valhalla Calendar соответствует Политике использования данных пользователей сервисов API Google, включая требования Limited Use.",p4:"Никакие данные не продаются, не передаются третьим лицам в рекламных целях и не используются для каких-либо целей, кроме отображения вашего календаря в приложении.",p5:"Для более плавного отображения на вашем устройстве локально создаётся файл, сохраняющий копию событий текущего месяца. Этот файл остаётся на вашем телефоне и никогда никуда не передаётся.",p6:"Valhalla Calendar не содержит рекламы и не включает никаких инструментов отслеживания.",p7:"Вы можете в любой момент отозвать доступ приложения к вашему аккаунту Google через настройки безопасности вашего аккаунта Google.",p8:"По любым вопросам обращайтесь ко мне по адресу:",backApp:"← Valhalla Calendar",footerTerms:"Условия использования",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{title:"پرائیویسی پالیسی – والہلا کیلنڈر",p1:"والہلا کیلنڈر آپ کی اجازت سے آپ کے گوگل اکاؤنٹ سے جڑتا ہے تاکہ آپ کے گوگل کیلنڈر تک رسائی حاصل کر سکے۔",p2:"یہ کنکشن ایپ کو آپ کے ایونٹس دکھانے، کسی ملاقات سے پہلے آپ کو مطلع کرنے، اور براہ راست آپ کے فون سے کوئی ایونٹ بنانے، ترمیم کرنے یا حذف کرنے کی اجازت دیتا ہے۔",p3:"گوگل APIs سے موصول ہونے والی معلومات کا استعمال اور منتقلی والہلا کیلنڈر کی جانب سے گوگل API سروسز یوزر ڈیٹا پالیسی، بشمول Limited Use کی ضروریات، کی پابندی کرتی ہے۔",p4:"کوئی ڈیٹا فروخت نہیں کیا جاتا، اشتہاری مقاصد کے لیے تیسرے فریق کے ساتھ شیئر نہیں کیا جاتا، اور ایپ میں آپ کے کیلنڈر کو دکھانے کے علاوہ کسی اور مقصد کے لیے استعمال نہیں کیا جاتا۔",p5:"زیادہ روانی سے دکھانے کے لیے، آپ کے آلے پر مقامی طور پر ایک فائل بنائی جاتی ہے تاکہ رواں مہینے کے ایونٹس کی ایک کاپی محفوظ کی جا سکے۔ یہ فائل آپ کے فون پر ہی رہتی ہے اور کبھی کہیں اور نہیں بھیجی جاتی۔",p6:"والہلا کیلنڈر میں کوئی اشتہار نہیں اور کوئی ٹریکنگ ٹول شامل نہیں۔",p7:"آپ کسی بھی وقت اپنے گوگل اکاؤنٹ کی سیکیورٹی سیٹنگز سے ایپ کی اپنے گوگل اکاؤنٹ تک رسائی منسوخ کر سکتے ہیں۔",p8:"کسی بھی سوال کے لیے، مجھ سے یہاں رابطہ کریں:",backApp:"← والہلا کیلنڈر",footerTerms:"استعمال کی شرائط",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{title:"隐私政策 – Valhalla Calendar",p1:"经您授权后，Valhalla Calendar 会连接您的谷歌账户，以访问您的谷歌日历。",p2:"此连接使应用能够显示您的日程、在约会前提醒您，并可直接从您的手机创建、修改或删除日程。",p3:"Valhalla Calendar 对从谷歌 API 获取信息的使用和传输，遵循谷歌 API 服务用户数据政策，包括其中的有限使用（Limited Use）要求。",p4:"任何数据均不会被出售、出于广告目的与第三方共享，也不会被用于在应用中显示您日历以外的任何其他目的。",p5:"为使显示更流畅，系统会在您的设备本地创建一个文件，用于保存当月日程的副本。该文件仅保留在您的手机上，从不会被传输到其他任何地方。",p6:"Valhalla Calendar 不含任何广告，也不集成任何追踪工具。",p7:"您可以随时通过谷歌账户的安全设置，撤销该应用对您谷歌账户的访问权限。",p8:"如有任何问题，请通过以下方式联系我：",backApp:"← Valhalla Calendar",footerTerms:"使用条款",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+  };
+
+  var rtlLangs = ["ur"];
+
+  function applyLang(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        el.textContent = dict[key];
+        el.dir = dir;
+      }
+    });
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = langMenu.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+      langMenu.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var box = document.getElementById('particles');
+  var n = 26;
+  for (var i = 0; i < n; i++) {
+    var s = document.createElement('div');
+    s.className = 'spark';
+    var size = 2 + Math.random() * 2.5;
+    var left = Math.random() * 100;
+    var dur = 6 + Math.random() * 6;
+    var delay = Math.random() * 10;
+    var drift = (Math.random() * 80 - 40) + 'px';
+    s.style.left = left + 'vw';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--drift', drift);
+    s.style.animationDuration = dur + 's';
+    s.style.animationDelay = delay + 's';
+    box.appendChild(s);
+  }
+</script>
+</body>
+</html>

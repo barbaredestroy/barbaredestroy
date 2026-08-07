@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nordika Fidélia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--glow:34,211,238;--glow2:22,178,205}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
+    body{font-family:Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+
+    .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:64px 24px 34px;background:linear-gradient(180deg,rgba(2,8,11,.5),rgba(2,5,8,.95)),radial-gradient(circle at 50% -10%,#0d3540 0,#081a1f 31%,#05090d 67%)}
+    .runes{position:absolute;z-index:-1;top:17%;left:0;right:0;display:flex;justify-content:space-around;color:rgba(75,207,220,.055);font:clamp(72px,11vw,180px) Georgia;transform:rotate(-6deg)}
+
+    #particles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .spark{position:absolute;bottom:-10px;border-radius:50%;background:rgb(var(--glow));box-shadow:0 0 6px 1px rgba(var(--glow),.8);animation-name:rise;animation-timing-function:ease-out;animation-iteration-count:infinite;opacity:0}
+    @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+    @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
+
+    .lang{position:absolute;top:24px;right:24px;z-index:5}
+    .lang-btn{width:120px;height:120px;border:none;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+    .lang-btn:hover,.lang-btn:focus-visible{outline:none}
+    .lang-btn img{width:120px;height:120px;object-fit:contain;border-radius:3px;display:block}
+    .lang-menu{position:absolute;top:100px;right:0;min-width:170px;background:rgba(10,26,31,.97);border:1px solid rgba(var(--glow),.28);border-radius:10px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.5);display:none;max-height:280px;overflow-y:auto}
+    .lang-menu.open{display:block}
+    .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
+    .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+
+    .back{position:absolute;top:24px;left:24px;z-index:5;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8fa3a7;transition:color .3s ease}
+    .back:hover{color:#4bd4e0}
+
+    .hero{max-width:720px;margin:0 auto 56px;text-align:center;padding-top:20px}
+    .mark{width:58px;height:58px;display:grid;place-items:center;margin:0 auto 28px;transform:rotate(45deg);border:1px solid rgba(91,201,220,.4);background:rgba(8,24,29,.74);color:#4bd4e0;box-shadow:0 0 25px rgba(34,211,238,.15);font-size:27px}
+    .mark span{display:block;transform:rotate(-45deg);font-size:24px}
+    .eyebrow{margin:0 0 10px;color:#5fc9d6;font-family:'Cinzel',serif;font-size:12px;font-weight:600;letter-spacing:.38em;text-transform:uppercase}
+    .brand{margin:0;font-family:'Cinzel Decorative',serif;font-weight:900;text-transform:uppercase;font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.1;letter-spacing:.01em;color:#ede6d6;text-shadow:0 0 30px rgba(34,211,238,.2)}
+    .subtitle{max-width:520px;margin:20px auto 0;color:#8fa3a7;font-size:15px;line-height:1.7}
+    .status{display:inline-flex;align-items:center;gap:9px;margin-top:26px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4bd4e0;border:1px solid rgba(var(--glow),.28);background:rgba(8,24,29,.6);padding:9px 20px;border-radius:100px}
+    .status:before{content:"";width:6px;height:6px;border-radius:50%;background:#4bd4e0;box-shadow:0 0 6px 1px rgba(34,211,238,.7)}
+
+    section.block{width:min(1040px,100%);margin:0 auto;padding:2.4rem 0}
+    .section-title{font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#4bd4e0;text-align:center;margin:0 0 32px}
+
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .feature{position:relative;border:1px solid rgba(var(--glow),.24);border-radius:16px;background:linear-gradient(145deg,rgba(17,29,35,.86),rgba(4,9,12,.94));padding:26px 22px;transition:.3s}
+    .feature:hover{border-color:rgba(var(--glow),.55);transform:translateY(-3px)}
+    .feature-rune{display:block;font-size:19px;color:#4bd4e0;margin-bottom:12px}
+    .feature h3{margin:0 0 8px;font-family:'Cinzel',serif;font-weight:600;font-size:16px;color:#e5ece9}
+    .feature p{margin:0;color:#7e9591;font-size:13.5px;line-height:1.6}
+
+    .cta{text-align:center;padding:3.4rem 0 1rem}
+    .cta h2{margin:0 0 12px;font-family:'Cinzel Decorative',serif;font-weight:700;font-size:clamp(1.35rem,3vw,1.9rem);color:#ede6d6}
+    .cta p{max-width:440px;margin:0 auto 26px;color:#8fa3a7;font-size:14.5px;line-height:1.65}
+    .cta-note{display:inline-block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#05141a;background:#4bd4e0;padding:13px 30px;border-radius:8px;box-shadow:0 10px 28px -10px rgba(34,211,238,.55)}
+
+    footer{border-top:1px solid rgba(255,255,255,.06);margin-top:3rem;padding:28px 0 6px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;text-align:center}
+    footer a{font-size:12px;color:#8fa3a7;transition:color .3s ease}
+    footer a:hover{color:#4bd4e0}
+    footer .copyright{width:100%;color:#52696a;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
+
+    @media(max-width:760px){.page{padding:100px 16px 28px}.hero{margin-bottom:40px}}
+    @media(prefers-reduced-motion:reduce){.feature{transition:none}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div id="particles" aria-hidden="true"></div>
+    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+
+    <a class="back" href="../" data-i18n="footerHome">← Accueil</a>
+
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+        <img src="assetsnordika/langue.png" alt="">
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="fr">Français</button>
+        <button role="menuitem" data-lang="de">Deutsch</button>
+        <button role="menuitem" data-lang="en">English</button>
+        <button role="menuitem" data-lang="es">Español</button>
+        <button role="menuitem" data-lang="hi">हिन्दी</button>
+        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+        <button role="menuitem" data-lang="it">Italiano</button>
+        <button role="menuitem" data-lang="pt">Português</button>
+        <button role="menuitem" data-lang="ru">Русский</button>
+        <button role="menuitem" data-lang="ur">اردو</button>
+        <button role="menuitem" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="mark" aria-hidden="true"><span>ᚠ</span></div>
+      <p class="eyebrow" data-i18n="eyebrow">Fidélité nordique</p>
+      <h1 class="brand">Nordika Fidélia</h1>
+      <p class="subtitle" data-i18n="subtitle">Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.</p>
+      <span class="status" data-i18n="status">En test — alpha fermée</span>
+    </section>
+
+    <section class="block">
+      <p class="section-title" data-i18n="featuresTitle">Ce que renferme le coffre</p>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-rune">ᛒ</span>
+          <h3 data-i18n="f1t">Scan en un instant</h3>
+          <p data-i18n="f1d">Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-rune">ᚱ</span>
+          <h3 data-i18n="f2t">100% hors-ligne</h3>
+          <p data-i18n="f2d">Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-rune">ᚨ</span>
+          <h3 data-i18n="f3t">Sauvegarde par QR</h3>
+          <p data-i18n="f3d">Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-rune">ᚲ</span>
+          <h3 data-i18n="f4t">12 langues, 19 polices</h3>
+          <p data-i18n="f4d">Une interface qui s'habille à ta manière, où que tu sois dans le monde.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <h2 data-i18n="ctaTitle">Bientôt dans ta poche</h2>
+      <p data-i18n="ctaDesc">Nordika Fidélia termine son passage en alpha fermée avant de rejoindre le Play Store.</p>
+      <span class="cta-note" data-i18n="ctaNote">Disponible prochainement</span>
+    </div>
+
+    <footer>
+      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
+      <a href="../" data-i18n="footerHome">← Accueil</a>
+      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+    </footer>
+  </main>
+
+<script>
+  var translations = {
+    fr:{eyebrow:"Fidélité nordique",subtitle:"Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.",status:"En test — alpha fermée",featuresTitle:"Ce que renferme le coffre",f1t:"Scan en un instant",f1d:"Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.",f2t:"100% hors-ligne",f2d:"Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.",f3t:"Sauvegarde par QR",f3d:"Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.",f4t:"12 langues, 19 polices",f4d:"Une interface qui s'habille à ta manière, où que tu sois dans le monde.",ctaTitle:"Bientôt dans ta poche",ctaDesc:"Nordika Fidélia termine son passage en alpha fermée avant de rejoindre le Play Store.",ctaNote:"Disponible prochainement",footerPrivacy:"Politique de confidentialité",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{eyebrow:"Nordische Treue",subtitle:"Alle deine Treuekarten, vereint in einem einzigen Reisebuch.",status:"In Erprobung — geschlossene Alpha",featuresTitle:"Was der Schatz birgt",f1t:"Scan im Nu",f1d:"Fotografiere den Barcode einer Karte und sie landet sofort in deinem Schatz.",f2t:"100% offline",f2d:"Keine Karte verlässt dein Telefon. Kein Konto, kein Server, kein Tracking.",f3t:"Sicherung per QR",f3d:"Exportiere und stelle deinen gesamten Schatz im Handumdrehen wieder her, von einem Telefon zum anderen.",f4t:"12 Sprachen, 19 Schriftarten",f4d:"Eine Oberfläche, die sich nach dir richtet, wo auch immer du auf der Welt bist.",ctaTitle:"Bald in deiner Tasche",ctaDesc:"Nordika Fidélia beendet seine geschlossene Alpha-Phase, bevor es in den Play Store kommt.",ctaNote:"Demnächst verfügbar",footerPrivacy:"Datenschutzerklärung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{eyebrow:"Nordic loyalty",subtitle:"All your loyalty cards, gathered in a single travel ledger.",status:"In testing — closed alpha",featuresTitle:"What the hoard holds",f1t:"Scan in an instant",f1d:"Photograph a card's barcode and it joins your hoard right away.",f2t:"100% offline",f2d:"No card ever leaves your phone. No account, no server, no tracking.",f3t:"QR backup",f3d:"Export and restore your whole hoard in a flash, from one phone to another.",f4t:"12 languages, 19 fonts",f4d:"An interface that dresses itself to your taste, wherever you are in the world.",ctaTitle:"Soon in your pocket",ctaDesc:"Nordika Fidélia is finishing its closed alpha before joining the Play Store.",ctaNote:"Coming soon",footerPrivacy:"Privacy policy",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{eyebrow:"Fidelidad nórdica",subtitle:"Todas tus tarjetas de fidelidad, reunidas en un solo cuaderno de viaje.",status:"En pruebas — alfa cerrada",featuresTitle:"Lo que guarda el tesoro",f1t:"Escaneo al instante",f1d:"Fotografía el código de barras de una tarjeta y se une al instante a tu tesoro.",f2t:"100% sin conexión",f2d:"Ninguna tarjeta sale de tu teléfono. Sin cuenta, sin servidor, sin seguimiento.",f3t:"Copia de seguridad por QR",f3d:"Exporta y restaura todo tu tesoro en un instante, de un teléfono a otro.",f4t:"12 idiomas, 19 tipografías",f4d:"Una interfaz que se viste a tu manera, estés donde estés en el mundo.",ctaTitle:"Pronto en tu bolsillo",ctaDesc:"Nordika Fidélia está terminando su alfa cerrada antes de llegar a la Play Store.",ctaNote:"Disponible próximamente",footerPrivacy:"Política de privacidad",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{eyebrow:"नॉर्डिक वफ़ादारी",subtitle:"आपके सभी लॉयल्टी कार्ड, एक ही यात्रा बहीखाते में एकत्रित।",status:"परीक्षण में — बंद अल्फा",featuresTitle:"खज़ाने में क्या है",f1t:"पल भर में स्कैन",f1d:"किसी कार्ड का बारकोड फोटो खींचें और वह तुरंत आपके खज़ाने में शामिल हो जाता है।",f2t:"100% ऑफ़लाइन",f2d:"कोई भी कार्ड आपके फोन से बाहर नहीं जाता। कोई खाता नहीं, कोई सर्वर नहीं, कोई ट्रैकिंग नहीं।",f3t:"QR के ज़रिए बैकअप",f3d:"अपने पूरे खज़ाने को एक फ़ोन से दूसरे में पल भर में निर्यात और पुनर्स्थापित करें।",f4t:"12 भाषाएँ, 19 फ़ॉन्ट",f4d:"एक इंटरफ़ेस जो आपकी पसंद के अनुसार ढल जाता है, चाहे आप दुनिया में कहीं भी हों।",ctaTitle:"जल्द ही आपकी जेब में",ctaDesc:"नॉर्डिका फिडेलिया प्ले स्टोर पर आने से पहले अपना बंद अल्फा चरण पूरा कर रहा है।",ctaNote:"जल्द ही उपलब्ध",footerPrivacy:"गोपनीयता नीति",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{eyebrow:"Loyalitas Nordik",subtitle:"Semua kartu loyalitasmu, terkumpul dalam satu buku catatan perjalanan.",status:"Dalam pengujian — alpha tertutup",featuresTitle:"Isi harta karun",f1t:"Pindai dalam sekejap",f1d:"Foto kode batang sebuah kartu dan langsung bergabung ke harta karunmu.",f2t:"100% offline",f2d:"Tidak ada kartu yang meninggalkan ponselmu. Tanpa akun, tanpa server, tanpa pelacakan.",f3t:"Cadangan via QR",f3d:"Ekspor dan pulihkan seluruh harta karunmu dalam sekejap, dari satu ponsel ke ponsel lain.",f4t:"12 bahasa, 19 font",f4d:"Antarmuka yang menyesuaikan seleramu, di mana pun kamu berada di dunia.",ctaTitle:"Segera di sakumu",ctaDesc:"Nordika Fidélia sedang menyelesaikan fase alpha tertutup sebelum bergabung dengan Play Store.",ctaNote:"Segera hadir",footerPrivacy:"Kebijakan privasi",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{eyebrow:"Fedeltà nordica",subtitle:"Tutte le tue carte fedeltà, riunite in un unico taccuino di viaggio.",status:"In prova — alpha chiusa",featuresTitle:"Cosa custodisce il forziere",f1t:"Scansione in un istante",f1d:"Fotografa il codice a barre di una carta e si unisce subito al tuo forziere.",f2t:"100% offline",f2d:"Nessuna carta lascia il tuo telefono. Nessun account, nessun server, nessun tracciamento.",f3t:"Backup tramite QR",f3d:"Esporta e ripristina tutto il tuo forziere in un lampo, da un telefono all'altro.",f4t:"12 lingue, 19 font",f4d:"Un'interfaccia che si veste a modo tuo, ovunque tu sia nel mondo.",ctaTitle:"Presto in tasca",ctaDesc:"Nordika Fidélia sta terminando la sua fase alpha chiusa prima di arrivare sul Play Store.",ctaNote:"Disponibile a breve",footerPrivacy:"Informativa sulla privacy",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{eyebrow:"Fidelidade nórdica",subtitle:"Todos os teus cartões de fidelidade, reunidos num único caderno de viagem.",status:"Em teste — alfa fechado",featuresTitle:"O que guarda o tesouro",f1t:"Digitalização num instante",f1d:"Fotografa o código de barras de um cartão e ele junta-se logo ao teu tesouro.",f2t:"100% offline",f2d:"Nenhum cartão sai do teu telemóvel. Sem conta, sem servidor, sem rastreamento.",f3t:"Cópia de segurança por QR",f3d:"Exporta e restaura todo o teu tesouro num instante, de um telemóvel para outro.",f4t:"12 idiomas, 19 tipos de letra",f4d:"Uma interface que se veste à tua maneira, onde quer que estejas no mundo.",ctaTitle:"Em breve no teu bolso",ctaDesc:"Nordika Fidélia está a terminar a fase alfa fechada antes de chegar à Play Store.",ctaNote:"Disponível brevemente",footerPrivacy:"Política de privacidade",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{eyebrow:"Северная лояльность",subtitle:"Все твои карты лояльности собраны в единой дорожной книге.",status:"На тестировании — закрытая альфа",featuresTitle:"Что хранит сокровищница",f1t:"Сканирование за миг",f1d:"Сфотографируй штрихкод карты, и она сразу окажется в твоей сокровищнице.",f2t:"100% офлайн",f2d:"Ни одна карта не покидает твой телефон. Без аккаунта, без сервера, без слежки.",f3t:"Резервная копия через QR",f3d:"Экспортируй и восстанавливай всю сокровищницу мгновенно, с одного телефона на другой.",f4t:"12 языков, 19 шрифтов",f4d:"Интерфейс, который подстраивается под тебя, где бы ты ни находился в мире.",ctaTitle:"Скоро в твоём кармане",ctaDesc:"Nordika Fidélia завершает закрытую альфа-версию перед выходом в Play Store.",ctaNote:"Скоро в продаже",footerPrivacy:"Политика конфиденциальности",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{eyebrow:"شمالی وفاداری",subtitle:"آپ کے تمام لائلٹی کارڈز، ایک ہی سفری کتاب میں جمع۔",status:"زیرِ جانچ — بند الفا",featuresTitle:"خزانے میں کیا ہے",f1t:"لمحوں میں اسکین",f1d:"کسی کارڈ کا بار کوڈ فوٹو کھینچیں اور وہ فوراً آپ کے خزانے میں شامل ہو جاتا ہے۔",f2t:"100% آف لائن",f2d:"کوئی کارڈ آپ کے فون سے باہر نہیں جاتا۔ کوئی اکاؤنٹ نہیں، کوئی سرور نہیں، کوئی ٹریکنگ نہیں۔",f3t:"QR کے ذریعے بیک اپ",f3d:"اپنے پورے خزانے کو ایک لمحے میں ایک فون سے دوسرے فون میں برآمد اور بحال کریں۔",f4t:"12 زبانیں، 19 فونٹس",f4d:"ایک انٹرفیس جو آپ کی پسند کے مطابق ڈھلتا ہے، آپ دنیا میں کہیں بھی ہوں۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"نورڈیکا فیڈیلیا پلے اسٹور پر آنے سے پہلے اپنا بند الفا مرحلہ مکمل کر رہا ہے۔",ctaNote:"جلد دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{eyebrow:"北欧忠诚",subtitle:"你所有的会员卡，汇聚于一本旅行手册之中。",status:"测试中 — 封闭内测",featuresTitle:"宝库中有什么",f1t:"瞬间扫描",f1d:"拍下卡片的条形码，它便立即加入你的宝库。",f2t:"100% 离线",f2d:"没有任何卡片离开你的手机。无需账号，无需服务器，无任何追踪。",f3t:"二维码备份",f3d:"瞬间导出并恢复你的整个宝库，从一部手机到另一部。",f4t:"12种语言，19种字体",f4d:"无论你身在世界何处，界面都能按你的喜好呈现。",ctaTitle:"即将装进你的口袋",ctaDesc:"Nordika Fidélia 正在完成封闭内测，随后即将上线 Play 商店。",ctaNote:"敬请期待",footerPrivacy:"隐私政策",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+  };
+
+  var rtlLangs = ["ur"];
+
+  function applyLang(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        el.textContent = dict[key];
+        el.dir = dir;
+      }
+    });
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = langMenu.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+      langMenu.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var box = document.getElementById('particles');
+  var n = 26;
+  for (var i = 0; i < n; i++) {
+    var s = document.createElement('div');
+    s.className = 'spark';
+    var size = 2 + Math.random() * 2.5;
+    var left = Math.random() * 100;
+    var dur = 6 + Math.random() * 6;
+    var delay = Math.random() * 10;
+    var drift = (Math.random() * 80 - 40) + 'px';
+    s.style.left = left + 'vw';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--drift', drift);
+    s.style.animationDuration = dur + 's';
+    s.style.animationDelay = delay + 's';
+    box.appendChild(s);
+  }
+</script>
+</body>
+</html>

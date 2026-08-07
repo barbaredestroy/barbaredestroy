@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Barbare Destroy — Choisis ta voie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--glow:34,211,238;--glow2:22,178,205}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
+    body{font-family:Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+
+    .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:64px 24px 34px;background:linear-gradient(180deg,rgba(2,8,11,.5),rgba(2,5,8,.95)),radial-gradient(circle at 50% -10%,#0d3540 0,#081a1f 31%,#05090d 67%)}
+    .runes{position:absolute;z-index:-1;top:17%;left:0;right:0;display:flex;justify-content:space-around;color:rgba(75,207,220,.055);font:clamp(72px,11vw,180px) Georgia;transform:rotate(-6deg)}
+
+    #particles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .spark{position:absolute;bottom:-10px;border-radius:50%;background:rgb(var(--glow));box-shadow:0 0 6px 1px rgba(var(--glow),.8);animation-name:rise;animation-timing-function:ease-out;animation-iteration-count:infinite;opacity:0}
+    @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+    @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
+
+    .hero{max-width:850px;margin:0 auto 50px;text-align:center}
+    .mark{width:58px;height:58px;display:grid;place-items:center;margin:0 auto 28px;transform:rotate(45deg);border:1px solid rgba(91,201,220,.4);background:rgba(8,24,29,.74);color:#4bd4e0;box-shadow:0 0 25px rgba(34,211,238,.15);font-size:27px}
+	.mark span{display:block;transform:rotate(-45deg);font-size:40px}
+    .brand{margin:0;font-family:'Cinzel Decorative',serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.1;letter-spacing:.01em;color:#ede6d6;text-shadow:0 0 30px rgba(34,211,238,.2)}
+    .brand em{font-style:normal;color:#3dd4df}
+    .subtitle{margin:18px 0 0;font-family:'Cinzel',serif;font-weight:500;font-size:clamp(1rem,2.2vw,1.3rem);letter-spacing:.28em;text-transform:uppercase;color:#8fa3a7}
+
+    .grid{width:min(1080px,100%);margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+    .card{--g:var(--glow);position:relative;min-height:550px;display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:28px 30px 30px;border:1px solid rgba(var(--g),.33);border-radius:24px;background:linear-gradient(145deg,rgba(17,29,35,.86),rgba(4,9,12,.94));box-shadow:inset 0 0 0 3px rgba(255,255,255,.025),0 22px 70px rgba(0,0,0,.4);transition:.3s}
+    .card.deep{--g:var(--glow2)}
+    .card:hover,.card:focus-visible{outline:none;transform:translateY(-7px);border-color:rgba(var(--g),.73);box-shadow:inset 0 0 0 3px rgba(255,255,255,.03),0 24px 80px rgba(var(--g),.12)}
+    .card:before{content:"";position:absolute;inset:-40% 20% 55%;border-radius:50%;background:rgba(var(--g),.14);filter:blur(45px)}
+    .corners:before,.corners:after{content:"ᛝ";position:absolute;top:13px;color:rgba(var(--g),.46);font:20px Georgia}
+    .corners:before{left:17px}
+    .corners:after{right:17px}
+
+    .logo{position:relative;z-index:1;width:min(330px,88%);aspect-ratio:1;display:grid;place-items:center;margin-bottom:18px}
+    .logo img{width:100%;height:100%;object-fit:contain;border-radius:20%;filter:drop-shadow(0 12px 28px rgba(0,0,0,.56))}
+
+    .copy{position:relative;z-index:1;text-align:center}
+    .copy .eyebrow{margin:0 0 7px;color:rgba(var(--g),.86);font-size:10px;font-weight:700;letter-spacing:.33em;text-transform:uppercase}
+    .copy h2{margin:0 0 10px;color:#e5ece9;font:500 clamp(25px,3vw,34px) Georgia,serif;letter-spacing:.04em}
+    .copy .desc{margin:0;color:#7e9591;font-size:14px;line-height:1.5}
+
+    .enter{position:relative;z-index:1;margin-top:auto;padding-top:25px;color:#b9cec9;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    .enter b{margin-left:8px;color:rgb(var(--g));font:17px Georgia}
+
+    footer{text-align:center;margin:42px auto 0}
+    footer .rune-line{color:#c9a227;font-size:15px;letter-spacing:.5em;opacity:.65;margin-bottom:10px}
+    footer .copyright{color:#52696a;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+
+    @media(max-width:760px){.page{padding:46px 16px 28px}.hero{margin-bottom:36px}.grid{grid-template-columns:1fr;max-width:470px;gap:20px}.card{min-height:510px;padding-inline:22px}.logo{width:min(310px,92%)}}
+    @media(prefers-reduced-motion:reduce){.card{transition:none}}
+
+    .lang{position:absolute;top:24px;right:24px;z-index:5}
+    .lang-btn{width:120px;height:120px;border:none;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+    .lang-btn:hover,.lang-btn:focus-visible{border-color:rgba(var(--glow),.73);outline:none}
+    .lang-btn img{width:120px;height:120px;object-fit:contain;border-radius:3px;display:block}
+    .lang-menu{position:absolute;top:46px;right:0;min-width:170px;background:rgba(10,26,31,.97);border:1px solid rgba(var(--glow),.28);border-radius:10px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.5);display:none;max-height:280px;overflow-y:auto}
+    .lang-menu.open{display:block}
+    .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
+    .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div id="particles" aria-hidden="true"></div>
+    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+        <img src="assets/langue.png" alt="">
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="fr">Français</button>
+        <button role="menuitem" data-lang="de">Deutsch</button>
+        <button role="menuitem" data-lang="en">English</button>
+        <button role="menuitem" data-lang="es">Español</button>
+        <button role="menuitem" data-lang="hi">हिन्दी</button>
+        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+        <button role="menuitem" data-lang="it">Italiano</button>
+        <button role="menuitem" data-lang="pt">Português</button>
+        <button role="menuitem" data-lang="ru">Русский</button>
+        <button role="menuitem" data-lang="ur">اردو</button>
+        <button role="menuitem" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="mark" aria-hidden="true"><span>ᛏ</span></div>
+      <h1 class="brand">Barbare <em>Destroy</em></h1>
+      <p class="subtitle" data-i18n="subtitle">Choisis ta voie</p>
+    </section>
+
+    <section class="grid" aria-label="Applications">
+      <a class="card" href="nordikafidelia/" aria-label="Ouvrir Nordika Fidélia">
+        <span class="corners"></span>
+        <div class="logo"><img src="assets/logofidelia.png" alt="Logo Nordika Fidélia"></div>
+        <div class="copy">
+          <p class="eyebrow" data-i18n="c1eyebrow">Fidélité nordique</p>
+          <h2>Nordika Fidélia</h2>
+          <p class="desc" data-i18n="c1desc">Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.</p>
+        </div>
+        <div class="enter"><span data-i18n="enter">Découvrir</span> <b>ᚱ</b></div>
+      </a>
+
+      <a class="card deep" href="valhallacalendar/" aria-label="Ouvrir Valhalla Calendar">
+        <span class="corners"></span>
+        <div class="logo"><img src="assets/logocalendar.png" alt="Logo Valhalla Calendar"></div>
+        <div class="copy">
+          <p class="eyebrow" data-i18n="c2eyebrow">Calendrier viking</p>
+          <h2>Valhalla Calendar</h2>
+          <p class="desc" data-i18n="c2desc">Ton calendrier, synchronisé et gardé par les dieux du temps.</p>
+        </div>
+        <div class="enter"><span data-i18n="enter">Découvrir</span> <b>ᚱ</b></div>
+      </a>
+    </section>
+
+    <footer>
+      <div class="rune-line">ᛒᚨᚱᛒᚨᚱᛖ</div>
+      <div class="copyright" data-i18n="copyright">&copy; 2026 · Forgé dans la rage et le sang</div>
+    </footer>
+  </main>
+
+<script>
+  var translations = {
+    fr: {
+      subtitle: "Choisis ta voie",
+      c1eyebrow: "Fidélité nordique",
+      c1desc: "Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.",
+      c2eyebrow: "Calendrier viking",
+      c2desc: "Ton calendrier, synchronisé et gardé par les dieux du temps.",
+      enter: "Découvrir",
+      copyright: "© 2026 · Forgé dans la rage et le sang"
+    },
+    de: {
+      subtitle: "Wähle deinen Weg",
+      c1eyebrow: "Nordische Treue",
+      c1desc: "Alle deine Treuekarten, vereint in einem einzigen Reisebuch.",
+      c2eyebrow: "Wikingerkalender",
+      c2desc: "Dein Kalender, synchronisiert und behütet von den Göttern der Zeit.",
+      enter: "Entdecken",
+      copyright: "© 2026 · Geschmiedet in Wut und Blut"
+    },
+    en: {
+      subtitle: "Choose your path",
+      c1eyebrow: "Nordic loyalty",
+      c1desc: "All your loyalty cards, gathered in a single travel ledger.",
+      c2eyebrow: "Viking calendar",
+      c2desc: "Your calendar, synced and watched over by the gods of time.",
+      enter: "Discover",
+      copyright: "© 2026 · Forged in rage and blood"
+    },
+    es: {
+      subtitle: "Elige tu camino",
+      c1eyebrow: "Fidelidad nórdica",
+      c1desc: "Todas tus tarjetas de fidelidad, reunidas en un solo cuaderno de viaje.",
+      c2eyebrow: "Calendario vikingo",
+      c2desc: "Tu calendario, sincronizado y custodiado por los dioses del tiempo.",
+      enter: "Descubrir",
+      copyright: "© 2026 · Forjado en la rabia y la sangre"
+    },
+    hi: {
+      subtitle: "अपना मार्ग चुनें",
+      c1eyebrow: "नॉर्डिक वफ़ादारी",
+      c1desc: "आपके सभी लॉयल्टी कार्ड, एक ही यात्रा बहीखाते में एकत्रित।",
+      c2eyebrow: "वाइकिंग कैलेंडर",
+      c2desc: "आपका कैलेंडर, सिंक किया हुआ और समय के देवताओं द्वारा सुरक्षित।",
+      enter: "खोजें",
+      copyright: "© 2026 · क्रोध और रक्त में गढ़ा गया"
+    },
+    "in": {
+      subtitle: "Pilih jalanmu",
+      c1eyebrow: "Loyalitas Nordik",
+      c1desc: "Semua kartu loyalitasmu, terkumpul dalam satu buku catatan perjalanan.",
+      c2eyebrow: "Kalender Viking",
+      c2desc: "Kalendermu, tersinkron dan dijaga oleh para dewa waktu.",
+      enter: "Jelajahi",
+      copyright: "© 2026 · Ditempa dalam amarah dan darah"
+    },
+    it: {
+      subtitle: "Scegli la tua via",
+      c1eyebrow: "Fedeltà nordica",
+      c1desc: "Tutte le tue carte fedeltà, riunite in un unico taccuino di viaggio.",
+      c2eyebrow: "Calendario vichingo",
+      c2desc: "Il tuo calendario, sincronizzato e custodito dagli dei del tempo.",
+      enter: "Scopri",
+      copyright: "© 2026 · Forgiato nella rabbia e nel sangue"
+    },
+    pt: {
+      subtitle: "Escolhe o teu caminho",
+      c1eyebrow: "Fidelidade nórdica",
+      c1desc: "Todos os teus cartões de fidelidade, reunidos num único caderno de viagem.",
+      c2eyebrow: "Calendário viking",
+      c2desc: "O teu calendário, sincronizado e guardado pelos deuses do tempo.",
+      enter: "Descobrir",
+      copyright: "© 2026 · Forjado na fúria e no sangue"
+    },
+    ru: {
+      subtitle: "Выбери свой путь",
+      c1eyebrow: "Северная лояльность",
+      c1desc: "Все твои карты лояльности собраны в единой дорожной книге.",
+      c2eyebrow: "Календарь викингов",
+      c2desc: "Твой календарь, синхронизированный и хранимый богами времени.",
+      enter: "Открыть",
+      copyright: "© 2026 · Выковано в ярости и крови"
+    },
+    ur: {
+      subtitle: "اپنا راستہ چنیں",
+      c1eyebrow: "شمالی وفاداری",
+      c1desc: "آپ کے تمام لائلٹی کارڈز، ایک ہی سفری کتاب میں جمع۔",
+      c2eyebrow: "وائکنگ کیلنڈر",
+      c2desc: "آپ کا کیلنڈر، ہم وقت اور وقت کے دیوتاؤں کی نگرانی میں۔",
+      enter: "دریافت کریں",
+      copyright: "© 2026 · غضب اور خون میں ڈھالا گیا"
+    },
+    zh: {
+      subtitle: "选择你的道路",
+      c1eyebrow: "北欧忠诚",
+      c1desc: "你所有的会员卡，汇聚于一本旅行手册之中。",
+      c2eyebrow: "维京日历",
+      c2desc: "你的日历，由时间之神同步守护。",
+      enter: "探索",
+      copyright: "© 2026 · 锻造于愤怒与鲜血"
+    }
+  };
+
+  var rtlLangs = ["ur"];
+
+  function applyLang(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        el.textContent = dict[key];
+        el.dir = dir;
+      }
+    });
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = langMenu.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+      langMenu.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var box = document.getElementById('particles');
+  var n = 26;
+  for (var i = 0; i < n; i++) {
+    var s = document.createElement('div');
+    s.className = 'spark';
+    var size = 2 + Math.random() * 2.5;
+    var left = Math.random() * 100;
+    var dur = 6 + Math.random() * 6;
+    var delay = Math.random() * 10;
+    var drift = (Math.random() * 80 - 40) + 'px';
+    s.style.left = left + 'vw';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--drift', drift);
+    s.style.animationDuration = dur + 's';
+    s.style.animationDelay = delay + 's';
+    box.appendChild(s);
+  }
+</script>
+</body>
+</html>
