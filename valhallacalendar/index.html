@@ -124,7 +124,7 @@
         <p class="eyebrow" data-i18n="eyebrow">Calendrier viking</p>
         <h1 class="brand">Valhalla Calendar</h1>
         <p class="subtitle" data-i18n="subtitle">Ton calendrier, synchronisé et gardé par les dieux du temps.</p>
-        <p class="purpose" data-i18n="purpose">Valhalla Calendar est une application de calendrier permettant de créer et gérer des événements, rappels et anniversaires, et de synchroniser son calendrier avec Google Calendar.</p>
+        <p class="purpose" data-i18n="purpose">Valhalla Calendar accède à votre compte Google Calendar pour lire, créer et modifier vos événements directement depuis l'application. Vos données sont utilisées uniquement pour la synchronisation et ne sont jamais partagées à des tiers.</p>
         <span class="status" data-i18n="status">Disponible prochainement</span>
       </div>
       <div class="device-stage" aria-hidden="true"><img class="app-mockup-img" src="assetscalendar/mockup-valhalla.png" alt=""></div>
@@ -190,17 +190,26 @@
     ur:{eyebrow:"وائکنگ کیلنڈر",subtitle:"آپ کا کیلنڈر، ہم وقت اور وقت کے دیوتاؤں کی نگرانی میں۔",status:"جلد دستیاب",featuresTitle:"والہلا کیا محفوظ رکھتا ہے",f1t:"گوگل ہم وقتی",f1d:"اپنا گوگل اکاؤنٹ جوڑیں اور بغیر کچھ دوبارہ درج کیے اپنے تمام ایونٹس دوبارہ حاصل کریں۔",f2t:"جگانے والے الارم",f2d:"حسب ضرورت رنگ ٹونز اور فل اسکرین الرٹس تاکہ آپ کوئی ملاقات نہ چوکیں۔",f3t:"رونی انداز",f3d:"19 گوتھک اور وائکنگ فونٹس، ایک قابل تخصیص پس منظر، ایک ماحول جو آپ سے مشابہت رکھتا ہے۔",f4t:"روان اور آف لائن",f4d:"ایک مقامی کیش آپ کے مہینے کو ہاتھ میں رکھتا ہے، بغیر کنکشن کے بھی۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"والہلا کیلنڈر پلے اسٹور پر آنے سے پہلے اپنی آخری ترتیبات مکمل کر رہا ہے۔",ctaNote:"جلد دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerTerms:"استعمال کی شرائط",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
     zh:{eyebrow:"维京日历",subtitle:"你的日历，由时间之神同步守护。",status:"敬请期待",featuresTitle:"瓦尔哈拉守护的是什么",f1t:"谷歌同步",f1d:"连接你的谷歌账户，无需重新输入即可找回所有日程。",f2t:"唤醒式闹钟",f2d:"自定义铃声与全屏提醒，让你不错过任何约会。",f3t:"符文风格外观",f3d:"19种哥特与维京字体、可自定义的背景，营造属于你的氛围。",f4t:"流畅且可离线使用",f4d:"本地缓存让你的月历随时可用，即使没有网络连接。",ctaTitle:"即将装进你的口袋",ctaDesc:"Valhalla Calendar 正在做最后的调整，即将上线 Play 商店。",ctaNote:"敬请期待",footerPrivacy:"隐私政策",footerTerms:"使用条款",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
   };
-  Object.assign(translations.fr,{purpose:"Valhalla Calendar est une application de calendrier permettant de créer et gérer des événements, rappels et anniversaires, et de synchroniser son calendrier avec Google Calendar."});
-  Object.assign(translations.de,{purpose:"Valhalla Calendar ist eine Kalender-App zum Erstellen und Verwalten von Terminen, Erinnerungen und Geburtstagen sowie zum Synchronisieren des Kalenders mit Google Calendar."});
-  Object.assign(translations.en,{purpose:"Valhalla Calendar is a calendar app for creating and managing events, reminders and birthdays, and for syncing your calendar with Google Calendar."});
-  Object.assign(translations.es,{purpose:"Valhalla Calendar es una aplicación de calendario para crear y gestionar eventos, recordatorios y cumpleaños, y sincronizar el calendario con Google Calendar."});
-  Object.assign(translations.hi,{purpose:"Valhalla Calendar एक कैलेंडर ऐप है जिसमें इवेंट, रिमाइंडर और जन्मदिन बनाए व प्रबंधित किए जा सकते हैं और कैलेंडर को Google Calendar के साथ सिंक किया जा सकता है।"});
-  Object.assign(translations.in,{purpose:"Valhalla Calendar adalah aplikasi kalender untuk membuat dan mengelola acara, pengingat, dan ulang tahun, serta menyinkronkan kalender dengan Google Calendar."});
-  Object.assign(translations.it,{purpose:"Valhalla Calendar è un'app calendario per creare e gestire eventi, promemoria e compleanni e sincronizzare il calendario con Google Calendar."});
-  Object.assign(translations.pt,{purpose:"Valhalla Calendar é uma aplicação de calendário para criar e gerir eventos, lembretes e aniversários e sincronizar o calendário com o Google Calendar."});
-  Object.assign(translations.ru,{purpose:"Valhalla Calendar — приложение-календарь для создания и управления событиями, напоминаниями и днями рождения, а также синхронизации календаря с Google Calendar."});
-  Object.assign(translations.ur,{purpose:"Valhalla Calendar ایک کیلنڈر ایپ ہے جس میں ایونٹس، یاد دہانیاں اور سالگرہ بنائی اور منظم کی جا سکتی ہیں اور کیلنڈر کو Google Calendar کے ساتھ ہم وقت کیا جا سکتا ہے۔"});
-  Object.assign(translations.zh,{purpose:"Valhalla Calendar 是一款日历应用，可创建和管理事件、提醒和生日，并与 Google Calendar 同步日历。"});
+
+  var purposeTexts = {
+    fr: "Valhalla Calendar accède à votre compte Google Calendar pour lire, créer et modifier vos événements directement depuis l'application. Vos données sont utilisées uniquement pour la synchronisation et ne sont jamais partagées à des tiers.",
+    de: "Valhalla Calendar greift auf Ihr Google Calendar-Konto zu, um Ihre Termine direkt über die App zu lesen, zu erstellen und zu bearbeiten. Ihre Daten werden ausschließlich für die Synchronisierung verwendet und niemals an Dritte weitergegeben.",
+    en: "Valhalla Calendar accesses your Google Calendar account to read, create, and modify your events directly from the app. Your data is used solely for synchronization and is never shared with third parties.",
+    es: "Valhalla Calendar accede a su cuenta de Google Calendar para leer, crear y modificar sus eventos directamente desde la aplicación. Sus datos se utilizan únicamente para la sincronización y nunca se comparten con terceros.",
+    hi: "Valhalla Calendar सीधे ऐप से आपके इवेंट को पढ़ने, बनाने और संशोधित करने के लिए आपके Google Calendar खाते तक पहुंचता है। आपका डेटा केवल सिंक्रोनाइज़ेशन के लिए उपयोग किया जाता है और कभी भी तीसरे पक्ष के साथ साझा नहीं किया जाता है।",
+    in: "Valhalla Calendar mengakses akun Google Calendar Anda untuk membaca, membuat, dan mengubah acara Anda langsung dari aplikasi. Data Anda hanya digunakan untuk sinkronisasi dan tidak pernah dibagikan kepada pihak ketiga.",
+    it: "Valhalla Calendar accede al tuo account Google Calendar per leggere, creare e modificare i tuoi eventi direttamente dall'app. I tuoi dati vengono utilizzati esclusivamente per la sincronizzazione e non vengono mai condivisi con terze parti.",
+    pt: "O Valhalla Calendar acede à sua conta do Google Calendar para ler, criar e modificar os seus eventos diretamente a partir da aplicação. Os seus dados são utilizados exclusivamente para sincronização e nunca são partilhados com terceiros.",
+    ru: "Valhalla Calendar получает доступ к вашему аккаунту Google Calendar для чтения, создания и изменения ваших событий прямо из приложения. Ваши данные используются исключительно для синхронизации и никогда не передаются третьим лицам.",
+    ur: "Valhalla Calendar براہ راست ایپ سے آپ کے ایونٹس کو پڑھنے، بنانے اور ترمیم کرنے کے لیے آپ کے Google Calendar اکاؤنٹ تک رسائی حاصل کرتا ہے۔ آپ کا ڈیٹا صرف ہم وقتی (synchronization) کے لیے استعمال ہوتا ہے اور کبھی کسی تیسرے فریق کے ساتھ شیئر نہیں کیا جاتا۔",
+    zh: "Valhalla Calendar 访问您的 Google Calendar 帐户，直接在应用中读取、创建和修改您的事件。您的数据仅用于同步，绝不会与第三方共享。"
+  };
+
+  for (var l in purposeTexts) {
+    if (translations[l]) {
+      translations[l].purpose = purposeTexts[l];
+    }
+  }
 
   var rtlLangs = ["ur"];
 
