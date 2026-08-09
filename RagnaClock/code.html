@@ -1,0 +1,1369 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Code ESP32 — RagnaClock</title><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><main class="page"><a class="back" href="arduino.html"><img src="assetsragnaclock/logoragnaclock.png" alt="RagnaClock"></a><div class="lang"><button class="lang-btn" id="langBtn"><img src="assetsragnaclock/langue.png" alt="Langues"></button><div class="lang-menu" id="langMenu"><button data-lang="fr">Français</button><button data-lang="de">Deutsch</button><button data-lang="en">English</button><button data-lang="es">Español</button><button data-lang="hi">हिन्दी</button><button data-lang="in">Bahasa Indonesia</button><button data-lang="it">Italiano</button><button data-lang="pt">Português</button><button data-lang="ru">Русский</button><button data-lang="ur">اردو</button><button data-lang="zh">中文</button></div></div>
+<section class="panel" style="width:min(1200px,100%)"><h1 data-i18n="title">Code Arduino de RagnaClock</h1><p class="notice" data-i18n="warning">Remplace les deux XXXXXXXXXXXXXXXXXX par ton SSID Wi-Fi et ton mot de passe avant le téléversement.</p><div class="actions"><button class="button" id="copyBtn" data-i18n="copy">Copier tout le code</button><a class="button alt" href="assetsragnaclock/es32code.txt" download="RagnaClock_ESP32.ino" data-i18n="download">Télécharger le fichier</a></div><p class="notice" data-i18n="license">Ce code est entièrement gratuit : tu peux l’utiliser, le copier, le modifier, l’intégrer à un autre projet et le partager où tu veux, sans demander d’autorisation.</p><pre class="codebox" id="source">#include &lt;Arduino.h&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+#include &lt;ESPmDNS.h&gt;
+#include &lt;Preferences.h&gt;
+#include &lt;time.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;vector&gt;
+
+#include &lt;Adafruit_GFX.h&gt;
+#include &lt;ESP32-HUB75-MatrixPanel-I2S-DMA.h&gt;
+#include &lt;ESP32-VirtualMatrixPanel-I2S-DMA.h&gt;
+
+// =====================================================
+// WIFI
+// =====================================================
+
+const char* WIFI_SSID     = "XXXXXXXXXXXXXXXXXX";
+const char* WIFI_PASSWORD = "XXXXXXXXXXXXXXXXXX";
+
+// =====================================================
+// PANNEAUX - CONFIGURATION VALIDEE, NE PLUS TOUCHER
+// =====================================================
+
+#define PANEL_RES_X 32
+#define PANEL_RES_Y 32
+#define NUM_ROWS 1
+#define NUM_COLS 3
+#define PANEL_CHAIN 3
+#define DEFAULT_BRIGHTNESS 2
+#define VIRTUAL_MATRIX_CHAIN_TYPE CHAIN_TOP_LEFT_DOWN
+
+// SEENGREAT RGB Matrix Adapter Board (E) Rev 2.2
+#define R1_PIN 18
+#define G1_PIN 8
+#define B1_PIN 17
+#define R2_PIN 16
+#define G2_PIN 1
+#define B2_PIN 15
+#define A_PIN 7
+#define B_PIN 48
+#define C_PIN 6
+#define D_PIN 47
+#define E_PIN 2
+#define LAT_PIN 21
+#define OE_PIN 4
+#define CLK_PIN 5
+
+MatrixPanel_I2S_DMA *dma_display = nullptr;
+VirtualMatrixPanel *display = nullptr;
+
+WebServer server(80);
+Preferences preferences;
+
+// =====================================================
+// REGLAGES PERSISTANTS
+// =====================================================
+
+uint8_t displayBrightness = DEFAULT_BRIGHTNESS;
+uint8_t digitSize = 100;
+uint8_t digitThickness = 3;
+uint16_t scrollDelayMs = 45;
+
+String digitFontStyle = "segments";
+bool autoFontRotation = false;
+
+const char* FONT_STYLE_LIST[8] = {
+  "segments", "segments_thin", "segments_thick", "lcd_retro",
+  "block", "block_round", "spaced", "compact"
+};
+
+String effectiveFontStyle = "segments";
+String lastEffectiveFontStyle = "";
+
+String hourColorHex   = "#00ff96";
+String minuteColorHex = "#00ff96";
+String secondColorHex = "#00ff96";
+
+String messageColorMode = "single";
+String messageColorHex   = "#00ff96";
+String messageP1Hex      = "#00ff96";
+String messageP2Hex      = "#a050ff";
+String messageP3Hex      = "#ff1493";
+
+uint16_t hourColor;
+uint16_t minuteColor;
+uint16_t secondColor;
+uint16_t messageColor;
+uint16_t messagePanel1Color;
+uint16_t messagePanel2Color;
+uint16_t messagePanel3Color;
+uint16_t blackColor;
+
+// =====================================================
+// MESSAGES
+// =====================================================
+
+String manualMessage = "";
+bool manualMode = false;
+
+#define MAX_SCHEDULES 10
+String schedDate[MAX_SCHEDULES];
+String schedMsg[MAX_SCHEDULES];
+
+String currentPlaybackMessage = "";
+String currentPlaybackSource = "";
+int passCount = 0;
+bool clockPause = false;
+unsigned long clockPauseStart = 0;
+
+int scrollX = 96;
+unsigned long lastScrollRefresh = 0;
+
+// =====================================================
+// CACHE HORLOGE
+// =====================================================
+
+int oldH1 = -1;
+int oldH2 = -1;
+int oldM1 = -1;
+int oldM2 = -1;
+int oldS1 = -1;
+int oldS2 = -1;
+int oldSecond = -1;
+int oldColonVisible = -1;
+
+// =====================================================
+// POLICE : 7 SEGMENTS
+// =====================================================
+
+const uint8_t digitSegments[10] = {
+  0x3F, 0x06, 0x5B, 0x4F, 0x66,
+  0x6D, 0x7D, 0x07, 0x7F, 0x6F
+};
+
+// =====================================================
+// POLICE : PIXEL BLOC 5x7
+// =====================================================
+
+const uint8_t blockDigits[10][7] = {
+  {0x0E,0x11,0x13,0x15,0x19,0x11,0x0E}, // 0
+  {0x04,0x0C,0x04,0x04,0x04,0x04,0x0E}, // 1
+  {0x0E,0x11,0x01,0x02,0x04,0x08,0x1F}, // 2
+  {0x1F,0x02,0x04,0x02,0x01,0x11,0x0E}, // 3
+  {0x02,0x06,0x0A,0x12,0x1F,0x02,0x02}, // 4
+  {0x1F,0x10,0x1E,0x01,0x01,0x11,0x0E}, // 5
+  {0x06,0x08,0x10,0x1E,0x11,0x11,0x0E}, // 6
+  {0x1F,0x01,0x02,0x04,0x08,0x08,0x08}, // 7
+  {0x0E,0x11,0x11,0x0E,0x11,0x11,0x0E}, // 8
+  {0x0E,0x11,0x11,0x0F,0x01,0x02,0x0C}  // 9
+};
+
+// =====================================================
+// EMOJIS PIXEL 8x8 (20 disponibles, utilises via codes dans le texte)
+// =====================================================
+
+const uint8_t emojiHeart[8]       = {0x66,0xFF,0xFF,0xFF,0x7E,0x3C,0x18,0x00};
+const uint8_t emojiBrokenHeart[8] = {0x66,0xFF,0xDB,0xBD,0x66,0x3C,0x18,0x00};
+const uint8_t emojiStar[8]        = {0x18,0x18,0xFF,0x7E,0x3C,0x66,0xC3,0x81};
+const uint8_t emojiBolt[8]        = {0x18,0x30,0x60,0xFE,0x18,0x30,0x60,0x00};
+const uint8_t emojiFire[8]        = {0x18,0x18,0x3C,0x3C,0x7E,0x7E,0x3C,0x18};
+const uint8_t emojiCoffee[8]      = {0x14,0x28,0x00,0x7C,0x46,0x46,0x7C,0x38};
+const uint8_t emojiSmile[8]       = {0x3C,0x42,0xA5,0x81,0xA5,0x99,0x42,0x3C};
+const uint8_t emojiWink[8]        = {0x3C,0x42,0x81,0x85,0xA5,0x99,0x42,0x3C};
+const uint8_t emojiSad[8]         = {0x3C,0x42,0xA5,0x81,0x99,0xA5,0x42,0x3C};
+const uint8_t emojiAngry[8]       = {0x42,0x24,0xA5,0x81,0xBD,0xC3,0x42,0x3C};
+const uint8_t emojiSun[8]         = {0x24,0x18,0xA5,0x7E,0x7E,0xA5,0x18,0x24};
+const uint8_t emojiMoon[8]        = {0x1C,0x36,0x66,0x60,0x60,0x66,0x36,0x1C};
+const uint8_t emojiRain[8]        = {0x00,0x3C,0x7E,0xFF,0x00,0x24,0x24,0x00};
+const uint8_t emojiSnow[8]        = {0x18,0xDB,0x7E,0x24,0x24,0x7E,0xDB,0x18};
+const uint8_t emojiSkull[8]       = {0x3C,0x7E,0xDB,0xFF,0x7E,0x3C,0x24,0x24};
+const uint8_t emojiGhost[8]       = {0x3C,0x7E,0xFF,0xDB,0xFF,0xFF,0xFF,0xA5};
+const uint8_t emojiMusic[8]       = {0x06,0x0E,0x0A,0x0A,0x0A,0xEA,0xEE,0x6C};
+const uint8_t emojiMountain[8]    = {0x00,0x08,0x1C,0x36,0x63,0xC1,0xFF,0x00};
+const uint8_t emojiRocket[8]      = {0x18,0x3C,0x3C,0x7E,0xFF,0x5A,0x66,0x18};
+const uint8_t emojiTrophy[8]      = {0x3C,0x7E,0x7E,0x3C,0x18,0x18,0x3C,0x00};
+
+// =====================================================
+// COULEURS
+// =====================================================
+
+uint16_t hexTo565(String hex) {
+  if (hex.length() != 7 || hex.charAt(0) != '#') {
+    return dma_display-&gt;color565(0, 255, 150);
+  }
+
+  long rgb = strtol(hex.substring(1).c_str(), nullptr, 16);
+  uint8_t r = (rgb &gt;&gt; 16) &amp; 0xFF;
+  uint8_t g = (rgb &gt;&gt; 8) &amp; 0xFF;
+  uint8_t b = rgb &amp; 0xFF;
+  return dma_display-&gt;color565(r, g, b);
+}
+
+void refreshDisplayColors() {
+  hourColor = hexTo565(hourColorHex);
+  minuteColor = hexTo565(minuteColorHex);
+  secondColor = hexTo565(secondColorHex);
+  messageColor = hexTo565(messageColorHex);
+  messagePanel1Color = hexTo565(messageP1Hex);
+  messagePanel2Color = hexTo565(messageP2Hex);
+  messagePanel3Color = hexTo565(messageP3Hex);
+  blackColor = dma_display-&gt;color565(0, 0, 0);
+}
+
+uint16_t rainbowColor(uint8_t pos) {
+  pos = 255 - pos;
+
+  if (pos &lt; 85) {
+    return dma_display-&gt;color565(255 - pos * 3, 0, pos * 3);
+  }
+
+  if (pos &lt; 170) {
+    pos -= 85;
+    return dma_display-&gt;color565(0, pos * 3, 255 - pos * 3);
+  }
+
+  pos -= 170;
+  return dma_display-&gt;color565(pos * 3, 255 - pos * 3, 0);
+}
+
+uint16_t scrollingTextColor(int x) {
+  if (messageColorMode == "rainbow") {
+    return rainbowColor((uint8_t)(x * 4 + millis() / 12));
+  }
+
+  if (messageColorMode == "panels") {
+    if (x &lt; 32) return messagePanel1Color;
+    if (x &lt; 64) return messagePanel2Color;
+    return messagePanel3Color;
+  }
+
+  return messageColor;
+}
+
+// =====================================================
+// CHIFFRES - RENDU "7 SEGMENTS" (et ses variantes)
+// =====================================================
+
+void drawDigitSegments(int cellX, int number, uint16_t color,
+                        int thickOverride, bool gap, bool forceMax = false) {
+  if (number &lt; 0 || number &gt; 9) return;
+
+  int digitW = forceMax ? 12 : map(digitSize, 50, 100, 7, 12);
+  int digitH = forceMax ? 25 : map(digitSize, 50, 100, 14, 25);
+
+  int thick = (thickOverride == -1)
+                ? constrain((int)digitThickness, 1, 3)
+                : constrain(thickOverride, 1, 3);
+
+  int x = cellX + (16 - digitW) / 2;
+  int y = (32 - digitH) / 2;
+
+  int horizontalW = digitW - (2 * thick);
+  int halfH = (digitH - (3 * thick)) / 2;
+
+  if (gap) {
+    horizontalW -= 1;
+    halfH -= 1;
+  }
+
+  if (horizontalW &lt; 1) horizontalW = 1;
+  if (halfH &lt; 1) halfH = 1;
+
+  uint8_t s = digitSegments[number];
+
+  display-&gt;fillRect(x + thick, y, horizontalW, thick, (s &amp; 0x01) ? color : blackColor);
+  display-&gt;fillRect(x + digitW - thick, y + thick, thick, halfH, (s &amp; 0x02) ? color : blackColor);
+  display-&gt;fillRect(x + digitW - thick, y + (2 * thick) + halfH, thick, halfH, (s &amp; 0x04) ? color : blackColor);
+  display-&gt;fillRect(x + thick, y + (2 * halfH) + (2 * thick), horizontalW, thick, (s &amp; 0x08) ? color : blackColor);
+  display-&gt;fillRect(x, y + (2 * thick) + halfH, thick, halfH, (s &amp; 0x10) ? color : blackColor);
+  display-&gt;fillRect(x, y + thick, thick, halfH, (s &amp; 0x20) ? color : blackColor);
+  display-&gt;fillRect(x + thick, y + halfH + thick, horizontalW, thick, (s &amp; 0x40) ? color : blackColor);
+}
+
+// =====================================================
+// CHIFFRES - RENDU "PIXEL BLOC" (et ses variantes)
+// =====================================================
+
+void drawDigitBlock(int cellX, int number, uint16_t color,
+                     int scaleOverride, bool roundCorners) {
+  if (number &lt; 0 || number &gt; 9) return;
+
+  int scale = (scaleOverride == -1)
+                ? ((digitSize &gt; 75) ? 2 : 1)
+                : scaleOverride;
+
+  int w = 5 * scale;
+  int h = 7 * scale;
+
+  int x = cellX + (16 - w) / 2;
+  int y = (32 - h) / 2;
+
+  for (int row = 0; row &lt; 7; row++) {
+    uint8_t bits = blockDigits[number][row];
+
+    for (int col = 0; col &lt; 5; col++) {
+      bool on = bits &amp; (1 &lt;&lt; (4 - col));
+
+      bool isCorner = (row == 0 || row == 6) &amp;&amp; (col == 0 || col == 4);
+      if (roundCorners &amp;&amp; isCorner) on = false;
+
+      display-&gt;fillRect(x + col * scale, y + row * scale, scale, scale, on ? color : blackColor);
+    }
+  }
+}
+
+void drawDigit(int cellX, int number, uint16_t color) {
+  if (effectiveFontStyle == "segments_thin") {
+    drawDigitSegments(cellX, number, color, 1, false);
+  } else if (effectiveFontStyle == "segments_thick") {
+    drawDigitSegments(cellX, number, color, 3, false, true);
+  } else if (effectiveFontStyle == "lcd_retro") {
+    drawDigitSegments(cellX, number, color, -1, true);
+  } else if (effectiveFontStyle == "block") {
+    drawDigitBlock(cellX, number, color, -1, false);
+  } else if (effectiveFontStyle == "block_round") {
+    drawDigitBlock(cellX, number, color, -1, true);
+  } else if (effectiveFontStyle == "spaced") {
+    drawDigitBlock(cellX, number, color, 1, false);
+  } else if (effectiveFontStyle == "compact") {
+    drawDigitBlock(cellX, number, color, 2, false);
+  } else {
+    drawDigitSegments(cellX, number, color, -1, false);
+  }
+}
+
+void resetClockCache() {
+  oldH1 = oldH2 = oldM1 = oldM2 = oldS1 = oldS2 = -1;
+  oldSecond = -1;
+  oldColonVisible = -1;
+}
+
+void updateClock() {
+  struct tm timeinfo;
+  if (!getLocalTime(&amp;timeinfo, 10)) return;
+
+  if (autoFontRotation) {
+    int idx = timeinfo.tm_yday % 8;
+    effectiveFontStyle = FONT_STYLE_LIST[idx];
+  } else {
+    effectiveFontStyle = digitFontStyle;
+  }
+
+  if (effectiveFontStyle != lastEffectiveFontStyle) {
+    lastEffectiveFontStyle = effectiveFontStyle;
+    oldH1 = oldH2 = oldM1 = oldM2 = oldS1 = oldS2 = -1;
+  }
+
+  if (timeinfo.tm_sec == oldSecond) return;
+  oldSecond = timeinfo.tm_sec;
+
+  int h1 = timeinfo.tm_hour / 10;
+  int h2 = timeinfo.tm_hour % 10;
+  int m1 = timeinfo.tm_min / 10;
+  int m2 = timeinfo.tm_min % 10;
+  int s1 = timeinfo.tm_sec / 10;
+  int s2 = timeinfo.tm_sec % 10;
+
+  if (h1 != oldH1) { drawDigit(0,  h1, hourColor);   oldH1 = h1; }
+  if (h2 != oldH2) { drawDigit(16, h2, hourColor);   oldH2 = h2; }
+  if (m1 != oldM1) { drawDigit(32, m1, minuteColor); oldM1 = m1; }
+  if (m2 != oldM2) { drawDigit(48, m2, minuteColor); oldM2 = m2; }
+  if (s1 != oldS1) { drawDigit(64, s1, secondColor); oldS1 = s1; }
+  if (s2 != oldS2) { drawDigit(80, s2, secondColor); oldS2 = s2; }
+
+  int colonVisible = (timeinfo.tm_sec % 2 == 0) ? 1 : 0;
+
+  if (colonVisible != oldColonVisible) {
+    uint16_t c = colonVisible ? minuteColor : blackColor;
+
+    display-&gt;fillRect(31, 11, 2, 2, c);
+    display-&gt;fillRect(31, 19, 2, 2, c);
+    display-&gt;fillRect(63, 11, 2, 2, c);
+    display-&gt;fillRect(63, 19, 2, 2, c);
+
+    oldColonVisible = colonVisible;
+  }
+}
+
+void showClockNow() {
+  dma_display-&gt;clearScreen();
+  resetClockCache();
+  updateClock();
+}
+
+// =====================================================
+// EMOJIS - RENDU BAS NIVEAU
+// =====================================================
+
+void drawPixelEmojiBitmap(const uint8_t* bitmap, uint16_t color, int x, int y) {
+  if (!bitmap) return;
+
+  for (int row = 0; row &lt; 8; row++) {
+    for (int col = 0; col &lt; 8; col++) {
+      if (bitmap[row] &amp; (1 &lt;&lt; (7 - col))) {
+        display-&gt;fillRect(x + col * 2, y + row * 2, 2, 2, color);
+      }
+    }
+  }
+}
+
+// =====================================================
+// MESSAGE : DECOUPAGE EN JETONS (TEXTE + EMOJIS INTEGRES)
+//
+// Codes reconnus dans le texte, entre crochets :
+//   [&lt;3] [&lt;/3] [star] [bolt] [fire] [coffee] [:)] [:D]
+//   [;)] [:(] [&gt;:(]  [sun] [moon] [rain] [snow]
+//   [skull] [ghost] [music] [mountain] [rocket] [trophy]
+// =====================================================
+
+struct MsgToken {
+  bool isEmoji;
+  char ch;
+  const uint8_t* bitmap;
+  uint16_t color;
+};
+
+std::vector&lt;MsgToken&gt; activeTokens;
+int activeTextWidthPx = 0;
+
+// La police classique d'Adafruit_GFX utilise les codes CP437 alors que
+// les telephones Android envoient les messages en UTF-8. Cette conversion
+// permet d'afficher correctement les accents francais sur les panneaux.
+uint8_t unicodeToCp437(uint32_t codepoint) {
+  switch (codepoint) {
+    case 0x00C7: return 128; // Ç
+    case 0x00FC: return 129; // ü
+    case 0x00E9: return 130; // é
+    case 0x00E2: return 131; // â
+    case 0x00E4: return 132; // ä
+    case 0x00E0: return 133; // à
+    case 0x00E5: return 134; // å
+    case 0x00E7: return 135; // ç
+    case 0x00EA: return 136; // ê
+    case 0x00EB: return 137; // ë
+    case 0x00E8: return 138; // è
+    case 0x00EF: return 139; // ï
+    case 0x00EE: return 140; // î
+    case 0x00C4: return 142; // Ä
+    case 0x00C9: return 144; // É
+    case 0x00F4: return 147; // ô
+    case 0x00F6: return 148; // ö
+    case 0x00FB: return 150; // û
+    case 0x00F9: return 151; // ù
+    case 0x00FF: return 152; // ÿ
+    case 0x00D6: return 153; // Ö
+    case 0x00DC: return 154; // Ü
+    case 0x2018:
+    case 0x2019: return '\'';
+    case 0x201C:
+    case 0x201D: return '"';
+    default: return '?';
+  }
+}
+
+uint8_t readUtf8Character(const String &amp;text, int &amp;index) {
+  uint8_t first = (uint8_t)text.charAt(index++);
+  if (first &lt; 0x80) return first;
+
+  uint32_t codepoint = 0;
+  int continuationCount = 0;
+
+  if ((first &amp; 0xE0) == 0xC0) {
+    codepoint = first &amp; 0x1F;
+    continuationCount = 1;
+  } else if ((first &amp; 0xF0) == 0xE0) {
+    codepoint = first &amp; 0x0F;
+    continuationCount = 2;
+  } else if ((first &amp; 0xF8) == 0xF0) {
+    codepoint = first &amp; 0x07;
+    continuationCount = 3;
+  } else {
+    return '?';
+  }
+
+  for (int n = 0; n &lt; continuationCount; n++) {
+    if (index &gt;= text.length()) return '?';
+    uint8_t next = (uint8_t)text.charAt(index);
+    if ((next &amp; 0xC0) != 0x80) return '?';
+    index++;
+    codepoint = (codepoint &lt;&lt; 6) | (next &amp; 0x3F);
+  }
+
+  return unicodeToCp437(codepoint);
+}
+
+bool resolveEmojiCode(const String &amp;code, const uint8_t* &amp;bmp, uint16_t &amp;col) {
+  bmp = nullptr;
+
+  if (code == "&lt;3")        { bmp = emojiHeart;       col = dma_display-&gt;color565(255, 20, 80); }
+  else if (code == "&lt;/3")  { bmp = emojiBrokenHeart;  col = dma_display-&gt;color565(180, 20, 60); }
+  else if (code == "star") { bmp = emojiStar;         col = dma_display-&gt;color565(255, 230, 0); }
+  else if (code == "bolt") { bmp = emojiBolt;         col = dma_display-&gt;color565(255, 240, 60); }
+  else if (code == "fire") { bmp = emojiFire;         col = dma_display-&gt;color565(255, 90, 0); }
+  else if (code == "coffee") { bmp = emojiCoffee;     col = dma_display-&gt;color565(255, 170, 70); }
+  else if (code == ":)" || code == ":D") { bmp = emojiSmile; col = dma_display-&gt;color565(255, 220, 0); }
+  else if (code == ";)")   { bmp = emojiWink;         col = dma_display-&gt;color565(255, 220, 0); }
+  else if (code == ":(")   { bmp = emojiSad;          col = dma_display-&gt;color565(90, 170, 255); }
+  else if (code == "&gt;:(")  { bmp = emojiAngry;        col = dma_display-&gt;color565(255, 60, 40); }
+  else if (code == "sun")  { bmp = emojiSun;          col = dma_display-&gt;color565(255, 200, 0); }
+  else if (code == "moon") { bmp = emojiMoon;         col = dma_display-&gt;color565(220, 220, 255); }
+  else if (code == "rain") { bmp = emojiRain;         col = dma_display-&gt;color565(90, 170, 255); }
+  else if (code == "snow") { bmp = emojiSnow;         col = dma_display-&gt;color565(200, 230, 255); }
+  else if (code == "skull") { bmp = emojiSkull;       col = dma_display-&gt;color565(220, 255, 240); }
+  else if (code == "ghost") { bmp = emojiGhost;       col = dma_display-&gt;color565(220, 220, 255); }
+  else if (code == "music") { bmp = emojiMusic;       col = dma_display-&gt;color565(180, 90, 255); }
+  else if (code == "mountain") { bmp = emojiMountain; col = dma_display-&gt;color565(140, 200, 160); }
+  else if (code == "rocket") { bmp = emojiRocket;     col = dma_display-&gt;color565(255, 100, 60); }
+  else if (code == "trophy") { bmp = emojiTrophy;     col = dma_display-&gt;color565(255, 210, 0); }
+
+  return bmp != nullptr;
+}
+
+std::vector&lt;MsgToken&gt; parseMessageTokens(const String &amp;message) {
+  std::vector&lt;MsgToken&gt; tokens;
+
+  int i = 0;
+  int len = message.length();
+
+  while (i &lt; len) {
+
+    if (message.charAt(i) == '[') {
+      int close = message.indexOf(']', i);
+
+      if (close != -1 &amp;&amp; close - i &lt;= 10) {
+        String code = message.substring(i + 1, close);
+
+        const uint8_t* bmp = nullptr;
+        uint16_t col = messageColor;
+
+        if (resolveEmojiCode(code, bmp, col)) {
+          MsgToken t;
+          t.isEmoji = true;
+          t.bitmap = bmp;
+          t.color = col;
+          t.ch = 0;
+          tokens.push_back(t);
+
+          i = close + 1;
+          continue;
+        }
+      }
+    }
+
+    MsgToken t;
+    t.isEmoji = false;
+    t.ch = (char)readUtf8Character(message, i);
+    t.bitmap = nullptr;
+    t.color = 0;
+    tokens.push_back(t);
+  }
+
+  return tokens;
+}
+
+void prepareMessage(const String &amp;message) {
+  activeTokens = parseMessageTokens(message);
+
+  activeTextWidthPx = 0;
+  for (auto &amp;t : activeTokens) {
+    activeTextWidthPx += t.isEmoji ? 18 : 12;
+  }
+
+  scrollX = 96;
+}
+
+// =====================================================
+// MESSAGE DEFILANT
+// =====================================================
+
+bool drawScrollingMessage() {
+  if (activeTokens.empty()) return true;
+  if (millis() - lastScrollRefresh &lt; scrollDelayMs) return false;
+  lastScrollRefresh = millis();
+
+  dma_display-&gt;clearScreen();
+
+  display-&gt;setTextWrap(false);
+  display-&gt;setTextSize(2);
+  display-&gt;cp437(true);
+
+  int cursorX = scrollX;
+
+  for (auto &amp;t : activeTokens) {
+    if (t.isEmoji) {
+      drawPixelEmojiBitmap(t.bitmap, t.color, cursorX, 8);
+      cursorX += 18;
+    } else {
+      display-&gt;setTextColor(scrollingTextColor(cursorX + 6));
+      display-&gt;setCursor(cursorX, 9);
+      display-&gt;write((uint8_t)t.ch);
+      cursorX += 12;
+    }
+  }
+
+  scrollX--;
+
+  if (scrollX &lt; -activeTextWidthPx) {
+    scrollX = 96;
+    return true;
+  }
+
+  return false;
+}
+
+// =====================================================
+// DATE
+// =====================================================
+
+String getToday() {
+  struct tm timeinfo;
+  if (!getLocalTime(&amp;timeinfo, 10)) return "";
+
+  char buffer[11];
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d", &amp;timeinfo);
+  return String(buffer);
+}
+
+// =====================================================
+// PROGRAMMATION : SAUVEGARDE / CHARGEMENT
+// =====================================================
+
+void loadSchedules() {
+  for (int i = 0; i &lt; MAX_SCHEDULES; i++) {
+    schedDate[i] = preferences.getString(("d" + String(i)).c_str(), "");
+    schedMsg[i]  = preferences.getString(("m" + String(i)).c_str(), "");
+  }
+}
+
+// =====================================================
+// PAGE WEB
+// =====================================================
+
+String buildScheduleListHtml() {
+  String html = "";
+  bool any = false;
+
+  for (int i = 0; i &lt; MAX_SCHEDULES; i++) {
+    if (schedDate[i].length() &amp;&amp; schedMsg[i].length()) {
+      any = true;
+
+      html += "&lt;div class='schedRow'&gt;";
+      html += "&lt;span class='schedText'&gt;&lt;b&gt;" + schedDate[i] + "&lt;/b&gt; - " + schedMsg[i] + "&lt;/span&gt;";
+      html += "&lt;form action='/deleteSchedule' method='POST'&gt;";
+      html += "&lt;input type='hidden' name='index' value='" + String(i) + "'&gt;";
+      html += "&lt;button class='danger' type='submit'&gt;Suppr.&lt;/button&gt;";
+      html += "&lt;/form&gt;";
+      html += "&lt;/div&gt;";
+    }
+  }
+
+  if (!any) {
+    html = "&lt;p class='info'&gt;Aucun message programme pour le moment.&lt;/p&gt;";
+  }
+
+  return html;
+}
+
+String fontOptionsHtml() {
+  struct FO { const char* value; const char* label; };
+  FO options[8] = {
+    {"segments",       "7 segments (classique)"},
+    {"segments_thin",  "7 segments fin"},
+    {"segments_thick", "7 segments epais"},
+    {"lcd_retro",      "LCD retro (avec espaces)"},
+    {"block",          "Pixel bloc"},
+    {"block_round",    "Pixel bloc arrondi"},
+    {"spaced",         "Pixel espace"},
+    {"compact",        "Pixel compact"}
+  };
+
+  String html = "";
+  for (int i = 0; i &lt; 8; i++) {
+    html += "&lt;option value='";
+    html += options[i].value;
+    html += "'";
+    if (digitFontStyle == options[i].value) html += " selected";
+    html += "&gt;";
+    html += options[i].label;
+    html += "&lt;/option&gt;";
+  }
+  return html;
+}
+
+// Rangee de boutons emoji cliquables, inseres au curseur dans le champ vise.
+String emojiRowHtml(const String &amp;targetInputId) {
+  struct EB { const char* glyph; const char* code; };
+  EB buttons[20] = {
+    {"\xE2\x9D\xA4\xEF\xB8\x8F", "&lt;3"},
+    {"\xF0\x9F\x92\x94", "&lt;/3"},
+    {"\xE2\xAD\x90", "star"},
+    {"\xE2\x9A\xA1", "bolt"},
+    {"\xF0\x9F\x94\xA5", "fire"},
+    {"\xE2\x98\x95", "coffee"},
+    {"\xF0\x9F\x99\x82", ":)"},
+    {"\xF0\x9F\x98\x89", ";)"},
+    {"\xF0\x9F\x99\x81", ":("},
+    {"\xF0\x9F\x98\xA0", "&gt;:("},
+    {"\xE2\x98\x80\xEF\xB8\x8F", "sun"},
+    {"\xF0\x9F\x8C\x99", "moon"},
+    {"\xF0\x9F\x8C\xA7\xEF\xB8\x8F", "rain"},
+    {"\xE2\x9D\x84\xEF\xB8\x8F", "snow"},
+    {"\xF0\x9F\x92\x80", "skull"},
+    {"\xF0\x9F\x91\xBB", "ghost"},
+    {"\xF0\x9F\x8E\xB5", "music"},
+    {"\xF0\x9F\x8F\x94\xEF\xB8\x8F", "mountain"},
+    {"\xF0\x9F\x9A\x80", "rocket"},
+    {"\xF0\x9F\x8F\x86", "trophy"}
+  };
+
+  String html = "&lt;div class='emojiRow'&gt;";
+  for (int i = 0; i &lt; 20; i++) {
+    html += "&lt;button type='button' class='emojiBtn' onclick=\"insertEmoji('";
+    html += targetInputId;
+    html += "','";
+    html += buttons[i].code;
+    html += "')\"&gt;";
+    html += buttons[i].glyph;
+    html += "&lt;/button&gt;";
+  }
+  html += "&lt;/div&gt;";
+
+  return html;
+}
+
+String webPage() {
+  String page = R"rawliteral(
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;
+&lt;title&gt;Barbapocalypse&lt;/title&gt;
+&lt;style&gt;
+*{box-sizing:border-box}
+body{margin:0;background:#07100d;color:#d8fff1;font-family:Arial,sans-serif;text-align:center;padding:18px}
+h1{color:#00ff96;margin:10px 0 24px;text-shadow:0 0 14px #00ff9670}
+h2{color:#00ff96;margin-top:4px}
+.card{max-width:620px;margin:16px auto;background:#101a17;border:1px solid #1d3b32;padding:18px;border-radius:16px;box-shadow:0 5px 22px #0008}
+.row{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+label{display:block;margin-top:12px;color:#a9d9c9}
+input[type=text],input[type=date],select{width:92%;max-width:460px;padding:12px;margin:7px;border-radius:9px;border:1px solid #31594d;background:#08120f;color:white;font-size:16px}
+input[type=color]{width:70px;height:42px;border:0;background:transparent}
+
+input[type=range]{-webkit-appearance:none;appearance:none;width:60%;max-width:320px;height:10px;border-radius:5px;background:#1d3b32}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#00cc80;border:3px solid #001b11;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:#00cc80;border:3px solid #001b11;cursor:pointer}
+
+.stepBtn{width:46px;height:46px;font-size:24px;font-weight:900;border:0;border-radius:10px;background:#1d3b32;color:#00ff96;cursor:pointer;flex-shrink:0}
+.stepBtn:hover{background:#254a3f}
+
+button{padding:12px 18px;margin:9px;border:0;border-radius:10px;background:#00cc80;color:#001b11;font-weight:800;font-size:16px;cursor:pointer}
+button:hover{background:#00ff96}
+.danger{background:#db4c5c;color:white}
+.info{color:#a9d9c9;font-size:14px}
+.colors{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.colorbox{min-width:120px}
+.codes{color:#7fd9bd;font-size:13px;margin-top:4px}
+.schedRow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#0c1613;border:1px solid #1d3b32;border-radius:10px;padding:8px 12px;margin:8px 0;text-align:left}
+.schedText{font-size:14px;word-break:break-word}
+.schedRow form{margin:0}
+.checkRow{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
+.checkRow input{width:22px;height:22px}
+.emojiRow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0}
+.emojiBtn{width:42px;height:42px;font-size:20px;border:0;border-radius:8px;background:#1d3b32;cursor:pointer;padding:0}
+.emojiBtn:hover{background:#254a3f}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;CLOCK DESTROY&lt;/h1&gt;
+
+&lt;div class="card"&gt;
+  &lt;h2&gt;Horloge&lt;/h2&gt;
+  &lt;form action="/clock" method="POST"&gt;
+    &lt;button type="submit"&gt;AFFICHER L'HORLOGE&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;div class="card"&gt;
+  &lt;h2&gt;Affichage&lt;/h2&gt;
+  &lt;form action="/displaySettings" method="POST"&gt;
+
+    &lt;label&gt;Luminosité : &lt;span id="val_brightness"&gt;BRIGHTNESS_VALUE&lt;/span&gt; / 255&lt;/label&gt;
+    &lt;div class="row"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('brightness',-5)"&gt;−&lt;/button&gt;
+      &lt;input type="range" id="brightness" name="brightness" min="1" max="255" value="BRIGHTNESS_VALUE" oninput="syncVal('brightness')"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('brightness',5)"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;label&gt;Taille des chiffres : &lt;span id="val_size"&gt;SIZE_VALUE&lt;/span&gt; %&lt;/label&gt;
+    &lt;div class="row"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('size',-5)"&gt;−&lt;/button&gt;
+      &lt;input type="range" id="size" name="size" min="50" max="100" value="SIZE_VALUE" oninput="syncVal('size')"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('size',5)"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;label&gt;Épaisseur (police 7 segments) : &lt;span id="val_thickness"&gt;THICK_VALUE&lt;/span&gt;&lt;/label&gt;
+    &lt;div class="row"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('thickness',-1)"&gt;−&lt;/button&gt;
+      &lt;input type="range" id="thickness" name="thickness" min="1" max="3" value="THICK_VALUE" oninput="syncVal('thickness')"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('thickness',1)"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;label&gt;Vitesse de défilement des messages : &lt;span id="val_scrollSpeed"&gt;SCROLL_VALUE&lt;/span&gt; ms&lt;/label&gt;
+    &lt;div class="row"&gt;
+      &lt;span class="info"&gt;Rapide&lt;/span&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('scrollSpeed',-5)"&gt;−&lt;/button&gt;
+      &lt;input type="range" id="scrollSpeed" name="scrollSpeed" min="15" max="150" value="SCROLL_VALUE" oninput="syncVal('scrollSpeed')"&gt;
+      &lt;button type="button" class="stepBtn" onclick="step('scrollSpeed',5)"&gt;+&lt;/button&gt;
+      &lt;span class="info"&gt;Lent&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;label&gt;Police d'affichage des chiffres&lt;/label&gt;
+    &lt;select name="fontStyle"&gt;
+      FONT_OPTIONS_HTML
+    &lt;/select&gt;
+
+    &lt;div class="checkRow"&gt;
+      &lt;input type="checkbox" name="autoFont" id="autoFont" value="1" AUTO_FONT_CHECKED&gt;
+      &lt;label for="autoFont" style="margin:0"&gt;Rotation automatique de la police (change chaque jour, ignore le choix ci-dessus)&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class="colors"&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Heures&lt;/label&gt;&lt;input type="color" name="hourColor" value="HOUR_COLOR"&gt;&lt;/div&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Minutes&lt;/label&gt;&lt;input type="color" name="minuteColor" value="MINUTE_COLOR"&gt;&lt;/div&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Secondes&lt;/label&gt;&lt;input type="color" name="secondColor" value="SECOND_COLOR"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;br&gt;&lt;button type="submit"&gt;APPLIQUER&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;div class="card"&gt;
+  &lt;h2&gt;Message immédiat&lt;/h2&gt;
+  &lt;p class="info"&gt;2 passages du message, puis retour à l'horloge pendant 1 minute, en boucle.&lt;/p&gt;
+  &lt;form action="/message" method="POST"&gt;
+    &lt;input type="text" id="msgText" name="message" maxlength="140" placeholder="Ton message..." required&gt;
+
+    MSG_EMOJI_ROW
+
+    &lt;p class="codes"&gt;Clique un emoji pour l'insérer où est ton curseur dans le texte.&lt;/p&gt;
+
+    &lt;label&gt;Couleurs&lt;/label&gt;
+    &lt;select name="colorMode" id="colorMode" onchange="updateColorMode()"&gt;
+      &lt;option value="single"&gt;Une seule couleur&lt;/option&gt;
+      &lt;option value="panels"&gt;Une couleur par panneau&lt;/option&gt;
+      &lt;option value="rainbow"&gt;Arc-en-ciel&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;div id="singleColor"&gt;&lt;label&gt;Couleur&lt;/label&gt;&lt;input type="color" name="messageColor" value="MSG_COLOR"&gt;&lt;/div&gt;
+
+    &lt;div id="panelColors" style="display:none" class="colors"&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Panneau 1&lt;/label&gt;&lt;input type="color" name="messageP1" value="MSG_P1"&gt;&lt;/div&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Panneau 2&lt;/label&gt;&lt;input type="color" name="messageP2" value="MSG_P2"&gt;&lt;/div&gt;
+      &lt;div class="colorbox"&gt;&lt;label&gt;Panneau 3&lt;/label&gt;&lt;input type="color" name="messageP3" value="MSG_P3"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;br&gt;&lt;button type="submit"&gt;AFFICHER LE MESSAGE&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;div class="card"&gt;
+  &lt;h2&gt;Messages programmés (10 maximum)&lt;/h2&gt;
+  &lt;form action="/schedule" method="POST"&gt;
+    &lt;input type="date" name="date" required&gt;
+    &lt;input type="text" id="schedText" name="message" maxlength="140" placeholder="Message pour cette journée" required&gt;
+
+    SCHED_EMOJI_ROW
+
+    &lt;br&gt;&lt;button type="submit"&gt;AJOUTER&lt;/button&gt;
+  &lt;/form&gt;
+
+  SCHEDULE_LIST_HTML
+
+&lt;/div&gt;
+
+&lt;script&gt;
+function updateColorMode(){
+  const m=document.getElementById('colorMode').value;
+  document.getElementById('singleColor').style.display=(m==='single')?'block':'none';
+  document.getElementById('panelColors').style.display=(m==='panels')?'flex':'none';
+}
+
+function syncVal(id){
+  document.getElementById('val_'+id).innerText = document.getElementById(id).value;
+}
+
+function step(id, amount){
+  const el = document.getElementById(id);
+  let v = parseInt(el.value) + amount;
+  const min = parseInt(el.min);
+  const max = parseInt(el.max);
+  if (v &lt; min) v = min;
+  if (v &gt; max) v = max;
+  el.value = v;
+  syncVal(id);
+}
+
+function insertEmoji(inputId, code){
+  const el = document.getElementById(inputId);
+  const start = el.selectionStart != null ? el.selectionStart : el.value.length;
+  const end = el.selectionEnd != null ? el.selectionEnd : el.value.length;
+  const text = el.value;
+  const insert = '[' + code + ']';
+  el.value = text.substring(0, start) + insert + text.substring(end);
+  const newPos = start + insert.length;
+  el.focus();
+  el.setSelectionRange(newPos, newPos);
+}
+
+fetch('/settime?epoch='+Math.floor(Date.now()/1000));
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+)rawliteral";
+
+  page.replace("BRIGHTNESS_VALUE", String(displayBrightness));
+  page.replace("SIZE_VALUE", String(digitSize));
+  page.replace("THICK_VALUE", String(digitThickness));
+  page.replace("SCROLL_VALUE", String(scrollDelayMs));
+
+  page.replace("FONT_OPTIONS_HTML", fontOptionsHtml());
+  page.replace("AUTO_FONT_CHECKED", autoFontRotation ? "checked" : "");
+
+  page.replace("HOUR_COLOR", hourColorHex);
+  page.replace("MINUTE_COLOR", minuteColorHex);
+  page.replace("SECOND_COLOR", secondColorHex);
+
+  page.replace("MSG_COLOR", messageColorHex);
+  page.replace("MSG_P1", messageP1Hex);
+  page.replace("MSG_P2", messageP2Hex);
+  page.replace("MSG_P3", messageP3Hex);
+
+  page.replace("MSG_EMOJI_ROW", emojiRowHtml("msgText"));
+  page.replace("SCHED_EMOJI_ROW", emojiRowHtml("schedText"));
+
+  page.replace("SCHEDULE_LIST_HTML", buildScheduleListHtml());
+
+  return page;
+}
+
+// =====================================================
+// SERVEUR WEB
+// =====================================================
+
+void setupWebServer() {
+  server.on("/", HTTP_GET, []() {
+    server.send(200, "text/html; charset=utf-8", webPage());
+  });
+
+  server.on("/clock", HTTP_POST, []() {
+    manualMode = false;
+    manualMessage = "";
+    passCount = 0;
+    clockPause = false;
+    currentPlaybackMessage = "";
+    showClockNow();
+    server.sendHeader("Location", "/");
+    server.send(303);
+  });
+
+  server.on("/displaySettings", HTTP_GET, []() {
+    String json = "{";
+    json += "\"brightness\":" + String(displayBrightness) + ",";
+    json += "\"size\":" + String(digitSize) + ",";
+    json += "\"thickness\":" + String(digitThickness) + ",";
+    json += "\"scrollSpeed\":" + String(scrollDelayMs) + ",";
+    json += "\"fontStyle\":\"" + digitFontStyle + "\",";
+    json += "\"autoFont\":" + String(autoFontRotation ? "true" : "false") + ",";
+    json += "\"hourColor\":\"" + hourColorHex + "\",";
+    json += "\"minuteColor\":\"" + minuteColorHex + "\",";
+    json += "\"secondColor\":\"" + secondColorHex + "\"";
+    json += "}";
+
+    server.send(200, "application/json; charset=utf-8", json);
+  });
+
+  server.on("/displaySettings", HTTP_POST, []() {
+    displayBrightness = constrain(server.arg("brightness").toInt(), 1, 255);
+    digitSize = constrain(server.arg("size").toInt(), 50, 100);
+    digitThickness = constrain(server.arg("thickness").toInt(), 1, 3);
+    scrollDelayMs = constrain(server.arg("scrollSpeed").toInt(), 15, 150);
+
+    String fs = server.arg("fontStyle");
+    bool validFont = false;
+    for (int i = 0; i &lt; 8; i++) {
+      if (fs == FONT_STYLE_LIST[i]) { validFont = true; break; }
+    }
+    if (validFont) digitFontStyle = fs;
+
+    autoFontRotation = server.hasArg("autoFont");
+
+    if (server.arg("hourColor").length() == 7) hourColorHex = server.arg("hourColor");
+    if (server.arg("minuteColor").length() == 7) minuteColorHex = server.arg("minuteColor");
+    if (server.arg("secondColor").length() == 7) secondColorHex = server.arg("secondColor");
+
+    preferences.putUChar("bright", displayBrightness);
+    preferences.putUChar("size", digitSize);
+    preferences.putUChar("thick", digitThickness);
+    preferences.putUShort("scrollms", scrollDelayMs);
+    preferences.putString("font", digitFontStyle);
+    preferences.putBool("autofont", autoFontRotation);
+    preferences.putString("hourcol", hourColorHex);
+    preferences.putString("mincol", minuteColorHex);
+    preferences.putString("seccol", secondColorHex);
+
+    dma_display-&gt;setBrightness8(displayBrightness);
+    refreshDisplayColors();
+
+    manualMode = false;
+    manualMessage = "";
+    passCount = 0;
+    clockPause = false;
+    currentPlaybackMessage = "";
+
+    lastEffectiveFontStyle = "";
+    showClockNow();
+    server.sendHeader("Location", "/");
+    server.send(303);
+  });
+
+  server.on("/message", HTTP_POST, []() {
+    manualMessage = server.arg("message");
+    messageColorMode = server.arg("colorMode");
+
+    if (messageColorMode != "single" &amp;&amp;
+        messageColorMode != "panels" &amp;&amp;
+        messageColorMode != "rainbow") {
+      messageColorMode = "single";
+    }
+
+    if (server.arg("messageColor").length() == 7) messageColorHex = server.arg("messageColor");
+    if (server.arg("messageP1").length() == 7) messageP1Hex = server.arg("messageP1");
+    if (server.arg("messageP2").length() == 7) messageP2Hex = server.arg("messageP2");
+    if (server.arg("messageP3").length() == 7) messageP3Hex = server.arg("messageP3");
+
+    preferences.putString("msgmode", messageColorMode);
+    preferences.putString("msgcol", messageColorHex);
+    preferences.putString("msgp1", messageP1Hex);
+    preferences.putString("msgp2", messageP2Hex);
+    preferences.putString("msgp3", messageP3Hex);
+
+    refreshDisplayColors();
+
+    if (manualMessage.length()) {
+      manualMode = true;
+    }
+
+    server.sendHeader("Location", "/");
+    server.send(303);
+  });
+
+  server.on("/schedule", HTTP_POST, []() {
+    String date = server.arg("date");
+    String msg = server.arg("message");
+
+    if (date.length() &amp;&amp; msg.length()) {
+      int slot = -1;
+
+      for (int i = 0; i &lt; MAX_SCHEDULES; i++) {
+        if (schedDate[i].length() == 0) { slot = i; break; }
+      }
+
+      if (slot != -1) {
+        schedDate[slot] = date;
+        schedMsg[slot] = msg;
+
+        preferences.putString(("d" + String(slot)).c_str(), date);
+        preferences.putString(("m" + String(slot)).c_str(), msg);
+      }
+    }
+
+    server.sendHeader("Location", "/");
+    server.send(303);
+  });
+
+  server.on("/deleteSchedule", HTTP_POST, []() {
+    int idx = server.arg("index").toInt();
+
+    if (idx &gt;= 0 &amp;&amp; idx &lt; MAX_SCHEDULES) {
+      schedDate[idx] = "";
+      schedMsg[idx] = "";
+
+      preferences.remove(("d" + String(idx)).c_str());
+      preferences.remove(("m" + String(idx)).c_str());
+    }
+
+    server.sendHeader("Location", "/");
+    server.send(303);
+  });
+
+server.on("/schedules", HTTP_GET, []() {
+    String json = "[";
+    bool first = true;
+    for (int i = 0; i &lt; MAX_SCHEDULES; i++) {
+      if (schedDate[i].length() &amp;&amp; schedMsg[i].length()) {
+        if (!first) json += ",";
+        first = false;
+        String safeMsg = schedMsg[i];
+        safeMsg.replace("\\", "\\\\");
+        safeMsg.replace("\"", "\\\"");
+        json += "{\"index\":" + String(i) + ",\"date\":\"" + schedDate[i] + "\",\"message\":\"" + safeMsg + "\"}";
+      }
+    }
+    json += "]";
+    server.send(200, "application/json; charset=utf-8", json);
+  });
+
+  server.on("/status", HTTP_GET, []() {
+    String json = "{";
+    json += "\"mode\":\"" + String(currentPlaybackMessage.length() ? "message" : "clock") + "\",";
+    json += "\"phase\":\"" + String(currentPlaybackMessage.length() ? (clockPause ? "clockPause" : "scrolling") : "none") + "\",";
+    json += "\"source\":\"" + currentPlaybackSource + "\",";
+
+    String safeText = currentPlaybackMessage;
+    safeText.replace("\\", "\\\\");
+    safeText.replace("\"", "\\\"");
+
+    json += "\"text\":\"" + safeText + "\"";
+    json += "}";
+
+    server.send(200, "application/json; charset=utf-8", json);
+  });
+
+  server.on("/settime", HTTP_GET, []() {
+    time_t epoch = (time_t)server.arg("epoch").toInt();
+    if (epoch &gt; 1700000000) {
+      struct timeval tv;
+      tv.tv_sec = epoch;
+      tv.tv_usec = 0;
+      settimeofday(&amp;tv, nullptr);
+      resetClockCache();
+    }
+    server.send(200, "text/plain", "OK");
+  });
+
+  server.begin();
+}
+
+// =====================================================
+// SETUP
+// =====================================================
+
+void setup() {
+  Serial.begin(115200);
+  delay(500);
+
+  preferences.begin("barbapocalypse", false);
+
+  displayBrightness = preferences.getUChar("bright", DEFAULT_BRIGHTNESS);
+  digitSize = preferences.getUChar("size", 100);
+  digitThickness = preferences.getUChar("thick", 3);
+  scrollDelayMs = preferences.getUShort("scrollms", 45);
+  digitFontStyle = preferences.getString("font", "segments");
+  autoFontRotation = preferences.getBool("autofont", false);
+
+  displayBrightness = constrain(displayBrightness, 1, 255);
+  digitSize = constrain(digitSize, 50, 100);
+  digitThickness = constrain(digitThickness, 1, 3);
+  scrollDelayMs = constrain(scrollDelayMs, 15, 150);
+
+  hourColorHex = preferences.getString("hourcol", "#00ff96");
+  minuteColorHex = preferences.getString("mincol", "#00ff96");
+  secondColorHex = preferences.getString("seccol", "#00ff96");
+
+  messageColorMode = preferences.getString("msgmode", "single");
+  messageColorHex = preferences.getString("msgcol", "#00ff96");
+  messageP1Hex = preferences.getString("msgp1", "#00ff96");
+  messageP2Hex = preferences.getString("msgp2", "#a050ff");
+  messageP3Hex = preferences.getString("msgp3", "#ff1493");
+
+  loadSchedules();
+
+  // ===================================================
+  // WIFI
+  // ===================================================
+
+  WiFi.mode(WIFI_STA);
+  WiFi.setSleep(false);
+  WiFi.setHostname("Barbapocalypse");
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+  Serial.println();
+  Serial.println("Connexion WiFi...");
+
+  unsigned long wifiStart = millis();
+  while (WiFi.status() != WL_CONNECTED &amp;&amp; millis() - wifiStart &lt; 15000) {
+    delay(250);
+    Serial.print(".");
+  }
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println();
+    Serial.println("WiFi connecte");
+    Serial.print("Adresse : http://");
+    Serial.println(WiFi.localIP());
+
+    configTzTime(
+      "CET-1CEST,M3.5.0/2,M10.5.0/3",
+      "pool.ntp.org",
+      "time.google.com"
+    );
+  } else {
+    Serial.println();
+    Serial.println("Creation du WiFi Barbapocalypse");
+
+    WiFi.mode(WIFI_AP);
+    WiFi.setSleep(false);
+    WiFi.softAP("Barbapocalypse", "metroid8");
+
+    Serial.println("WiFi : Barbapocalypse");
+    Serial.println("Mot de passe : metroid8");
+    Serial.println("Adresse : http://192.168.4.1");
+  }
+
+  // ===================================================
+  // HUB75
+  // ===================================================
+
+  HUB75_I2S_CFG::i2s_pins pins = {
+    R1_PIN, G1_PIN, B1_PIN,
+    R2_PIN, G2_PIN, B2_PIN,
+    A_PIN, B_PIN, C_PIN, D_PIN, E_PIN,
+    LAT_PIN, OE_PIN, CLK_PIN
+  };
+
+  HUB75_I2S_CFG config(
+    PANEL_RES_X * 2,
+    PANEL_RES_Y / 2,
+    PANEL_CHAIN,
+    pins
+  );
+
+  config.clkphase = false;
+
+  dma_display = new MatrixPanel_I2S_DMA(config);
+
+  if (!dma_display-&gt;begin()) {
+    Serial.println("ERREUR PANNEAUX");
+    while (true) delay(1000);
+  }
+
+  dma_display-&gt;setBrightness8(displayBrightness);
+  dma_display-&gt;clearScreen();
+
+  display = new VirtualMatrixPanel(
+    *dma_display,
+    NUM_ROWS,
+    NUM_COLS,
+    PANEL_RES_X,
+    PANEL_RES_Y,
+    VIRTUAL_MATRIX_CHAIN_TYPE
+  );
+
+  display-&gt;setPhysicalPanelScanRate(FOUR_SCAN_32PX_HIGH);
+
+  refreshDisplayColors();
+
+  setupWebServer();
+
+  if (MDNS.begin("horloge")) {
+    Serial.println("Adresse locale : http://horloge.local");
+  }
+
+  resetClockCache();
+  updateClock();
+}
+
+// =====================================================
+// LOOP
+// =====================================================
+
+void loop() {
+  server.handleClient();
+
+  static unsigned long lastDateCheck = 0;
+  static int todaySchedIndex = -1;
+
+  if (millis() - lastDateCheck &gt;= 1000) {
+    lastDateCheck = millis();
+    String today = getToday();
+
+    todaySchedIndex = -1;
+    for (int i = 0; i &lt; MAX_SCHEDULES; i++) {
+      if (schedDate[i].length() &amp;&amp; schedMsg[i].length() &amp;&amp; schedDate[i] == today) {
+        todaySchedIndex = i;
+        break;
+      }
+    }
+  }
+
+String desired = "";
+  String desiredSource = "";
+
+  if (todaySchedIndex != -1) {
+    desired = schedMsg[todaySchedIndex];
+    desiredSource = "schedule";
+  } else if (manualMode &amp;&amp; manualMessage.length()) {
+    desired = manualMessage;
+    desiredSource = "manual";
+  }
+
+  if (desired != currentPlaybackMessage) {
+    currentPlaybackMessage = desired;
+    currentPlaybackSource = desiredSource;   // &lt;-- AJOUT
+    passCount = 0;
+    clockPause = false;
+
+    if (desired.length()) {
+      prepareMessage(desired);
+      dma_display-&gt;clearScreen();
+    } else {
+      showClockNow();
+    }
+  }
+
+  if (currentPlaybackMessage.length()) {
+
+    if (clockPause) {
+      updateClock();
+
+      if (millis() - clockPauseStart &gt;= 60000UL) {
+        clockPause = false;
+        passCount = 0;
+        scrollX = 96;
+        dma_display-&gt;clearScreen();
+      }
+
+      delay(2);
+      return;
+    }
+
+    if (drawScrollingMessage()) {
+      passCount++;
+
+      if (passCount &gt;= 2) {
+        clockPause = true;
+        clockPauseStart = millis();
+        showClockNow();
+      }
+    }
+
+    return;
+  }
+
+  updateClock();
+  delay(2);
+}
+</pre></section><footer><a href="arduino.html" data-i18n="back">← Configuration ESP32</a><a href="conditions.html" data-i18n="terms">Conditions d'utilisation</a><small>RagnaClock · ESP32 HUB75</small></footer></main>
+<script>window.pageTranslations={
+fr:{title:"Code Arduino de RagnaClock",warning:"Remplace les deux XXXXXXXXXXXXXXXXXX par ton SSID Wi-Fi et ton mot de passe avant le téléversement.",copy:"Copier tout le code",download:"Télécharger le fichier",loading:"Chargement du code…",back:"← Configuration ESP32",terms:"Conditions d'utilisation"},en:{title:"RagnaClock Arduino code",warning:"Replace both XXXXXXXXXXXXXXXXXX values with your Wi-Fi SSID and password before uploading.",copy:"Copy all code",download:"Download file",loading:"Loading code…",back:"← ESP32 configuration",terms:"Terms of use"},de:{title:"Arduino-Code von RagnaClock",warning:"Ersetze beide XXXXXXXXXXXXXXXXXX vor dem Hochladen durch WLAN-SSID und Passwort.",copy:"Gesamten Code kopieren",download:"Datei herunterladen",loading:"Code wird geladen…",back:"← ESP32-Konfiguration",terms:"Nutzungsbedingungen"},es:{title:"Código Arduino de RagnaClock",warning:"Sustituye los dos XXXXXXXXXXXXXXXXXX por el SSID y contraseña Wi-Fi antes de cargar.",copy:"Copiar todo el código",download:"Descargar archivo",loading:"Cargando código…",back:"← Configuración ESP32",terms:"Condiciones de uso"},hi:{title:"RagnaClock Arduino कोड",warning:"अपलोड से पहले दोनों XXXXXXXXXXXXXXXXXX को Wi-Fi SSID और पासवर्ड से बदलें।",copy:"पूरा कोड कॉपी करें",download:"फ़ाइल डाउनलोड करें",loading:"कोड लोड हो रहा है…",back:"← ESP32 कॉन्फ़िगरेशन",terms:"उपयोग की शर्तें"},in:{title:"Kode Arduino RagnaClock",warning:"Ganti kedua XXXXXXXXXXXXXXXXXX dengan SSID dan kata sandi Wi-Fi sebelum mengunggah.",copy:"Salin semua kode",download:"Unduh berkas",loading:"Memuat kode…",back:"← Konfigurasi ESP32",terms:"Syarat penggunaan"},it:{title:"Codice Arduino di RagnaClock",warning:"Sostituisci entrambi gli XXXXXXXXXXXXXXXXXX con SSID e password Wi-Fi prima del caricamento.",copy:"Copia tutto il codice",download:"Scarica il file",loading:"Caricamento del codice…",back:"← Configurazione ESP32",terms:"Termini di utilizzo"},pt:{title:"Código Arduino do RagnaClock",warning:"Substitui os dois XXXXXXXXXXXXXXXXXX pelo SSID e palavra-passe Wi-Fi antes de carregar.",copy:"Copiar todo o código",download:"Descarregar ficheiro",loading:"A carregar código…",back:"← Configuração ESP32",terms:"Termos de utilização"},ru:{title:"Код Arduino RagnaClock",warning:"Перед загрузкой замените оба XXXXXXXXXXXXXXXXXX на SSID и пароль Wi-Fi.",copy:"Копировать весь код",download:"Скачать файл",loading:"Загрузка кода…",back:"← Настройка ESP32",terms:"Условия использования"},ur:{title:"RagnaClock Arduino کوڈ",warning:"اپ لوڈ سے پہلے دونوں XXXXXXXXXXXXXXXXXX کو Wi-Fi SSID اور پاس ورڈ سے بدلیں۔",copy:"تمام کوڈ کاپی کریں",download:"فائل ڈاؤن لوڈ کریں",loading:"کوڈ لوڈ ہو رہا ہے…",back:"← ESP32 ترتیب",terms:"استعمال کی شرائط"},zh:{title:"RagnaClock Arduino 代码",warning:"上传前将两个 XXXXXXXXXXXXXXXXXX 替换为 Wi-Fi SSID 和密码。",copy:"复制全部代码",download:"下载文件",loading:"正在加载代码…",back:"← ESP32 配置",terms:"使用条款"}}
+</script><script>
+Object.assign(window.pageTranslations.fr,{license:"Ce code est entièrement gratuit : tu peux l’utiliser, le copier, le modifier, l’intégrer à un autre projet et le partager où tu veux, sans demander d’autorisation."});
+Object.assign(window.pageTranslations.en,{license:"This code is entirely free: you may use, copy, modify, integrate and share it anywhere without asking permission."});
+Object.assign(window.pageTranslations.de,{license:"Dieser Code ist vollständig kostenlos: Du darfst ihn ohne Genehmigung nutzen, kopieren, ändern, integrieren und überall teilen."});
+Object.assign(window.pageTranslations.es,{license:"Este código es totalmente gratuito: puedes usarlo, copiarlo, modificarlo, integrarlo y compartirlo donde quieras sin pedir permiso."});
+Object.assign(window.pageTranslations.hi,{license:"यह कोड पूरी तरह निःशुल्क है: आप इसे बिना अनुमति उपयोग, कॉपी, संशोधित, किसी परियोजना में शामिल और कहीं भी साझा कर सकते हैं।"});
+Object.assign(window.pageTranslations.in,{license:"Kode ini sepenuhnya gratis: kamu boleh menggunakan, menyalin, mengubah, mengintegrasikan, dan membagikannya di mana saja tanpa izin."});
+Object.assign(window.pageTranslations.it,{license:"Questo codice è completamente gratuito: puoi usarlo, copiarlo, modificarlo, integrarlo e condividerlo ovunque senza autorizzazione."});
+Object.assign(window.pageTranslations.pt,{license:"Este código é totalmente gratuito: podes usá-lo, copiá-lo, modificá-lo, integrá-lo e partilhá-lo onde quiseres sem autorização."});
+Object.assign(window.pageTranslations.ru,{license:"Этот код полностью бесплатен: его можно использовать, копировать, изменять, включать в другие проекты и распространять без разрешения."});
+Object.assign(window.pageTranslations.ur,{license:"یہ کوڈ مکمل طور پر مفت ہے: آپ اسے بغیر اجازت استعمال، کاپی، تبدیل، کسی منصوبے میں شامل اور کہیں بھی شیئر کر سکتے ہیں۔"});
+Object.assign(window.pageTranslations.zh,{license:"此代码完全免费：无需许可即可使用、复制、修改、集成到其他项目并在任何地方分享。"});
+</script><script src="common.js"></script><script>
+var sourceEl=document.getElementById('source');var code=sourceEl.textContent;document.getElementById('copyBtn').onclick=function(){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code)}else{var t=document.createElement('textarea');t.value=code;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}};
+</script></body></html>
