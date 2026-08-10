@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Valhalla Calendar — Suppression des données</title>
+  <meta name="description" content="Comment révoquer l'accès de Valhalla Calendar à votre Google Calendar et supprimer les données locales de l'application.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--glow:35,221,217;--glow2:11,116,125;--bronze:154,118,72}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
+    body{font-family:Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+
+    .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:64px 24px 34px;background:radial-gradient(ellipse at 72% 8%,rgba(12,116,124,.25),transparent 31%),radial-gradient(ellipse at 18% 28%,rgba(8,62,67,.2),transparent 26%),linear-gradient(180deg,#061116 0,#03080c 47%,#05090d 100%)}
+    .page:before{content:"";position:absolute;z-index:-2;inset:0;background:repeating-linear-gradient(135deg,transparent 0 34px,rgba(255,255,255,.012) 35px 36px),radial-gradient(circle at 50% 12%,transparent 0 18%,rgba(0,0,0,.42) 64%)}
+    .runes{position:absolute;z-index:-1;top:17%;left:0;right:0;display:flex;justify-content:space-around;color:rgba(120,220,180,.055);font:clamp(72px,11vw,180px) Georgia;transform:rotate(-6deg)}
+
+    #particles{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+    .spark{position:absolute;bottom:-10px;border-radius:50%;background:rgb(var(--glow));box-shadow:0 0 6px 1px rgba(var(--glow),.8);animation-name:rise;animation-timing-function:ease-out;animation-iteration-count:infinite;opacity:0}
+    @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
+    @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
+
+    .lang{position:absolute;top:24px;right:24px;z-index:5}
+    .lang-btn{width:120px;height:120px;border:none;background:transparent;display:grid;place-items:center;cursor:pointer;padding:0}
+    .lang-btn:hover,.lang-btn:focus-visible{outline:none}
+    .lang-btn img{width:120px;height:120px;object-fit:contain;border-radius:3px;display:block}
+    .lang-menu{position:absolute;top:100px;right:0;min-width:170px;background:rgba(10,26,31,.97);border:1px solid rgba(var(--glow),.28);border-radius:10px;padding:6px;box-shadow:0 18px 40px rgba(0,0,0,.5);display:none;max-height:280px;overflow-y:auto}
+    .lang-menu.open{display:block}
+    .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
+    .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+
+    .back{position:absolute;top:24px;left:24px;z-index:5;width:120px;height:120px;display:grid;place-items:center}.back img{width:120px;height:120px;object-fit:contain;display:block}
+
+    .legal{width:min(760px,100%);margin:70px auto 40px}
+    .mark{width:52px;height:52px;display:grid;place-items:center;margin:0 auto 26px;transform:rotate(45deg);border:1px solid rgba(var(--bronze),.65);background:linear-gradient(145deg,#16272a,#071012);color:#32dedd;box-shadow:inset 0 0 0 5px rgba(0,0,0,.35),0 0 28px rgba(35,221,217,.15);font-size:24px}
+    .mark span{display:block;transform:rotate(-45deg);font-size:21px}
+    .legal h1{margin:0 0 8px;text-align:center;font-family:'Cinzel Decorative',serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.7rem,4vw,2.5rem);color:#eee5d4;filter:drop-shadow(0 3px 0 #071014) drop-shadow(0 0 18px rgba(27,184,190,.18))}
+    .legal .sub{text-align:center;margin:0 0 46px;color:#7f9698;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+    .legal .intro{color:#c0cccc;font-size:14.5px;line-height:1.75;margin:0 0 40px;border-left:2px solid rgba(var(--bronze),.65);padding:12px 0 12px 18px;background:linear-gradient(90deg,rgba(154,118,72,.08),transparent)}
+    .legal section{margin:0 0 34px;padding:26px 26px 22px;border:1px solid rgba(var(--bronze),.38);border-radius:5px;background:linear-gradient(145deg,rgba(17,31,33,.92),rgba(4,9,12,.97));box-shadow:inset 0 0 0 3px rgba(0,0,0,.23)}
+    .legal h2{margin:0 0 14px;font-family:'Cinzel',serif;font-weight:600;font-size:16px;letter-spacing:.02em;color:#3ee2de}
+    .legal p{margin:0 0 10px;color:#9bb0b1;font-size:14px;line-height:1.7}
+    .legal ol{margin:0;padding-left:22px;color:#9bb0b1;font-size:14px;line-height:1.85}
+    .legal ol li{margin-bottom:6px}
+    .legal code{color:#7fe8e4;background:rgba(35,221,217,.08);padding:1px 6px;border-radius:3px;font-size:13px}
+    .legal a.mail{color:#5eeab6;border-bottom:1px solid rgba(94,234,182,.4)}
+
+    footer{border-top:1px solid rgba(255,255,255,.06);margin-top:1rem;padding:28px 0 6px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;text-align:center;width:min(760px,100%);margin-left:auto;margin-right:auto}
+    footer a{font-size:12px;color:#8fa7a0;transition:color .3s ease}
+    footer a:hover{color:#5eeab6}
+    footer .copyright{width:100%;color:#556b60;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
+
+    .rune-char{display:inline}
+    .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.72);transition:color 1s ease,text-shadow 1s ease}
+
+    @media(max-width:600px){.page{padding:74px 14px 22px}.runes{display:none}.back,.lang{position:absolute;top:8px}.back{left:8px}.lang{right:8px}.back,.back img,.lang-btn,.lang-btn img{width:64px;height:64px}.lang-menu{top:58px;right:2px;min-width:185px;max-height:55vh}.lang-menu button{font-size:14px;padding:11px}.legal{margin:60px auto 24px}.legal h1{font-size:1.5rem}.legal .intro{font-size:13.5px;padding:10px 0 10px 14px}.legal section{padding:20px 18px 18px}.legal h2{font-size:14.5px}.legal p,.legal ol{font-size:13px}footer{margin-top:1.4rem;padding-top:22px;gap:15px;flex-direction:column}footer .copyright{font-size:9px;line-height:1.5;margin-top:2px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div id="particles" aria-hidden="true"></div>
+    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+
+    <a class="back" href="index.html" aria-label="Retour"><img src="assetscalendar/logocalendar.png" alt="Valhalla Calendar logo"></a>
+
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+        <img src="assetscalendar/langue.png" alt="">
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button role="menuitem" data-lang="fr">Français</button>
+        <button role="menuitem" data-lang="de">Deutsch</button>
+        <button role="menuitem" data-lang="en">English</button>
+        <button role="menuitem" data-lang="es">Español</button>
+        <button role="menuitem" data-lang="hi">हिन्दी</button>
+        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+        <button role="menuitem" data-lang="it">Italiano</button>
+        <button role="menuitem" data-lang="pt">Português</button>
+        <button role="menuitem" data-lang="ru">Русский</button>
+        <button role="menuitem" data-lang="ur">اردو</button>
+        <button role="menuitem" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <div class="legal">
+      <div class="mark" aria-hidden="true"><span>ᛟ</span></div>
+      <h1 data-i18n="pageTitle">Suppression des données</h1>
+      <p class="sub" data-i18n="eyebrow">Valhalla Calendar</p>
+
+      <p class="intro" data-i18n="intro">Valhalla Calendar ne stocke aucune donnée de compte ni donnée personnelle sur ses propres serveurs. Toutes les données de calendrier sont lues, créées ou modifiées directement via l'API Google Calendar et restent dans votre compte Google.</p>
+
+      <section>
+        <h2 data-i18n="secAccessTitle">Révoquer l'accès à votre Google Calendar</h2>
+        <ol>
+          <li data-i18n="step1">Rendez-vous sur la page des autorisations de votre compte Google : myaccount.google.com/permissions</li>
+          <li data-i18n="step2">Recherchez « Valhalla Calendar » dans la liste des applications ayant accès à votre compte.</li>
+          <li data-i18n="step3">Sélectionnez-la puis cliquez sur « Supprimer l'accès » pour révoquer l'autorisation de l'application.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 data-i18n="secLocalTitle">Supprimer les données locales de l'application</h2>
+        <p data-i18n="localText">Valhalla Calendar ne possède aucun compte propre. Désinstaller l'application de votre appareil supprime instantanément toutes les données locales, y compris les événements en cache, les préférences et les paramètres.</p>
+      </section>
+
+      <section>
+        <h2 data-i18n="secContactTitle">Questions sur vos données</h2>
+        <p data-i18n="contactText">Pour toute question concernant vos données, contactez-nous à l'adresse barbaredestroy@gmail.com.</p>
+      </section>
+    </div>
+
+    <footer>
+      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
+      <a href="conditions.html" data-i18n="footerTerms">Conditions d'utilisation</a>
+      <a href="index.html" data-i18n="footerHome">← Accueil</a>
+      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+    </footer>
+  </main>
+
+<script>
+  var translations = {
+    fr:{eyebrow:"Valhalla Calendar",pageTitle:"Suppression des données",intro:"Valhalla Calendar ne stocke aucune donnée de compte ni donnée personnelle sur ses propres serveurs. Toutes les données de calendrier sont lues, créées ou modifiées directement via l'API Google Calendar et restent dans votre compte Google.",secAccessTitle:"Révoquer l'accès à votre Google Calendar",step1:"Rendez-vous sur la page des autorisations de votre compte Google : myaccount.google.com/permissions",step2:"Recherchez « Valhalla Calendar » dans la liste des applications ayant accès à votre compte.",step3:"Sélectionnez-la puis cliquez sur « Supprimer l'accès » pour révoquer l'autorisation de l'application.",secLocalTitle:"Supprimer les données locales de l'application",localText:"Valhalla Calendar ne possède aucun compte propre. Désinstaller l'application de votre appareil supprime instantanément toutes les données locales, y compris les événements en cache, les préférences et les paramètres.",secContactTitle:"Questions sur vos données",contactText:"Pour toute question concernant vos données, contactez-nous à l'adresse barbaredestroy@gmail.com.",footerPrivacy:"Politique de confidentialité",footerTerms:"Conditions d'utilisation",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{eyebrow:"Valhalla Calendar",pageTitle:"Datenlöschung",intro:"Valhalla Calendar speichert keine Konto- oder persönlichen Daten auf eigenen Servern. Alle Kalenderdaten werden direkt über die Google Calendar API gelesen, erstellt oder geändert und verbleiben in Ihrem Google-Konto.",secAccessTitle:"Zugriff auf Ihren Google Kalender widerrufen",step1:"Rufen Sie die Berechtigungsseite Ihres Google-Kontos auf: myaccount.google.com/permissions",step2:"Suchen Sie „Valhalla Calendar“ in der Liste der Apps mit Kontozugriff.",step3:"Wählen Sie die App aus und klicken Sie auf „Zugriff entfernen“, um die Berechtigung zu widerrufen.",secLocalTitle:"Lokale App-Daten löschen",localText:"Valhalla Calendar führt kein eigenes Konto. Durch Deinstallieren der App von Ihrem Gerät werden alle lokalen Daten, einschließlich zwischengespeicherter Termine, Einstellungen und Präferenzen, sofort entfernt.",secContactTitle:"Fragen zu Ihren Daten",contactText:"Bei Fragen zu Ihren Daten kontaktieren Sie uns unter barbaredestroy@gmail.com.",footerPrivacy:"Datenschutzerklärung",footerTerms:"Nutzungsbedingungen",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{eyebrow:"Valhalla Calendar",pageTitle:"Data Deletion",intro:"Valhalla Calendar does not store any account or personal data on its own servers. All calendar data is read, created, or modified directly through the Google Calendar API and remains within your Google account.",secAccessTitle:"Revoke access to your Google Calendar",step1:"Go to your Google Account permissions page: myaccount.google.com/permissions",step2:"Find \u201CValhalla Calendar\u201D in the list of apps with account access.",step3:"Select it and click \u201CRemove Access\u201D to revoke the app's permission.",secLocalTitle:"Delete local app data",localText:"Valhalla Calendar keeps no account of its own. Uninstalling the app from your device instantly removes all local data, including cached events, preferences, and settings.",secContactTitle:"Questions about your data",contactText:"For any question regarding your data, contact us at barbaredestroy@gmail.com.",footerPrivacy:"Privacy policy",footerTerms:"Terms of use",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{eyebrow:"Valhalla Calendar",pageTitle:"Eliminación de datos",intro:"Valhalla Calendar no almacena ningún dato de cuenta ni datos personales en sus propios servidores. Todos los datos del calendario se leen, crean o modifican directamente a través de la API de Google Calendar y permanecen en su cuenta de Google.",secAccessTitle:"Revocar el acceso a su Google Calendar",step1:"Vaya a la página de permisos de su cuenta de Google: myaccount.google.com/permissions",step2:"Busque «Valhalla Calendar» en la lista de aplicaciones con acceso a la cuenta.",step3:"Selecciónela y haga clic en «Eliminar acceso» para revocar el permiso de la aplicación.",secLocalTitle:"Eliminar los datos locales de la aplicación",localText:"Valhalla Calendar no posee cuenta propia. Al desinstalar la aplicación de su dispositivo se eliminan al instante todos los datos locales, incluidos los eventos en caché, las preferencias y los ajustes.",secContactTitle:"Preguntas sobre sus datos",contactText:"Para cualquier pregunta relacionada con sus datos, contáctenos en barbaredestroy@gmail.com.",footerPrivacy:"Política de privacidad",footerTerms:"Condiciones de uso",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{eyebrow:"Valhalla Calendar",pageTitle:"डेटा हटाना",intro:"Valhalla Calendar अपने सर्वर पर कोई खाता या व्यक्तिगत डेटा संग्रहीत नहीं करता। सभी कैलेंडर डेटा सीधे Google Calendar API के माध्यम से पढ़ा, बनाया या संशोधित किया जाता है और आपके Google खाते में ही रहता है।",secAccessTitle:"अपने Google Calendar तक पहुंच रद्द करें",step1:"अपने Google खाते के अनुमति पृष्ठ पर जाएं: myaccount.google.com/permissions",step2:"खाता एक्सेस वाले ऐप्स की सूची में “Valhalla Calendar” खोजें।",step3:"इसे चुनें और ऐप की अनुमति रद्द करने के लिए “पहुंच हटाएं” पर क्लिक करें।",secLocalTitle:"स्थानीय ऐप डेटा हटाएं",localText:"Valhalla Calendar का अपना कोई खाता नहीं है। अपने डिवाइस से ऐप को अनइंस्टॉल करने पर संचित इवेंट, प्राथमिकताओं और सेटिंग्स सहित सभी स्थानीय डेटा तुरंत हटा दिया जाता है।",secContactTitle:"आपके डेटा से संबंधित प्रश्न",contactText:"अपने डेटा से संबंधित किसी भी प्रश्न के लिए, हमसे barbaredestroy@gmail.com पर संपर्क करें।",footerPrivacy:"गोपनीयता नीति",footerTerms:"उपयोग की शर्तें",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{eyebrow:"Valhalla Calendar",pageTitle:"Penghapusan Data",intro:"Valhalla Calendar tidak menyimpan data akun atau data pribadi apa pun di server sendiri. Semua data kalender dibaca, dibuat, atau diubah langsung melalui Google Calendar API dan tetap berada di akun Google Anda.",secAccessTitle:"Cabut akses ke Google Calendar Anda",step1:"Buka halaman izin akun Google Anda: myaccount.google.com/permissions",step2:"Cari “Valhalla Calendar” dalam daftar aplikasi yang memiliki akses ke akun.",step3:"Pilih aplikasi tersebut lalu klik “Hapus Akses” untuk mencabut izin aplikasi.",secLocalTitle:"Hapus data aplikasi lokal",localText:"Valhalla Calendar tidak memiliki akun sendiri. Menghapus instalan aplikasi dari perangkat Anda akan langsung menghapus semua data lokal, termasuk acara yang tersimpan sementara, preferensi, dan pengaturan.",secContactTitle:"Pertanyaan tentang data Anda",contactText:"Untuk pertanyaan apa pun mengenai data Anda, hubungi kami di barbaredestroy@gmail.com.",footerPrivacy:"Kebijakan privasi",footerTerms:"Syarat penggunaan",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{eyebrow:"Valhalla Calendar",pageTitle:"Eliminazione dei dati",intro:"Valhalla Calendar non memorizza alcun dato di account o dato personale sui propri server. Tutti i dati del calendario vengono letti, creati o modificati direttamente tramite l'API di Google Calendar e restano nel tuo account Google.",secAccessTitle:"Revoca l'accesso al tuo Google Calendar",step1:"Vai alla pagina delle autorizzazioni del tuo account Google: myaccount.google.com/permissions",step2:"Cerca «Valhalla Calendar» nell'elenco delle app con accesso all'account.",step3:"Selezionala e fai clic su «Rimuovi accesso» per revocare l'autorizzazione dell'app.",secLocalTitle:"Elimina i dati locali dell'app",localText:"Valhalla Calendar non possiede un proprio account. Disinstallare l'app dal dispositivo rimuove istantaneamente tutti i dati locali, inclusi eventi in cache, preferenze e impostazioni.",secContactTitle:"Domande sui tuoi dati",contactText:"Per qualsiasi domanda relativa ai tuoi dati, contattaci a barbaredestroy@gmail.com.",footerPrivacy:"Informativa sulla privacy",footerTerms:"Termini di utilizzo",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{eyebrow:"Valhalla Calendar",pageTitle:"Eliminação de dados",intro:"O Valhalla Calendar não armazena quaisquer dados de conta ou dados pessoais nos seus próprios servidores. Todos os dados de calendário são lidos, criados ou modificados diretamente através da API do Google Calendar e permanecem na sua conta Google.",secAccessTitle:"Revogar o acesso ao seu Google Calendar",step1:"Aceda à página de permissões da sua conta Google: myaccount.google.com/permissions",step2:"Procure «Valhalla Calendar» na lista de aplicações com acesso à conta.",step3:"Selecione-a e clique em «Remover acesso» para revogar a permissão da aplicação.",secLocalTitle:"Eliminar os dados locais da aplicação",localText:"O Valhalla Calendar não possui conta própria. Desinstalar a aplicação do seu dispositivo remove instantaneamente todos os dados locais, incluindo eventos em cache, preferências e definições.",secContactTitle:"Perguntas sobre os seus dados",contactText:"Para qualquer questão relacionada com os seus dados, contacte-nos em barbaredestroy@gmail.com.",footerPrivacy:"Política de privacidade",footerTerms:"Termos de utilização",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{eyebrow:"Valhalla Calendar",pageTitle:"Удаление данных",intro:"Valhalla Calendar не хранит данные учётной записи или личные данные на собственных серверах. Все данные календаря считываются, создаются или изменяются напрямую через Google Calendar API и остаются в вашем аккаунте Google.",secAccessTitle:"Отозвать доступ к Google Calendar",step1:"Перейдите на страницу разрешений вашего аккаунта Google: myaccount.google.com/permissions",step2:"Найдите «Valhalla Calendar» в списке приложений с доступом к аккаунту.",step3:"Выберите его и нажмите «Удалить доступ», чтобы отозвать разрешение приложения.",secLocalTitle:"Удаление локальных данных приложения",localText:"У Valhalla Calendar нет собственной учётной записи. Удаление приложения с устройства мгновенно удаляет все локальные данные, включая кэшированные события, настройки и параметры.",secContactTitle:"Вопросы о ваших данных",contactText:"По любым вопросам, касающимся ваших данных, свяжитесь с нами по адресу barbaredestroy@gmail.com.",footerPrivacy:"Политика конфиденциальности",footerTerms:"Условия использования",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{eyebrow:"Valhalla Calendar",pageTitle:"ڈیٹا کا خاتمہ",intro:"Valhalla Calendar اپنے سرورز پر کوئی اکاؤنٹ یا ذاتی ڈیٹا محفوظ نہیں کرتا۔ تمام کیلنڈر ڈیٹا براہ راست Google Calendar API کے ذریعے پڑھا، بنایا یا ترمیم کیا جاتا ہے اور آپ کے Google اکاؤنٹ میں ہی رہتا ہے۔",secAccessTitle:"اپنے Google Calendar تک رسائی منسوخ کریں",step1:"اپنے Google اکاؤنٹ کے اجازت والے صفحے پر جائیں: myaccount.google.com/permissions",step2:"اکاؤنٹ تک رسائی رکھنے والی ایپس کی فہرست میں “Valhalla Calendar” تلاش کریں۔",step3:"اسے منتخب کریں اور ایپ کی اجازت منسوخ کرنے کے لیے “رسائی ہٹائیں” پر کلک کریں۔",secLocalTitle:"مقامی ایپ ڈیٹا حذف کریں",localText:"Valhalla Calendar کا اپنا کوئی اکاؤنٹ نہیں ہے۔ اپنے آلے سے ایپ کو اَن انسٹال کرنے سے کیش شدہ ایونٹس، ترجیحات اور ترتیبات سمیت تمام مقامی ڈیٹا فوری طور پر حذف ہو جاتا ہے۔",secContactTitle:"آپ کے ڈیٹا سے متعلق سوالات",contactText:"اپنے ڈیٹا سے متعلق کسی بھی سوال کے لیے، ہم سے barbaredestroy@gmail.com پر رابطہ کریں۔",footerPrivacy:"پرائیویسی پالیسی",footerTerms:"استعمال کی شرائط",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{eyebrow:"Valhalla Calendar",pageTitle:"数据删除",intro:"Valhalla Calendar 不会在自己的服务器上存储任何帐户或个人数据。所有日历数据均通过 Google Calendar API 直接读取、创建或修改，并保留在您的 Google 帐户中。",secAccessTitle:"撤销对您 Google Calendar 的访问权限",step1:"前往您的 Google 帐户权限页面：myaccount.google.com/permissions",step2:"在有帐户访问权限的应用列表中找到“Valhalla Calendar”。",step3:"选择该应用，然后点击“移除访问权限”以撤销该应用的授权。",secLocalTitle:"删除本地应用数据",localText:"Valhalla Calendar 没有自己的帐户系统。从设备卸载该应用会立即删除所有本地数据，包括缓存的事件、偏好设置和配置。",secContactTitle:"有关您数据的问题",contactText:"如有关于您数据的任何问题，请通过 barbaredestroy@gmail.com 与我们联系。",footerPrivacy:"隐私政策",footerTerms:"使用条款",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+  };
+
+  var rtlLangs = ["ur"];
+  var RUNES="ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var animationRun=0;
+  function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
+  function decodeText(el,text,delay,run){
+    var final=text!==undefined?text:el.textContent;
+    if(reduceMotion){el.textContent=final;return;}
+    el.innerHTML='';
+    var chars=Array.from(final),spans=[];
+    chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});
+    var longText=chars.length>90,step=longText?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70,interval=longText?45:80;
+    chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=longText?3:5+Math.floor(Math.random()*4),start=delay+i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){if(run!==animationRun)return;span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});
+  }
+  function decodeCascade(){animationRun++;var run=animationRun;document.querySelectorAll('[data-i18n]').forEach(function(el,idx){setTimeout(function(){decodeText(el,el.textContent,0,run);},idx*140);});}
+
+  function applyLang(lang){
+    var dict = translations[lang];
+    if(!dict) return;
+    var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined){
+        el.dir = dir;
+        el.textContent = dict[key];
+      }
+    });
+    decodeCascade();
+  }
+
+  var langBtn = document.getElementById('langBtn');
+  var langMenu = document.getElementById('langMenu');
+  langBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = langMenu.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(){
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+  langMenu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+      langMenu.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var box = document.getElementById('particles');
+  var n = 26;
+  for (var i = 0; i < n; i++) {
+    var s = document.createElement('div');
+    s.className = 'spark';
+    var size = 2 + Math.random() * 2.5;
+    var left = Math.random() * 100;
+    var dur = 6 + Math.random() * 6;
+    var delay = Math.random() * 10;
+    var drift = (Math.random() * 80 - 40) + 'px';
+    s.style.left = left + 'vw';
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.setProperty('--drift', drift);
+    s.style.animationDuration = dur + 's';
+    s.style.animationDelay = delay + 's';
+    box.appendChild(s);
+  }
+  decodeCascade();
+</script>
+</body>
+</html>
