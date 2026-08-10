@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Barbare Destroy — Choisis ta voie</title>
+  <title>Barbare Destroy — L’univers viking au creux de ta main</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
@@ -22,14 +22,26 @@
     @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:.9}100%{transform:translateY(-100vh) translateX(var(--drift,20px));opacity:0}}
     @media(prefers-reduced-motion:reduce){.spark{animation:none!important}}
 
-    .hero{max-width:850px;margin:0 auto 50px;text-align:center}
+    .hero{max-width:850px;margin:0 auto 34px;text-align:center}
     .mark{width:58px;height:58px;display:grid;place-items:center;margin:0 auto 28px;transform:rotate(45deg);border:1px solid rgba(91,201,220,.4);background:rgba(8,24,29,.74);color:#4bd4e0;box-shadow:0 0 25px rgba(34,211,238,.15);font-size:27px}
 	.mark span{display:block;transform:rotate(-45deg);font-size:40px}
     .brand{margin:0;font-family:'Cinzel Decorative',serif;font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,6vw,4.2rem);line-height:1.1;letter-spacing:.01em;color:#ede6d6;text-shadow:0 0 30px rgba(34,211,238,.2)}
     .brand em{font-style:normal;color:#3dd4df}
     .subtitle{margin:18px 0 0;font-family:'Cinzel',serif;font-weight:500;font-size:clamp(1rem,2.2vw,1.3rem);letter-spacing:.28em;text-transform:uppercase;color:#8fa3a7}
+    .tagline{margin:16px 0 0;color:#9fb2b3;font:500 clamp(.86rem,1.8vw,1.08rem) 'Cinzel',serif;letter-spacing:.12em}
+    .path-callout{width:min(760px,100%);margin:-18px auto 36px;text-align:center;color:#e9dfca;font-size:clamp(1.05rem,2.5vw,1.45rem);font-weight:600;letter-spacing:.34em;text-shadow:0 0 18px rgba(var(--glow),.48)}
+    .path-callout:before,.path-callout:after{content:"ᚱ";display:inline-block;margin:0 18px;color:#42d1dd;text-shadow:0 0 13px rgba(var(--glow),.8)}
 
-    .grid{width:min(1440px,100%);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .oath{width:min(1120px,100%);margin:0 auto 46px;padding:24px 28px 27px;border:1px solid rgba(var(--glow),.24);border-radius:20px;background:linear-gradient(145deg,rgba(15,28,34,.8),rgba(5,10,13,.9));box-shadow:inset 0 0 0 3px rgba(255,255,255,.02),0 18px 55px rgba(0,0,0,.32);text-align:center}
+    .oath h2{margin:0 0 20px;color:#e9dfca;font-family:'Cinzel Decorative',serif;font-size:clamp(1.25rem,3vw,2rem);text-transform:uppercase;letter-spacing:.06em}
+    .oath-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    .promise{position:relative;padding:17px 16px 15px;border-top:1px solid rgba(var(--glow),.3);background:rgba(6,14,18,.46)}
+    .promise .rune{display:block;margin:-30px auto 9px;width:31px;height:31px;line-height:31px;border:1px solid rgba(var(--glow),.36);transform:rotate(45deg);background:#091419;color:#44d0dc;font:19px/31px Georgia}
+    .promise .rune b{display:block;transform:rotate(-45deg);font-weight:400}
+    .promise h3{margin:0 0 7px;color:#d9e6e3;font:600 14px 'Cinzel',serif;letter-spacing:.08em;text-transform:uppercase}
+    .promise p{margin:0;color:#829895;font-size:12.5px;line-height:1.5}
+
+    .grid{width:min(1680px,100%);margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
     .card{--g:var(--glow);position:relative;min-height:550px;display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:28px 30px 30px;border:1px solid rgba(var(--g),.33);border-radius:24px;background:linear-gradient(145deg,rgba(17,29,35,.86),rgba(4,9,12,.94));box-shadow:inset 0 0 0 3px rgba(255,255,255,.025),0 22px 70px rgba(0,0,0,.4);transition:.3s}
     .card.deep{--g:var(--glow2)}
     .card:hover,.card:focus-visible{outline:none;transform:translateY(-7px);border-color:rgba(var(--g),.73);box-shadow:inset 0 0 0 3px rgba(255,255,255,.03),0 24px 80px rgba(var(--g),.12)}
@@ -53,8 +65,8 @@
     footer .rune-line{color:#c9a227;font-size:15px;letter-spacing:.5em;opacity:.65;margin-bottom:10px}
     footer .copyright{color:#52696a;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
 
-    @media(max-width:1080px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:920px}}
-    @media(max-width:760px){.page{padding:76px 14px 24px;background:radial-gradient(circle at 50% 0,rgba(26,144,166,.18),transparent 27%),linear-gradient(180deg,#07151a 0,#03080b 64%,#05090d 100%)}.runes,#particles{display:none}.lang{top:7px;right:7px}.lang-btn,.lang-btn img{width:64px;height:64px}.lang-menu{top:58px;right:2px;min-width:185px;max-height:58vh}.lang-menu button{font-size:14px;padding:11px}.hero{margin:0 auto 24px}.mark{width:46px;height:46px;margin:0 auto 17px}.mark span{font-size:30px}.brand{font-size:clamp(1.8rem,9vw,2.6rem);line-height:1.05}.subtitle{margin-top:10px;font-size:10px;letter-spacing:.22em}.grid{grid-template-columns:1fr;max-width:440px;gap:12px}.card{min-height:0;display:grid;grid-template-columns:108px minmax(0,1fr);align-items:center;column-gap:14px;padding:16px 15px;border-radius:15px;text-align:left}.card:hover,.card:focus-visible{transform:none}.card:before{inset:-70% 35% 40%}.corners:before,.corners:after{top:8px;font-size:14px}.corners:before{left:10px}.corners:after{right:10px}.logo{grid-row:1/3;width:108px;height:108px;aspect-ratio:1;margin:0}.logo img{border-radius:18%;filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))}.copy{text-align:left;align-self:end}.copy .eyebrow{font-size:8px;letter-spacing:.2em;margin-bottom:5px}.copy h2{font-size:clamp(18px,5.6vw,23px);line-height:1.05;margin-bottom:7px}.copy .desc{font-size:11.5px;line-height:1.4}.enter{grid-column:2;margin:0;padding-top:10px;align-self:start;font-size:9px;letter-spacing:.13em}.enter b{font-size:14px;margin-left:5px}footer{margin:28px auto 0}.rune-line{font-size:12px!important;letter-spacing:.35em!important}.copyright{font-size:9px!important;line-height:1.5}}
+    @media(max-width:1280px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:920px}}
+    @media(max-width:760px){.page{padding:76px 14px 24px;background:radial-gradient(circle at 50% 0,rgba(26,144,166,.18),transparent 27%),linear-gradient(180deg,#07151a 0,#03080b 64%,#05090d 100%)}.runes,#particles{display:none}.lang{top:7px;right:7px}.lang-btn,.lang-btn img{width:64px;height:64px}.lang-menu{top:58px;right:2px;min-width:185px;max-height:58vh}.lang-menu button{font-size:14px;padding:11px}.hero{margin:0 auto 24px}.mark{width:46px;height:46px;margin:0 auto 17px}.mark span{font-size:30px}.brand{font-size:clamp(1.8rem,9vw,2.6rem);line-height:1.05}.tagline{margin-top:12px;font-size:10px;line-height:1.5;letter-spacing:.08em}.subtitle{font-size:10px;letter-spacing:.22em}.path-callout{margin:-8px auto 27px;font-size:12px;letter-spacing:.18em}.path-callout:before,.path-callout:after{margin:0 8px}.oath{margin-bottom:25px;padding:19px 13px 11px;border-radius:15px}.oath h2{margin-bottom:22px;font-size:1.08rem}.oath-grid{grid-template-columns:1fr;gap:20px}.promise{padding:15px 12px 12px}.promise .rune{margin-top:-28px}.promise h3{font-size:12px}.promise p{font-size:11.5px}.grid{grid-template-columns:1fr;max-width:440px;gap:12px}.card{min-height:0;display:grid;grid-template-columns:108px minmax(0,1fr);align-items:center;column-gap:14px;padding:16px 15px;border-radius:15px;text-align:left}.card:hover,.card:focus-visible{transform:none}.card:before{inset:-70% 35% 40%}.corners:before,.corners:after{top:8px;font-size:14px}.corners:before{left:10px}.corners:after{right:10px}.logo{grid-row:1/3;width:108px;height:108px;aspect-ratio:1;margin:0}.logo img{border-radius:18%;filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))}.copy{text-align:left;align-self:end}.copy .eyebrow{font-size:8px;letter-spacing:.2em;margin-bottom:5px}.copy h2{font-size:clamp(18px,5.6vw,23px);line-height:1.05;margin-bottom:7px}.copy .desc{font-size:11.5px;line-height:1.4}.enter{grid-column:2;margin:0;padding-top:10px;align-self:start;font-size:9px;letter-spacing:.13em}.enter b{font-size:14px;margin-left:5px}footer{margin:28px auto 0}.rune-line{font-size:12px!important;letter-spacing:.35em!important}.copyright{font-size:9px!important;line-height:1.5}}
     @media(prefers-reduced-motion:reduce){.card{transition:none}}
 
     .lang{position:absolute;top:24px;right:24px;z-index:5}
@@ -65,6 +77,9 @@
     .lang-menu.open{display:block}
     .lang-menu button{width:100%;text-align:left;background:none;border:none;color:#cfe6e3;font-size:13px;padding:9px 10px;border-radius:6px;cursor:pointer;font-family:Arial,sans-serif}
     .lang-menu button:hover{background:rgba(var(--glow),.12);color:#fff}
+
+    .rune-char{display:inline-block}
+    .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.7);transition:color 1s ease,text-shadow 1s ease}
   </style>
 </head>
 <body>
@@ -94,8 +109,36 @@
     <section class="hero">
       <div class="mark" aria-hidden="true"><span>ᛏ</span></div>
       <h1 class="brand">Barbare <em>Destroy</em></h1>
-      <p class="subtitle" data-i18n="subtitle">Choisis ta voie</p>
+      <p class="tagline" data-i18n="tagline">L’univers viking au creux de ta main</p>
     </section>
+
+    <section class="oath" aria-labelledby="oath-title">
+      <h2 id="oath-title" data-i18n="oathTitle">L’engagement des dieux</h2>
+      <div class="oath-grid">
+        <article class="promise">
+          <span class="rune" aria-hidden="true"><b>ᛟ</b></span>
+          <h3 data-i18n="odinTitle">La protection d’Odin</h3>
+          <p data-i18n="odinText">Ta vie privée reste sous ta garde. Aucune revente de données, aucun pistage caché.</p>
+        </article>
+        <article class="promise">
+          <span class="rune" aria-hidden="true"><b>ᚦ</b></span>
+          <h3 data-i18n="thorTitle">La puissance de Mjöllnir</h3>
+          <p data-i18n="thorText">Toutes nos applications sont garanties sans publicité, aujourd’hui comme demain.</p>
+        </article>
+        <article class="promise">
+          <span class="rune" aria-hidden="true"><b>ᚠ</b></span>
+          <h3 data-i18n="freyrTitle">La générosité de Freyr</h3>
+          <p data-i18n="freyrText">Toutes nos applications sont gratuites, sans abonnement ni achat caché.</p>
+        </article>
+        <article class="promise">
+          <span class="rune" aria-hidden="true"><b>ᛒ</b></span>
+          <h3 data-i18n="baldrTitle">La simplicité de Baldr</h3>
+          <p data-i18n="baldrText">Nos applications restent simples et claires, sans complexité inutile ni prise de tête.</p>
+        </article>
+      </div>
+    </section>
+
+    <p class="subtitle path-callout" data-i18n="subtitle">Choisis ta divinité</p>
 
     <section class="grid" aria-label="Applications">
       <a class="card" href="nordikafidelia/" aria-label="Ouvrir Nordika Fidélia">
@@ -120,9 +163,20 @@
         <div class="enter"><span data-i18n="enter">Découvrir</span> <b>ᚱ</b></div>
       </a>
 
-      <a class="card" href="RagnaClock/" aria-label="Ouvrir RagnaClock">
-        <span class="corners"></span><div class="logo"><img src="assets/logoragnaclock.png" alt="Logo RagnaClock"></div>
-        <div class="copy"><p class="eyebrow" data-i18n="c3eyebrow">Horloge viking connectée</p><h2>RagnaClock</h2><p class="desc" data-i18n="c3desc">Pilote une horloge ESP32 HUB75 et ses messages depuis ton téléphone.</p></div>
+      <a class="card" href="ragnaclock/" aria-label="Ouvrir Ragnaclock">
+        <span class="corners"></span><div class="logo"><img src="assets/logoragnaclock.png" alt="Logo Ragnaclock"></div>
+        <div class="copy"><p class="eyebrow" data-i18n="c3eyebrow">Horloge viking connectée</p><h2>Ragnaclock</h2><p class="desc" data-i18n="c3desc">Pilote une horloge ESP32 HUB75 et ses messages depuis ton téléphone.</p></div>
+        <div class="enter"><span data-i18n="enter">Découvrir</span> <b>ᚱ</b></div>
+      </a>
+
+      <a class="card deep" href="runaskra/index.html" aria-label="Ouvrir Runaskra">
+        <span class="corners"></span>
+        <div class="logo"><img src="assets/logorunaskra.png" alt="Logo Runaskra"></div>
+        <div class="copy">
+          <p class="eyebrow" data-i18n="c4eyebrow">Visionneuse nordique</p>
+          <h2>Runaskra</h2>
+          <p class="desc" data-i18n="c4desc">Ouvre et consulte tes documents PDF simplement, sans publicité ni fonctions inutiles.</p>
+        </div>
         <div class="enter"><span data-i18n="enter">Découvrir</span> <b>ᚱ</b></div>
       </a>
     </section>
@@ -136,7 +190,8 @@
 <script>
   var translations = {
     fr: {
-      subtitle: "Choisis ta voie",
+      subtitle: "Choisis ta divinité",
+      tagline: "L’univers viking au creux de ta main",
       c1eyebrow: "Fidélité nordique",
       c1desc: "Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.",
       c2eyebrow: "Calendrier viking",
@@ -145,7 +200,8 @@
       copyright: "© 2026 · Forgé dans la rage et le sang"
     },
     de: {
-      subtitle: "Wähle deinen Weg",
+      subtitle: "Wähle deine Gottheit",
+      tagline: "Die Welt der Wikinger in deiner Hand",
       c1eyebrow: "Nordische Treue",
       c1desc: "Alle deine Treuekarten, vereint in einem einzigen Reisebuch.",
       c2eyebrow: "Wikingerkalender",
@@ -154,7 +210,8 @@
       copyright: "© 2026 · Geschmiedet in Wut und Blut"
     },
     en: {
-      subtitle: "Choose your path",
+      subtitle: "Choose your deity",
+      tagline: "The Viking world in the palm of your hand",
       c1eyebrow: "Nordic loyalty",
       c1desc: "All your loyalty cards, gathered in a single travel ledger.",
       c2eyebrow: "Viking calendar",
@@ -163,7 +220,8 @@
       copyright: "© 2026 · Forged in rage and blood"
     },
     es: {
-      subtitle: "Elige tu camino",
+      subtitle: "Elige tu divinidad",
+      tagline: "El mundo vikingo en la palma de tu mano",
       c1eyebrow: "Fidelidad nórdica",
       c1desc: "Todas tus tarjetas de fidelidad, reunidas en un solo cuaderno de viaje.",
       c2eyebrow: "Calendario vikingo",
@@ -172,7 +230,8 @@
       copyright: "© 2026 · Forjado en la rabia y la sangre"
     },
     hi: {
-      subtitle: "अपना मार्ग चुनें",
+      subtitle: "अपना देवता चुनें",
+      tagline: "वाइकिंग संसार आपकी हथेली में",
       c1eyebrow: "नॉर्डिक वफ़ादारी",
       c1desc: "आपके सभी लॉयल्टी कार्ड, एक ही यात्रा बहीखाते में एकत्रित।",
       c2eyebrow: "वाइकिंग कैलेंडर",
@@ -181,7 +240,8 @@
       copyright: "© 2026 · क्रोध और रक्त में गढ़ा गया"
     },
     "in": {
-      subtitle: "Pilih jalanmu",
+      subtitle: "Pilih dewamu",
+      tagline: "Dunia Viking dalam genggamanmu",
       c1eyebrow: "Loyalitas Nordik",
       c1desc: "Semua kartu loyalitasmu, terkumpul dalam satu buku catatan perjalanan.",
       c2eyebrow: "Kalender Viking",
@@ -190,7 +250,8 @@
       copyright: "© 2026 · Ditempa dalam amarah dan darah"
     },
     it: {
-      subtitle: "Scegli la tua via",
+      subtitle: "Scegli la tua divinità",
+      tagline: "Il mondo vichingo nel palmo della tua mano",
       c1eyebrow: "Fedeltà nordica",
       c1desc: "Tutte le tue carte fedeltà, riunite in un unico taccuino di viaggio.",
       c2eyebrow: "Calendario vichingo",
@@ -199,7 +260,8 @@
       copyright: "© 2026 · Forgiato nella rabbia e nel sangue"
     },
     pt: {
-      subtitle: "Escolhe o teu caminho",
+      subtitle: "Escolhe a tua divindade",
+      tagline: "O mundo viking na palma da tua mão",
       c1eyebrow: "Fidelidade nórdica",
       c1desc: "Todos os teus cartões de fidelidade, reunidos num único caderno de viagem.",
       c2eyebrow: "Calendário viking",
@@ -208,7 +270,8 @@
       copyright: "© 2026 · Forjado na fúria e no sangue"
     },
     ru: {
-      subtitle: "Выбери свой путь",
+      subtitle: "Выбери своё божество",
+      tagline: "Мир викингов у тебя на ладони",
       c1eyebrow: "Северная лояльность",
       c1desc: "Все твои карты лояльности собраны в единой дорожной книге.",
       c2eyebrow: "Календарь викингов",
@@ -217,7 +280,8 @@
       copyright: "© 2026 · Выковано в ярости и крови"
     },
     ur: {
-      subtitle: "اپنا راستہ چنیں",
+      subtitle: "اپنے دیوتا کا انتخاب کریں",
+      tagline: "وائکنگ دنیا آپ کی ہتھیلی میں",
       c1eyebrow: "شمالی وفاداری",
       c1desc: "آپ کے تمام لائلٹی کارڈز، ایک ہی سفری کتاب میں جمع۔",
       c2eyebrow: "وائکنگ کیلنڈر",
@@ -226,7 +290,8 @@
       copyright: "© 2026 · غضب اور خون میں ڈھالا گیا"
     },
     zh: {
-      subtitle: "选择你的道路",
+      subtitle: "选择你的神祇",
+      tagline: "维京世界，尽在掌中",
       c1eyebrow: "北欧忠诚",
       c1desc: "你所有的会员卡，汇聚于一本旅行手册之中。",
       c2eyebrow: "维京日历",
@@ -248,7 +313,83 @@
   Object.assign(translations.ur,{c3eyebrow:"منسلک وائکنگ گھڑی",c3desc:"اپنے فون سے ESP32 HUB75 گھڑی اور اس کے پیغامات کو کنٹرول کریں۔"});
   Object.assign(translations.zh,{c3eyebrow:"联网维京时钟",c3desc:"通过手机控制 ESP32 HUB75 时钟及其消息。"});
 
+  Object.assign(translations.fr,{oathTitle:"L’engagement des dieux",odinTitle:"La protection d’Odin",odinText:"Ta vie privée reste sous ta garde. Aucune revente de données, aucun pistage caché.",thorTitle:"La puissance de Mjöllnir",thorText:"Toutes nos applications sont garanties sans publicité, aujourd’hui comme demain.",freyrTitle:"La générosité de Freyr",freyrText:"Toutes nos applications sont gratuites, sans abonnement ni achat caché.",baldrTitle:"La simplicité de Baldr",baldrText:"Nos applications restent simples et claires, sans complexité inutile ni prise de tête.",c4eyebrow:"Visionneuse nordique",c4desc:"Ouvre et consulte tes documents PDF simplement, sans publicité ni fonctions inutiles."});
+  Object.assign(translations.de,{oathTitle:"Das Versprechen der Götter",odinTitle:"Odins Schutz",odinText:"Deine Privatsphäre bleibt unter deinem Schutz. Kein Datenverkauf und kein verstecktes Tracking.",thorTitle:"Die Macht Mjölnirs",thorText:"Alle unsere Apps bleiben frei von Werbung – heute und morgen.",freyrTitle:"Freyrs Großzügigkeit",freyrText:"Alle unsere Apps sind kostenlos, ohne Abonnement oder versteckte Käufe.",baldrTitle:"Baldrs Einfachheit",baldrText:"Unsere Apps bleiben einfach und klar, ohne unnötige Komplexität oder Kopfzerbrechen.",c4eyebrow:"Nordischer Betrachter",c4desc:"Öffne und lies PDF-Dokumente einfach – ohne Werbung oder unnötige Funktionen."});
+  Object.assign(translations.en,{oathTitle:"The gods’ pledge",odinTitle:"Odin’s protection",odinText:"Your privacy remains in your hands. No data selling and no hidden tracking.",thorTitle:"The power of Mjölnir",thorText:"Every one of our apps is guaranteed ad-free, today and tomorrow.",freyrTitle:"Freyr’s generosity",freyrText:"Every one of our apps is free, with no subscription or hidden purchase.",baldrTitle:"Baldr’s simplicity",baldrText:"Our apps stay simple and clear, with no unnecessary complexity or hassle.",c4eyebrow:"Nordic document viewer",c4desc:"Open and read PDF documents simply, without ads or unnecessary features."});
+  Object.assign(translations.es,{oathTitle:"El compromiso de los dioses",odinTitle:"La protección de Odín",odinText:"Tu privacidad permanece bajo tu control. Sin venta de datos ni rastreo oculto.",thorTitle:"El poder de Mjölnir",thorText:"Todas nuestras aplicaciones están garantizadas sin publicidad, hoy y mañana.",freyrTitle:"La generosidad de Freyr",freyrText:"Todas nuestras aplicaciones son gratuitas, sin suscripción ni compras ocultas.",baldrTitle:"La simplicidad de Baldr",baldrText:"Nuestras aplicaciones se mantienen simples y claras, sin complicaciones ni complejidad innecesaria.",c4eyebrow:"Visor nórdico",c4desc:"Abre y consulta documentos PDF fácilmente, sin publicidad ni funciones innecesarias."});
+  Object.assign(translations.hi,{oathTitle:"देवताओं की प्रतिज्ञा",odinTitle:"ओडिन की सुरक्षा",odinText:"आपकी निजता आपके नियंत्रण में रहती है। न डेटा बेचा जाता है, न छिपी ट्रैकिंग होती है।",thorTitle:"म्योल्निर की शक्ति",thorText:"हमारे सभी ऐप आज और हमेशा विज्ञापन-मुक्त हैं।",freyrTitle:"फ्रेय की उदारता",freyrText:"हमारे सभी ऐप निःशुल्क हैं, बिना सदस्यता या छिपी खरीदारी के।",baldrTitle:"बाल्डर की सरलता",baldrText:"हमारे ऐप सरल और स्पष्ट बने रहते हैं, बिना किसी अनावश्यक जटिलता या सिरदर्द के।",c4eyebrow:"नॉर्डिक दस्तावेज़ दर्शक",c4desc:"PDF दस्तावेज़ आसानी से खोलें और पढ़ें, बिना विज्ञापन या अनावश्यक सुविधाओं के।"});
+  Object.assign(translations.in,{oathTitle:"Janji para dewa",odinTitle:"Perlindungan Odin",odinText:"Privasi tetap dalam kendalimu. Tanpa penjualan data atau pelacakan tersembunyi.",thorTitle:"Kekuatan Mjölnir",thorText:"Semua aplikasi kami dijamin bebas iklan, sekarang dan seterusnya.",freyrTitle:"Kemurahan Freyr",freyrText:"Semua aplikasi kami gratis, tanpa langganan atau pembelian tersembunyi.",baldrTitle:"Kesederhanaan Baldr",baldrText:"Aplikasi kami tetap sederhana dan jelas, tanpa kerumitan yang tidak perlu.",c4eyebrow:"Penampil dokumen Nordik",c4desc:"Buka dan baca dokumen PDF dengan mudah, tanpa iklan atau fitur yang tidak perlu."});
+  Object.assign(translations.it,{oathTitle:"L’impegno degli dei",odinTitle:"La protezione di Odino",odinText:"La tua privacy resta sotto il tuo controllo. Nessuna vendita dei dati e nessun tracciamento nascosto.",thorTitle:"La potenza di Mjölnir",thorText:"Tutte le nostre applicazioni sono garantite senza pubblicità, oggi e domani.",freyrTitle:"La generosità di Freyr",freyrText:"Tutte le nostre applicazioni sono gratuite, senza abbonamenti o acquisti nascosti.",baldrTitle:"La semplicità di Baldr",baldrText:"Le nostre applicazioni restano semplici e chiare, senza inutili complicazioni.",c4eyebrow:"Visualizzatore nordico",c4desc:"Apri e consulta facilmente i documenti PDF, senza pubblicità o funzioni inutili."});
+  Object.assign(translations.pt,{oathTitle:"O compromisso dos deuses",odinTitle:"A proteção de Odin",odinText:"A tua privacidade permanece sob o teu controlo. Sem venda de dados nem rastreio oculto.",thorTitle:"O poder de Mjölnir",thorText:"Todas as nossas aplicações são garantidamente sem publicidade, hoje e amanhã.",freyrTitle:"A generosidade de Freyr",freyrText:"Todas as nossas aplicações são gratuitas, sem subscrição ou compras escondidas.",baldrTitle:"A simplicidade de Baldr",baldrText:"As nossas aplicações mantêm-se simples e claras, sem complicações desnecessárias.",c4eyebrow:"Visualizador nórdico",c4desc:"Abre e consulta documentos PDF facilmente, sem publicidade ou funções desnecessárias."});
+  Object.assign(translations.ru,{oathTitle:"Клятва богов",odinTitle:"Защита Одина",odinText:"Ваша конфиденциальность остаётся под вашим контролем. Без продажи данных и скрытого отслеживания.",thorTitle:"Сила Мьёльнира",thorText:"Все наши приложения гарантированно остаются без рекламы — сегодня и завтра.",freyrTitle:"Щедрость Фрейра",freyrText:"Все наши приложения бесплатны, без подписок и скрытых покупок.",baldrTitle:"Простота Бальдра",baldrText:"Наши приложения остаются простыми и понятными, без лишней сложности.",c4eyebrow:"Северный просмотрщик",c4desc:"Просто открывайте и читайте PDF-документы — без рекламы и лишних функций."});
+  Object.assign(translations.ur,{oathTitle:"دیوتاؤں کا عہد",odinTitle:"اوڈن کی حفاظت",odinText:"آپ کی رازداری آپ کے اختیار میں رہتی ہے۔ نہ ڈیٹا فروخت ہوتا ہے، نہ پوشیدہ نگرانی۔",thorTitle:"میولنیر کی طاقت",thorText:"ہماری تمام ایپس آج اور ہمیشہ اشتہارات سے پاک ہیں۔",freyrTitle:"فریئر کی سخاوت",freyrText:"ہماری تمام ایپس مفت ہیں، بغیر سبسکرپشن یا پوشیدہ خریداری کے۔",baldrTitle:"بالڈر کی سادگی",baldrText:"ہماری ایپس سادہ اور واضح رہتی ہیں، بغیر کسی غیر ضروری پیچیدگی کے۔",c4eyebrow:"نارڈک دستاویز ناظر",c4desc:"PDF دستاویزات آسانی سے کھولیں اور پڑھیں، بغیر اشتہارات یا غیر ضروری خصوصیات کے۔"});
+  Object.assign(translations.zh,{oathTitle:"众神的承诺",odinTitle:"奥丁的守护",odinText:"你的隐私始终由你掌控，不出售数据，也不进行隐藏追踪。",thorTitle:"妙尔尼尔之力",thorText:"我们的所有应用现在与未来都保证无广告。",freyrTitle:"弗雷的慷慨",freyrText:"我们的所有应用均免费，无订阅、无隐藏购买。",baldrTitle:"巴德尔的简约",baldrText:"我们的应用保持简单清晰，没有多余的复杂功能，不让人费心。",c4eyebrow:"北欧文档阅读器",c4desc:"轻松打开和阅读 PDF 文档，无广告、无多余功能。"});
+
   var rtlLangs = ["ur"];
+
+  // ===== Effet runique : le texte apparaît d'abord en runes, puis se déchiffre =====
+  var RUNES = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function randomRune(){
+    return RUNES[Math.floor(Math.random() * RUNES.length)];
+  }
+
+  function decodeText(el, text){
+    var final = (text !== undefined) ? text : el.textContent;
+    if (reduceMotion){ el.textContent = final; return; }
+
+    el.innerHTML = '';
+    var words = final.split(' ');
+    var chars = [];
+    var spans = [];
+
+    words.forEach(function(word, wi){
+      if (word.length){
+        var wrap = document.createElement('span');
+        wrap.style.whiteSpace = 'nowrap';
+        for (var c = 0; c < word.length; c++){
+          var s = document.createElement('span');
+          s.className = 'rune-char';
+          s.textContent = randomRune();
+          wrap.appendChild(s);
+          spans.push(s);
+          chars.push(word[c]);
+        }
+        el.appendChild(wrap);
+      }
+      if (wi < words.length - 1){
+        el.appendChild(document.createTextNode(' '));
+      }
+    });
+
+    chars.forEach(function(ch, i){
+      var span = spans[i];
+      var flickers = 5 + Math.floor(Math.random() * 4);
+      var startDelay = i * 70;
+      var flickerInterval = 80;
+
+      for (var f = 0; f < flickers; f++){
+        (function(f){
+          setTimeout(function(){ span.textContent = randomRune(); }, startDelay + f * flickerInterval);
+        })(f);
+      }
+
+      setTimeout(function(){
+        span.textContent = ch;
+        span.classList.add('settling');
+        setTimeout(function(){ span.classList.remove('settling'); }, 1000);
+      }, startDelay + flickers * flickerInterval);
+    });
+  }
+
+  function decodeCascade(){
+    if (reduceMotion) return;
+    var targets = document.querySelectorAll('.brand, .tagline, #oath-title, .promise h3, .promise p, .subtitle, .card .eyebrow, .card h2, .card .desc, .enter span');
+    targets.forEach(function(el, idx){
+      setTimeout(function(){ decodeText(el); }, idx * 220);
+    });
+  }
 
   function applyLang(lang){
     var dict = translations[lang];
@@ -257,8 +398,8 @@
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if(dict[key] !== undefined){
-        el.textContent = dict[key];
         el.dir = dir;
+        decodeText(el, dict[key]);
       }
     });
   }
@@ -300,6 +441,8 @@
     s.style.animationDelay = delay + 's';
     box.appendChild(s);
   }
+
+  decodeCascade();
 </script>
 </body>
 </html>

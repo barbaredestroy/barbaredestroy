@@ -44,6 +44,8 @@
     footer .copyright{width:100%;color:#556b60;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
 
     @media(max-width:760px){.page{padding:100px 16px 28px}main.content{padding-top:60px}}
+    .rune-char{display:inline}
+    .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.72);transition:color 1s ease,text-shadow 1s ease}
   </style>
 </head>
 <body>
@@ -122,16 +124,24 @@
   Object.assign(translations.zh,{p5:"为使显示更流畅，应用会在您的设备本地创建文件，用于保存当月日程的副本。该文件仅保留在您的手机上，会根据应用运行所需的数据进行更新，并在卸载 Valhalla Calendar 时随应用数据自动删除。",p9:"数据控制者及发布者：Serge Hinzelin，个人独立开发者。Valhalla Calendar 是一款免费提供的个人应用，不含广告、订阅、应用内购买，也不通过用户数据获利。",p10:"应用仅访问其所声明的 Google 日历功能严格需要的数据：您的日历及其中日程所包含的信息，例如标题、日期、时间、描述或地点（如有）。应用不会请求访问其运行不需要的 Google 数据。",p11:"Valhalla Calendar 不使用发布者的个人服务器或远程数据库来保存您的日程副本。同步所需的数据交换通过 Google 服务完成，上述缓存始终保留在您的设备本地。",p12:"根据 GDPR，您对个人数据享有访问、更正、删除和限制处理等权利。您的日历数据可直接在 Google 日历中查看、更正或删除。如有隐私问题或需行使与 Valhalla Calendar 有关的权利，可通过下方地址联系发布者。您也可以向法国数据保护机构 CNIL（www.cnil.fr）提出投诉。",p13:"本政策最后更新日期：2026 年 8 月 7 日。数据使用方式如有重大变化，将在本政策中反映。"});
 
   var rtlLangs = ["ur"];
+  var RUNES="ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var animationRun=0;
+  function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
+  function decodeText(el,text,delay,run){var final=text!==undefined?text:el.textContent;if(reduceMotion){el.textContent=final;return;}el.innerHTML='';var chars=Array.from(final),spans=[];chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});var longText=chars.length>90,step=longText?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70,interval=longText?45:80;chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=longText?3:5+Math.floor(Math.random()*4),start=delay+i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){if(run!==animationRun)return;span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});}
+  function decodeCascade(){animationRun++;var run=animationRun;document.querySelectorAll('[data-i18n]').forEach(function(el,idx){setTimeout(function(){decodeText(el,el.textContent,0,run);},idx*180);});}
 
   function applyLang(lang){
     var dict = translations[lang];
     if(!dict) return;
+    animationRun++;
+    var run=animationRun;
     var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if(dict[key] !== undefined){
-        el.textContent = dict[key];
         el.dir = dir;
+        decodeText(el,dict[key],0,run);
       }
     });
   }
@@ -173,6 +183,7 @@
     s.style.animationDelay = delay + 's';
     box.appendChild(s);
   }
+  decodeCascade();
 </script>
 </body>
 </html>

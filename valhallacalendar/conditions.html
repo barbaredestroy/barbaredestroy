@@ -44,6 +44,8 @@
     footer .copyright{width:100%;color:#556b60;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
 
     @media(max-width:760px){.page{padding:100px 16px 28px}main.content{padding-top:60px}}
+    .rune-char{display:inline}
+    .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.72);transition:color 1s ease,text-shadow 1s ease}
   </style>
 </head>
 <body>
@@ -120,16 +122,24 @@
   Object.assign(translations.zh,{p8:"Valhalla Calendar 由个人独立开发者 Serge Hinzelin 开发并发布。应用完全免费，不含广告、订阅、应用内购买或追踪工具。它首先是为满足个人需求，以及希望使用简单、直接且没有不必要复杂功能的用户而创建的。",p9:"不存在隐藏付费模式：用户可以免费使用本应用，也可以随时卸载并选择任何其他解决方案。",p10:"Serge Hinzelin 开发的应用所特有的源代码、软件架构、运行逻辑、界面、文本、徽标、符号、图标、按钮及其他元素不会转让给用户。在法律授予的权利及适用许可范围内，未经事先授权，禁止在相关应用之外复制、提取、修改、再分发、发布、出售或重新使用这些元素。未来引用本条款的应用同样适用本规则。",p11:"应用特有的图形元素，包括符号、assets、图标和按钮，均专门为这些应用创建，其中包括使用通过订阅或许可获准使用的人工智能工具生成或辅助制作的内容。在法律及相关许可允许的最大范围内，发布者对这些元素所享有的权利均予保留，未经授权不得在应用之外重新使用。"});
 
   var rtlLangs = ["ur"];
+  var RUNES="ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var animationRun=0;
+  function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
+  function decodeText(el,text,delay,run){var final=text!==undefined?text:el.textContent;if(reduceMotion){el.textContent=final;return;}el.innerHTML='';var chars=Array.from(final),spans=[];chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});var longText=chars.length>90,step=longText?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70,interval=longText?45:80;chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=longText?3:5+Math.floor(Math.random()*4),start=delay+i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){if(run!==animationRun)return;span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});}
+  function decodeCascade(){animationRun++;var run=animationRun;document.querySelectorAll('[data-i18n]').forEach(function(el,idx){setTimeout(function(){decodeText(el,el.textContent,0,run);},idx*180);});}
 
   function applyLang(lang){
     var dict = translations[lang];
     if(!dict) return;
+    animationRun++;
+    var run=animationRun;
     var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if(dict[key] !== undefined){
-        el.textContent = dict[key];
         el.dir = dir;
+        decodeText(el,dict[key],0,run);
       }
     });
   }
@@ -171,6 +181,7 @@
     s.style.animationDelay = delay + 's';
     box.appendChild(s);
   }
+  decodeCascade();
 </script>
 </body>
 </html>

@@ -44,6 +44,8 @@
     footer .copyright{width:100%;color:#52696a;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
 
     @media(max-width:760px){.page{padding:100px 16px 28px}main.content{padding-top:60px}}
+    .rune-char{display:inline-block}
+    .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.7);transition:color 1s ease,text-shadow 1s ease}
   </style>
 </head>
 <body>
@@ -121,6 +123,19 @@
   Object.assign(translations.fr,{footerTerms:"Conditions d'utilisation"});Object.assign(translations.de,{footerTerms:"Nutzungsbedingungen"});Object.assign(translations.en,{footerTerms:"Terms of use"});Object.assign(translations.es,{footerTerms:"Condiciones de uso"});Object.assign(translations.hi,{footerTerms:"उपयोग की शर्तें"});Object.assign(translations.in,{footerTerms:"Syarat penggunaan"});Object.assign(translations.it,{footerTerms:"Termini di utilizzo"});Object.assign(translations.pt,{footerTerms:"Termos de utilização"});Object.assign(translations.ru,{footerTerms:"Условия использования"});Object.assign(translations.ur,{footerTerms:"استعمال کی شرائط"});Object.assign(translations.zh,{footerTerms:"使用条款"});
 
   var rtlLangs = ["ur"];
+  var RUNES="ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
+  function decodeText(el,text){
+    var final=text!==undefined?text:el.textContent;
+    if(reduceMotion){el.textContent=final;return;}
+    el.innerHTML='';
+    var chars=Array.from(final),spans=[];
+    chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});
+    var legal=el.classList.contains('para'),step=legal?Math.max(4,Math.min(18,2200/Math.max(chars.length,1))):70,interval=legal?50:80;
+    chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=legal?3:5+Math.floor(Math.random()*4),start=i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});
+  }
+  function decodeCascade(){if(reduceMotion)return;document.querySelectorAll('[data-i18n]').forEach(function(el,idx){setTimeout(function(){decodeText(el);},idx*180);});}
 
   function applyLang(lang){
     var dict = translations[lang];
@@ -129,8 +144,8 @@
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if(dict[key] !== undefined){
-        el.textContent = dict[key];
         el.dir = dir;
+        decodeText(el,dict[key]);
       }
     });
   }
@@ -172,6 +187,7 @@
     s.style.animationDelay = delay + 's';
     box.appendChild(s);
   }
+  decodeCascade();
 </script>
 </body>
 </html>
