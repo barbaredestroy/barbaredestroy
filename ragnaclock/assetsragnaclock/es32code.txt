@@ -5,6 +5,7 @@
 #include <Preferences.h>
 #include <time.h>
 #include <sys/time.h>
+#include <esp_sntp.h>
 #include <vector>
 
 #include <Adafruit_GFX.h>
@@ -17,6 +18,16 @@
 
 const char* WIFI_SSID     = "XXXXXXXXXXXXXXXXXX";
 const char* WIFI_PASSWORD = "XXXXXXXXXXXXXXXXXX";
+
+// Synchronisation de l'heure et reconnexion automatique
+const unsigned long NTP_SYNC_INTERVAL_MS = 5UL * 60UL * 1000UL;
+const unsigned long WIFI_RETRY_INTERVAL_MS = 10UL * 1000UL;
+const unsigned long AP_START_DELAY_MS = 15UL * 1000UL;
+
+bool rescueAccessPointActive = false;
+bool wifiWasConnected = false;
+unsigned long wifiDisconnectedSince = 0;
+unsigned long lastWifiRetry = 0;
 
 // =====================================================
 // PANNEAUX - CONFIGURATION VALIDEE, NE PLUS TOUCHER
@@ -90,6 +101,88 @@ uint16_t messagePanel1Color;
 uint16_t messagePanel2Color;
 uint16_t messagePanel3Color;
 uint16_t blackColor;
+
+void resetClockCache();
+
+// =====================================================
+// WIFI ET HEURE
+// =====================================================
+
+void setTemporaryMidnight() {
+  // Heure provisoire : 1er janvier 2024 à 00:00:00 en France (heure d'hiver).
+  // Elle avance normalement jusqu'à la première synchronisation Internet.
+  struct timeval tv;
+  tv.tv_sec = 1704063600;
+  tv.tv_usec = 0;
+  settimeofday(&tv, nullptr);
+}
+
+void configureNtp() {
+  configTzTime(
+    "CET-1CEST,M3.5.0/2,M10.5.0/3",
+    "pool.ntp.org",
+    "time.google.com"
+  );
+
+  // Le service NTP redemande l'heure toutes les 5 minutes.
+  sntp_set_sync_interval(NTP_SYNC_INTERVAL_MS);
+}
+
+void startRescueAccessPoint() {
+  if (rescueAccessPointActive) return;
+
+  WiFi.mode(WIFI_AP_STA);
+  WiFi.softAP("Barbapocalypse", "metroid8");
+  rescueAccessPointActive = true;
+
+  Serial.println("WiFi de secours : Barbapocalypse");
+  Serial.println("Adresse : http://192.168.4.1");
+}
+
+void stopRescueAccessPoint() {
+  if (!rescueAccessPointActive) return;
+
+  WiFi.softAPdisconnect(true);
+  WiFi.mode(WIFI_STA);
+  rescueAccessPointActive = false;
+}
+
+void maintainWifiAndTime() {
+  const bool connected = WiFi.status() == WL_CONNECTED;
+
+  if (connected) {
+    if (!wifiWasConnected) {
+      Serial.println("WiFi connecte ou retabli");
+      Serial.print("Adresse : http://");
+      Serial.println(WiFi.localIP());
+
+      // Force une synchronisation immédiate après chaque retour du WiFi.
+      configureNtp();
+      stopRescueAccessPoint();
+      resetClockCache();
+    }
+
+    wifiWasConnected = true;
+    wifiDisconnectedSince = 0;
+    return;
+  }
+
+  if (wifiWasConnected || wifiDisconnectedSince == 0) {
+    wifiDisconnectedSince = millis();
+    Serial.println("WiFi indisponible, tentative de reconnexion...");
+  }
+  wifiWasConnected = false;
+
+  if (millis() - lastWifiRetry >= WIFI_RETRY_INTERVAL_MS) {
+    lastWifiRetry = millis();
+    WiFi.reconnect();
+  }
+
+  if (!rescueAccessPointActive &&
+      millis() - wifiDisconnectedSince >= AP_START_DELAY_MS) {
+    startRescueAccessPoint();
+  }
+}
 
 // =====================================================
 // MESSAGES
@@ -1177,8 +1270,15 @@ void setup() {
   // WIFI
   // ===================================================
 
+  // Toujours définir le fuseau horaire, même si Internet est absent.
+  setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
+  tzset();
+  setTemporaryMidnight();
+
   WiFi.mode(WIFI_STA);
   WiFi.setSleep(false);
+  WiFi.setAutoReconnect(true);
+  WiFi.persistent(true);
   WiFi.setHostname("Barbapocalypse");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -1197,22 +1297,14 @@ void setup() {
     Serial.print("Adresse : http://");
     Serial.println(WiFi.localIP());
 
-    configTzTime(
-      "CET-1CEST,M3.5.0/2,M10.5.0/3",
-      "pool.ntp.org",
-      "time.google.com"
-    );
+    wifiWasConnected = true;
+    configureNtp();
   } else {
     Serial.println();
-    Serial.println("Creation du WiFi Barbapocalypse");
-
-    WiFi.mode(WIFI_AP);
-    WiFi.setSleep(false);
-    WiFi.softAP("Barbapocalypse", "metroid8");
-
-    Serial.println("WiFi : Barbapocalypse");
-    Serial.println("Mot de passe : metroid8");
-    Serial.println("Adresse : http://192.168.4.1");
+    Serial.println("WiFi indisponible : horloge provisoire a 00:00:00");
+    setTemporaryMidnight();
+    wifiDisconnectedSince = millis();
+    startRescueAccessPoint();
   }
 
   // ===================================================
@@ -1255,6 +1347,7 @@ void setup() {
   );
 
   display->setPhysicalPanelScanRate(FOUR_SCAN_32PX_HIGH);
+  display->setRotation(2);  // Rotation 180 degres : affichage remis tete en haut
 
   refreshDisplayColors();
 
@@ -1274,6 +1367,7 @@ void setup() {
 
 void loop() {
   server.handleClient();
+  maintainWifiAndTime();
 
   static unsigned long lastDateCheck = 0;
   static int todaySchedIndex = -1;
