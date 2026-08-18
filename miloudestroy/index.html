@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MilouDestroy — Gravure laser, impression 3D et scrapbooking faits main.">
+  <title>MilouDestroy — Créations mignonnes, mais pas trop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#accueil"><span class="brand-mark">🐙</span><span>MILOU<strong>DESTROY</strong></span></a>
+    <nav><a href="#boutique">Boutique</a><a href="#univers">Nos univers</a><a href="#sur-mesure">Sur mesure</a><a href="#atelier">L’atelier</a></nav>
+    <button class="cart" type="button">Panier 🛒 <b id="cart-count">0</b></button>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="hero-copy">
+        <p class="eyebrow">— FABRIQUÉ AVEC AMOUR & UN PEU DE CHAOS</p>
+        <h1>Des créations<br><em>mignonnes.</em><br>Mais pas trop.</h1>
+        <p class="lead">Un atelier où les poulpes roses rencontrent les légendes vikings. Gravure laser, impression 3D et scrapbooking, créés en petite série ou rien que pour toi.</p>
+        <div class="actions"><a class="button primary" href="#boutique">Découvrir la boutique ↗</a><a class="button ghost" href="#sur-mesure">Créer sur mesure</a></div>
+        <div class="proof"><span>🐙 💀 🩷</span><p><b>Des créations uniques</b><br>Fabriquées dans notre atelier en France</p></div>
+      </div>
+      <div class="hero-visual"><div class="ring"></div><img src="images/hero-miloudestroy.png" alt="Poulpe rose travaillant dans un atelier créatif"><span class="bubble one"><b>100%</b> fait maison</span><span class="bubble two">✦ personnalisable</span></div>
+    </section>
+
+    <div class="marquee">GRAVURE LASER　✦　IMPRESSION 3D　✦　SCRAPBOOKING　✦　CRÉATIONS UNIQUES　✦　PERSONNALISATION</div>
+
+    <section class="section" id="univers">
+      <div class="section-head"><div><p class="eyebrow">— CHOISIS TON UNIVERS</p><h2>Trois façons de<br><em>donner vie aux idées.</em></h2></div><p>Chaque création passe entre nos mains, de la première esquisse au dernier petit détail.</p></div>
+      <div class="categories">
+        <article class="category dark"><i>✹</i><small>12 CRÉATIONS</small><h3>Gravure laser</h3><p>Bois, ardoise et acrylique transformés en objets qui ont du caractère.</p><a href="#boutique" data-filter-link="Gravure laser">↗</a></article>
+        <article class="category pink"><i>⬡</i><small>18 CRÉATIONS</small><h3>Impression 3D</h3><p>Figurines articulées, déco et petites créatures sorties de l’atelier.</p><a href="#boutique" data-filter-link="Impression 3D">↗</a></article>
+        <article class="category beige"><i>✂</i><small>9 CRÉATIONS</small><h3>Scrapbooking</h3><p>Albums, cartes et coffrets composés à la main, pièce après pièce.</p><a href="#boutique" data-filter-link="Scrapbooking">↗</a></article>
+      </div>
+    </section>
+
+    <section class="section shop" id="boutique">
+      <div class="section-head shop-head"><div><p class="eyebrow">— LES PETITS TRÉSORS</p><h2>Fraîchement sortis<br><em>de l’atelier.</em></h2></div><div class="filters"><button class="active" data-filter="all">Tout voir</button><button data-filter="Gravure laser">Gravure laser</button><button data-filter="Impression 3D">Impression 3D</button><button data-filter="Scrapbooking">Scrapbooking</button></div></div>
+      <div class="products">
+        <article class="product" data-type="Impression 3D"><div class="product-art a1"><span>BEST-SELLER</span><i>🐙</i></div><small>IMPRESSION 3D</small><h3>Poulpe des abysses</h3><p>Poulpe articulé, doux au toucher et imprimé à la commande.</p><div><b>18,00 €</b><button class="add">Ajouter ＋</button></div></article>
+        <article class="product" data-type="Gravure laser"><div class="product-art a2"><span>PERSONNALISABLE</span><i>ᛉ</i></div><small>GRAVURE LASER</small><h3>Plaque Clan du Nord</h3><p>Votre nom gravé sur bois, entouré de runes et de tentacules.</p><div><b>29,00 €</b><button class="add">Ajouter ＋</button></div></article>
+        <article class="product" data-type="Scrapbooking"><div class="product-art a3"><span>PIÈCE UNIQUE</span><i>✦</i></div><small>SCRAPBOOKING</small><h3>Album Kraken rose</h3><p>Album relié main, 20 pages décorées pour vos plus beaux souvenirs.</p><div><b>42,00 €</b><button class="add">Ajouter ＋</button></div></article>
+        <article class="product" data-type="Impression 3D"><div class="product-art a4"><span>NOUVEAU</span><i>⚔</i></div><small>IMPRESSION 3D</small><h3>Mini Milou Viking</h3><p>La mascotte casquée qui veille sur votre bureau ou votre atelier.</p><div><b>14,00 €</b><button class="add">Ajouter ＋</button></div></article>
+        <article class="product" data-type="Gravure laser"><div class="product-art a5"><span>PETIT PRIX</span><i>ᛟ</i></div><small>GRAVURE LASER</small><h3>Médaillon Yggdrasil</h3><p>Découpe fine en bois, personnalisable avec un prénom au dos.</p><div><b>12,00 €</b><button class="add">Ajouter ＋</button></div></article>
+        <article class="product" data-type="Scrapbooking"><div class="product-art a6"><span>ÉDITION LIMITÉE</span><i>☾</i></div><small>SCRAPBOOKING</small><h3>Coffret Sorcière créative</h3><p>Papiers, découpes, rubans et surprises dans une boîte faite main.</p><div><b>35,00 €</b><button class="add">Ajouter ＋</button></div></article>
+      </div>
+    </section>
+
+    <section class="custom section" id="sur-mesure">
+      <div class="custom-art"><img src="images/collection-miloudestroy.png" alt="Collection de créations MilouDestroy"><span>UNE IDÉE<br><b>UNIQUE ?</b></span></div>
+      <div class="custom-copy"><p class="eyebrow">— TON IDÉE, NOS TENTACULES</p><h2>On fabrique aussi<br><em>ce qui n’existe pas.</em></h2><p>Un prénom, une couleur, un thème complètement barré ? Raconte-nous ton idée. On te répond avec une proposition claire avant de lancer la fabrication.</p><ol><li><b>01</b><div><strong>Tu racontes ton projet</strong><small>Dimensions, couleurs, occasion et inspirations.</small></div></li><li><b>02</b><div><strong>On imagine ensemble</strong><small>Maquette et tarif validés avant fabrication.</small></div></li><li><b>03</b><div><strong>On donne vie à l’idée</strong><small>Fabrication soignée et envoi protégé.</small></div></li></ol><a class="button primary" href="mailto:bonjour@miloudestroy.fr">Parler de mon projet ↗</a></div>
+    </section>
+
+    <section class="story section" id="atelier"><div class="quote"><span>🐙</span><p>« Ici, rien ne sort d’une usine. Chaque pièce est testée, assemblée, poncée ou collée avec patience… et parfois huit tentacules. »</p><b>— L’ESPRIT MILOUDESTROY</b></div><div class="values"><div><b>01</b><h3>Petites séries</h3><p>Pas de production à la chaîne. On préfère créer moins, mais mieux.</p></div><div><b>02</b><h3>Fabriqué en France</h3><p>Tout prend forme dans notre petit atelier, avec soin et bonne humeur.</p></div><div><b>03</b><h3>À ton image</h3><p>Couleur, prénom ou détail spécial : la personnalisation est notre terrain de jeu.</p></div></div></section>
+
+    <section class="newsletter"><div><p class="eyebrow">LE COURRIER DU KRAKEN</p><h2>Des nouveautés, pas du spam.</h2><p>Un petit message quand une collection débarque ou qu’une créature rare sort de l’imprimante.</p></div><form id="newsletter"><input type="email" placeholder="ton@email.fr" required><button>S’inscrire ↗</button></form></section>
+  </main>
+
+  <footer><div class="brand"><span class="brand-mark">🐙</span><span>MILOU<strong>DESTROY</strong></span></div><p>Objets mignons pour âmes un peu sauvages.</p><div class="footer-links"><a href="#boutique">Boutique</a><a href="#sur-mesure">Sur mesure</a><a href="#atelier">L’atelier</a><a href="#">Instagram</a></div><small>© 2026 MILOUDESTROY — FAIT AVEC 🩷 ET BEAUCOUP DE CAFÉ.</small></footer>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
