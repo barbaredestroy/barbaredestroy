@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RúnVakt surveille LightBurn et envoie une notification ntfy lorsque votre gravure est terminée.">
+  <title>RúnVakt — La sentinelle de vos gravures LightBurn</title>
+  <link rel="icon" href="assets/runvakt.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <div id="particles" aria-hidden="true"></div><div class="floating-runes" aria-hidden="true"></div>
+  <a class="back" href="../index.html" aria-label="Retour à BarbareDestroy"><img src="assets/logoindex.png" alt="BarbareDestroy"></a>
+
+  <div class="lang">
+    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+      <img src="assets/langue.png" alt="">
+    </button>
+    <div class="lang-menu" id="langMenu" role="menu">
+      <button role="menuitem" data-lang="fr">Français</button>
+      <button role="menuitem" data-lang="de">Deutsch</button>
+      <button role="menuitem" data-lang="en">English</button>
+      <button role="menuitem" data-lang="es">Español</button>
+      <button role="menuitem" data-lang="hi">हिन्दी</button>
+      <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
+      <button role="menuitem" data-lang="it">Italiano</button>
+      <button role="menuitem" data-lang="pt">Português</button>
+      <button role="menuitem" data-lang="ru">Русский</button>
+      <button role="menuitem" data-lang="ur">اردو</button>
+      <button role="menuitem" data-lang="zh">中文</button>
+      <button role="menuitem" data-lang="ja">日本語</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="sigil">ᚱ ᚢ ᚾ ᚹ ᚨ ᚲ ᛏ</div>
+        <h1>RúnVakt</h1>
+        <p class="tagline" data-i18n="tagline">La sentinelle de vos gravures</p>
+        <p class="lead" data-i18n="lead">Lance ta gravure dans LightBurn, éloigne-toi sereinement et reçois une notification sur ton téléphone dès que le travail est terminé.</p>
+        <div class="status" data-i18n="status">Bientôt disponible sur le Microsoft Store</div>
+      </div>
+      <div class="mockup"><div class="logo-halo"></div><img class="app-logo" src="assets/runvakt-logo.png" alt="Logo de RúnVakt"></div>
+    </section>
+
+    <section class="content">
+      <h2 class="section-title"><span data-i18n="featuresTitle1">Une surveillance simple.</span> <span data-i18n="featuresTitle2">Une vraie tranquillité.</span></h2>
+      <div class="features">
+        <article class="feature"><b>ᚱ</b><h3 data-i18n="f1Title">Surveillance LightBurn</h3><p data-i18n="f1Desc">RúnVakt lance la tâche depuis l’onglet Laser et surveille la console jusqu’au message de fin.</p></article>
+        <article class="feature"><b>ᛃ</b><h3 data-i18n="f2Title">Notification ntfy</h3><p data-i18n="f2Desc">Une alerte arrive sur ton téléphone lorsque la gravure est terminée, même si tu n’es plus devant le PC.</p></article>
+        <article class="feature"><b>ᛏ</b><h3 data-i18n="f3Title">Configuration guidée</h3><p data-i18n="f3Desc">Le tutoriel intégré, le QR code et le test de notification permettent de tout configurer rapidement.</p></article>
+        <article class="feature"><b>ᛇ</b><h3 data-i18n="f4Title">Sujet personnel</h3><p data-i18n="f4Desc">Chaque installation génère un sujet ntfy aléatoire pour éviter de mélanger tes alertes avec celles des autres.</p></article>
+        <article class="feature"><b>ᚨ</b><h3 data-i18n="f5Title">Interface personnalisable</h3><p data-i18n="f5Desc">Choisis ton fond d’écran et règle sa transparence pour créer l’ambiance qui te ressemble.</p></article>
+        <article class="feature"><b>ᛟ</b><h3 data-i18n="f6Title">Sans publicité</h3><p data-i18n="f6Desc">Aucun compte RúnVakt, aucune publicité, aucun traceur et aucune analyse comportementale.</p></article>
+      </div>
+    </section>
+
+    <section class="content steps">
+      <div><span>01</span><h3 data-i18n="s1Title">Prépare</h3><p data-i18n="s1Desc">Ouvre LightBurn et affiche l’onglet Laser.</p></div>
+      <div><span>02</span><h3 data-i18n="s2Title">Lance</h3><p data-i18n="s2Desc">RúnVakt déclenche la gravure et commence le suivi.</p></div>
+      <div><span>03</span><h3 data-i18n="s3Title">Sois averti</h3><p data-i18n="s3Desc">La notification arrive sur ton téléphone à la fin.</p></div>
+    </section>
+
+    <section class="content manifesto">
+      <div class="sigil">ᛋ ᛖ ᚲ ᚢ ᚱ ᛁ ᛏ ᛖ</div>
+      <h2 class="section-title"><span data-i18n="manifestoTitle1">Un fonctionnement</span> <span data-i18n="manifestoTitle2">transparent</span></h2>
+      <p data-i18n="manifestoText">Les préférences restent sur ton PC. Seule la notification nécessaire est envoyée vers le serveur ntfy que tu as choisi.</p>
+      <a class="legal-button" href="confidentialite.html" data-i18n="legalButton">Consulter la confidentialité</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <a href="../index.html" data-i18n="navHome">Accueil BarbareDestroy</a>
+      <a href="confidentialite.html" data-i18n="navPrivacy">Politique de confidentialité</a>
+      <a href="conditions.html" data-i18n="navTerms">Conditions d’utilisation</a>
+    </nav>
+    <div class="rune-line">ᛒᚨᚱᛒᚨᚱᛖ ᛞᛖᛋᛏᚱᛟᛃ</div>
+    <span class="copyright">© 2026 BarbareDestroy — Serge Hinzelin</span>
+  </footer>
+</div>
+<script src="common.js"></script>
+<script src="i18n.js"></script>
+</body></html>
