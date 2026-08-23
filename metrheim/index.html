@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Metrheim, le convertisseur d'unités Android simple et sans publicité.">
+  <title>Metrheim — Convertisseur d'unités</title>
+  <link rel="icon" href="assetsmetreheim/logoindex.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <div id="particles" aria-hidden="true"></div><div class="floating-runes" aria-hidden="true"></div>
+  <a class="back" href="../index.html" aria-label="Retour à BarbareDestroy"><img src="assetsmetreheim/logoindex.png" alt="BarbareDestroy"></a>
+
+  <div class="lang">
+    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+      <img src="assetsmetreheim/langue.png" alt="">
+    </button>
+    <div class="lang-menu" id="langMenu" role="menu">
+      <button role="menuitem" data-lang="fr">Français</button>
+      <button role="menuitem" data-lang="en">English</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="sigil">ᛗ ᛖ ᛏ ᚱ ᚺ ᛖ ᛁ ᛗ</div>
+        <h1>Metrheim</h1>
+        <p class="tagline" data-i18n="tagline">Le convertisseur d'unités qui va à l'essentiel</p>
+        <p class="lead" data-i18n="lead">Pouces, centimètres, miles, kilomètres, litres, gallons... Bascule d'une unité à l'autre en un instant, sans publicité ni superflu.</p>
+        <div class="status" data-i18n="status">Bientôt disponible sur Google Play</div>
+      </div>
+      <div class="mockup"><div class="logo-halo"></div><img class="app-logo" src="assetsmetreheim/mockup-metrheim.png" alt="Aperçu de Metrheim"></div>
+    </section>
+
+    <section class="content">
+      <h2 class="section-title"><span data-i18n="featuresTitle1">Toutes les unités.</span> <span data-i18n="featuresTitle2">Aucun superflu.</span></h2>
+      <div class="features">
+        <article class="feature"><b>ᚱ</b><h3 data-i18n="f1Title">Toutes les unités utiles</h3><p data-i18n="f1Desc">Longueur, poids, volume, vitesse et pression réunis dans une seule application.</p></article>
+        <article class="feature"><b>ᛃ</b><h3 data-i18n="f2Title">Résultat instantané</h3><p data-i18n="f2Desc">La conversion s'affiche pendant la saisie, sans bouton à presser.</p></article>
+        <article class="feature"><b>ᛏ</b><h3 data-i18n="f3Title">Mémoire par catégorie</h3><p data-i18n="f3Desc">Chaque catégorie retient les unités choisies, même après redémarrage du téléphone.</p></article>
+        <article class="feature"><b>ᛇ</b><h3 data-i18n="f4Title">Catégories réordonnables</h3><p data-i18n="f4Desc">Range les catégories dans l'ordre qui te convient le mieux depuis les réglages.</p></article>
+        <article class="feature"><b>ᚨ</b><h3 data-i18n="f5Title">Fond d'écran personnalisable</h3><p data-i18n="f5Desc">Choisis ton image et règle sa transparence pour créer l'ambiance qui te ressemble.</p></article>
+        <article class="feature"><b>ᛟ</b><h3 data-i18n="f6Title">Sans publicité</h3><p data-i18n="f6Desc">Aucun compte, aucune publicité, aucun traceur et aucune collecte de données.</p></article>
+      </div>
+    </section>
+
+    <section class="content steps">
+      <div><span>01</span><h3 data-i18n="s1Title">Choisis</h3><p data-i18n="s1Desc">Sélectionne la catégorie qui t'intéresse.</p></div>
+      <div><span>02</span><h3 data-i18n="s2Title">Saisis</h3><p data-i18n="s2Desc">Tape ta valeur dans l'unité de départ.</p></div>
+      <div><span>03</span><h3 data-i18n="s3Title">Lis</h3><p data-i18n="s3Desc">Le résultat converti s'affiche immédiatement.</p></div>
+    </section>
+
+    <section class="content manifesto">
+      <div class="sigil">ᛗ ᛖ ᛏ ᚱ ᚺ ᛖ ᛁ ᛗ</div>
+      <h2 class="section-title"><span data-i18n="manifestoTitle1">Une conversion</span> <span data-i18n="manifestoTitle2">sans détour</span></h2>
+      <p data-i18n="manifestoText">Tout reste sur ton téléphone. Aucune donnée n'est envoyée où que ce soit.</p>
+      <a class="legal-button" href="confidentialite.html" data-i18n="legalButton">Consulter la confidentialité</a>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <a href="../index.html" data-i18n="navHome">Accueil BarbareDestroy</a>
+      <a href="confidentialite.html" data-i18n="navPrivacy">Politique de confidentialité</a>
+      <a href="conditions.html" data-i18n="navTerms">Conditions d'utilisation</a>
+    </nav>
+    <div class="rune-line">ᛒᚨᚱᛒᚨᚱᛖ ᛞᛖᛋᛏᚱᛟᛃ</div>
+    <span class="copyright">© 2026 BarbareDestroy — Serge Hinzelin</span>
+  </footer>
+</div>
+<script src="common.js"></script>
+<script>
+var translations = {
+  fr: {
+    tagline: "Le convertisseur d'unités qui va à l'essentiel",
+    lead: "Pouces, centimètres, miles, kilomètres, litres, gallons... Bascule d'une unité à l'autre en un instant, sans publicité ni superflu.",
+    status: "Bientôt disponible sur Google Play",
+    featuresTitle1: "Toutes les unités.",
+    featuresTitle2: "Aucun superflu.",
+    f1Title: "Toutes les unités utiles",
+    f1Desc: "Longueur, poids, volume, vitesse et pression réunis dans une seule application.",
+    f2Title: "Résultat instantané",
+    f2Desc: "La conversion s'affiche pendant la saisie, sans bouton à presser.",
+    f3Title: "Mémoire par catégorie",
+    f3Desc: "Chaque catégorie retient les unités choisies, même après redémarrage du téléphone.",
+    f4Title: "Catégories réordonnables",
+    f4Desc: "Range les catégories dans l'ordre qui te convient le mieux depuis les réglages.",
+    f5Title: "Fond d'écran personnalisable",
+    f5Desc: "Choisis ton image et règle sa transparence pour créer l'ambiance qui te ressemble.",
+    f6Title: "Sans publicité",
+    f6Desc: "Aucun compte, aucune publicité, aucun traceur et aucune collecte de données.",
+    s1Title: "Choisis",
+    s1Desc: "Sélectionne la catégorie qui t'intéresse.",
+    s2Title: "Saisis",
+    s2Desc: "Tape ta valeur dans l'unité de départ.",
+    s3Title: "Lis",
+    s3Desc: "Le résultat converti s'affiche immédiatement.",
+    manifestoTitle1: "Une conversion",
+    manifestoTitle2: "sans détour",
+    manifestoText: "Tout reste sur ton téléphone. Aucune donnée n'est envoyée où que ce soit.",
+    legalButton: "Consulter la confidentialité",
+    navHome: "Accueil BarbareDestroy",
+    navPrivacy: "Politique de confidentialité",
+    navTerms: "Conditions d'utilisation"
+  },
+  en: {
+    tagline: "The unit converter that goes straight to the point",
+    lead: "Inches, centimetres, miles, kilometres, litres, gallons... Switch from one unit to another instantly, with no ads and no clutter.",
+    status: "Coming soon to Google Play",
+    featuresTitle1: "Every unit you need.",
+    featuresTitle2: "Nothing you don't.",
+    f1Title: "Every unit that matters",
+    f1Desc: "Length, weight, volume, speed and pressure, all in a single app.",
+    f2Title: "Instant result",
+    f2Desc: "The conversion updates as you type, no button to press.",
+    f3Title: "Per-category memory",
+    f3Desc: "Each category remembers the units you picked, even after restarting your phone.",
+    f4Title: "Reorder your categories",
+    f4Desc: "Arrange categories in the order that suits you best from the settings.",
+    f5Title: "Custom wallpaper",
+    f5Desc: "Pick your own image and adjust its transparency to match your style.",
+    f6Title: "No ads",
+    f6Desc: "No account, no ads, no trackers and no data collection.",
+    s1Title: "Choose",
+    s1Desc: "Pick the category you need.",
+    s2Title: "Type",
+    s2Desc: "Enter your value in the starting unit.",
+    s3Title: "Read",
+    s3Desc: "The converted result appears instantly.",
+    manifestoTitle1: "A conversion",
+    manifestoTitle2: "with no detour",
+    manifestoText: "Everything stays on your phone. No data is ever sent anywhere.",
+    legalButton: "Read the privacy policy",
+    navHome: "BarbareDestroy home",
+    navPrivacy: "Privacy policy",
+    navTerms: "Terms of use"
+  }
+};
+
+var langBtn = document.getElementById('langBtn');
+var langMenu = document.getElementById('langMenu');
+langBtn.addEventListener('click', function(e){
+  e.stopPropagation();
+  var open = langMenu.classList.toggle('open');
+  langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.addEventListener('click', function(){
+  langMenu.classList.remove('open');
+  langBtn.setAttribute('aria-expanded', 'false');
+});
+langMenu.querySelectorAll('button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    applyLang(btn.getAttribute('data-lang'));
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+
+function applyLang(lang){
+  var dict = translations[lang];
+  if(!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) decodeText(el, dict[key]);
+  });
+}
+
+// ===== Effet runique : le texte apparaît d'abord en runes, puis se déchiffre =====
+var RUNES = 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ';
+var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function randomRune(){
+  return RUNES[Math.floor(Math.random() * RUNES.length)];
+}
+
+function decodeText(el, text){
+  var final = (text !== undefined) ? text : el.textContent;
+  if (reduceMotion){ el.textContent = final; return; }
+
+  el.innerHTML = '';
+  var words = final.split(' ');
+  var chars = [];
+  var spans = [];
+
+  words.forEach(function(word, wi){
+    if (word.length){
+      var wrap = document.createElement('span');
+      wrap.style.whiteSpace = 'nowrap';
+      for (var c = 0; c < word.length; c++){
+        var s = document.createElement('span');
+        s.className = 'rune-char';
+        s.textContent = randomRune();
+        wrap.appendChild(s);
+        spans.push(s);
+        chars.push(word[c]);
+      }
+      el.appendChild(wrap);
+    }
+    if (wi < words.length - 1){
+      el.appendChild(document.createTextNode(' '));
+    }
+  });
+
+  chars.forEach(function(ch, i){
+    var span = spans[i];
+    var flickers = 5 + Math.floor(Math.random() * 4);
+    var startDelay = i * 70;
+    var flickerInterval = 80;
+
+    for (var f = 0; f < flickers; f++){
+      (function(f){
+        setTimeout(function(){ span.textContent = randomRune(); }, startDelay + f * flickerInterval);
+      })(f);
+    }
+
+    setTimeout(function(){
+      span.textContent = ch;
+      span.classList.add('settling');
+      setTimeout(function(){ span.classList.remove('settling'); }, 1000);
+    }, startDelay + flickers * flickerInterval);
+  });
+}
+
+function decodeCascade(){
+  if (reduceMotion) return;
+  var targets = document.querySelectorAll('.tagline, .lead, .status, .section-title span, .feature h3, .feature p, .steps h3, .steps p, .manifesto p, .legal-button, footer nav a');
+  targets.forEach(function(el, idx){
+    setTimeout(function(){ decodeText(el); }, idx * 90);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', decodeCascade);
+</script>
+</body></html>
