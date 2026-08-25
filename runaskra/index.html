@@ -61,4 +61,5 @@ function language(lang,initial=false){const d=T[lang]||T.fr;run++;const id=run;d
 const btn=document.getElementById('langBtn'),menu=document.getElementById('langMenu');btn.onclick=e=>{e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))};document.onclick=()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')};menu.querySelectorAll('button').forEach(b=>b.onclick=()=>language(b.dataset.lang));let lang='fr';try{lang=localStorage.getItem('runaskraLang')||(navigator.language||'fr').slice(0,2);if(lang==='id')lang='in'}catch(e){}language(T[lang]?lang:'fr',true);
 const box=document.getElementById('particles');if(!reduce)for(let i=0;i<26;i++){const s=document.createElement('i'),size=2+Math.random()*2.5;s.className='spark';s.style.cssText=`left:${Math.random()*100}vw;width:${size}px;height:${size}px;--drift:${Math.random()*80-40}px;animation-duration:${6+Math.random()*6}s;animation-delay:${Math.random()*10}s`;box.append(s)}
 </script>
+<script data-goatcounter="https://barbaredestroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>
