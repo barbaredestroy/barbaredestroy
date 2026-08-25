@@ -7,6 +7,12 @@
   <title>RúnVakt — La sentinelle de vos gravures LightBurn</title>
   <link rel="icon" href="assets/runvakt.ico">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .download-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:28px}
+    .download-actions .legal-button{min-width:230px;text-align:center}
+    .status-link{color:inherit;text-decoration:none;cursor:pointer}
+    .status-link:hover,.status-link:focus{text-decoration:underline}
+  </style>
 </head>
 <body>
 <div class="shell">
@@ -40,7 +46,7 @@
         <h1>RúnVakt</h1>
         <p class="tagline" data-i18n="tagline">La sentinelle de vos gravures</p>
         <p class="lead" data-i18n="lead">Lance ta gravure dans LightBurn, éloigne-toi sereinement et reçois une notification sur ton téléphone dès que le travail est terminé.</p>
-        <div class="status" data-i18n="status">Bientôt disponible sur le Microsoft Store</div>
+        <a class="status status-link" href="https://apps.microsoft.com/store/detail/9NFFMSS82M6R?cid=DevShareMCLPCS" target="_blank" rel="noopener noreferrer" data-i18n="status">Disponible dès aujourd’hui, gratuitement et pour toujours</a>
       </div>
       <div class="mockup"><div class="logo-halo"></div><img class="app-logo" src="assets/runvakt-logo.png" alt="Logo de RúnVakt"></div>
     </section>
@@ -54,6 +60,7 @@
         <article class="feature"><b>ᛇ</b><h3 data-i18n="f4Title">Sujet personnel</h3><p data-i18n="f4Desc">Chaque installation génère un sujet ntfy aléatoire pour éviter de mélanger tes alertes avec celles des autres.</p></article>
         <article class="feature"><b>ᚨ</b><h3 data-i18n="f5Title">Interface personnalisable</h3><p data-i18n="f5Desc">Choisis ton fond d’écran et règle sa transparence pour créer l’ambiance qui te ressemble.</p></article>
         <article class="feature"><b>ᛟ</b><h3 data-i18n="f6Title">Sans publicité</h3><p data-i18n="f6Desc">Aucun compte RúnVakt, aucune publicité, aucun traceur et aucune analyse comportementale.</p></article>
+        <article class="feature"><b>ᚺ</b><h3 data-i18n="f7Title">Home Assistant</h3><p data-i18n="f7Desc">Relie RúnVakt à Home Assistant et fais annoncer la fin de ta gravure par Alexa ou Google Assistant.</p></article>
       </div>
     </section>
 
@@ -64,10 +71,13 @@
     </section>
 
     <section class="content manifesto">
-      <div class="sigil">ᛋ ᛖ ᚲ ᚢ ᚱ ᛁ ᛏ ᛖ</div>
-      <h2 class="section-title"><span data-i18n="manifestoTitle1">Un fonctionnement</span> <span data-i18n="manifestoTitle2">transparent</span></h2>
-      <p data-i18n="manifestoText">Les préférences restent sur ton PC. Seule la notification nécessaire est envoyée vers le serveur ntfy que tu as choisi.</p>
-      <a class="legal-button" href="confidentialite.html" data-i18n="legalButton">Consulter la confidentialité</a>
+      <div class="sigil">ᚱ ᚢ ᚾ ᚹ ᚨ ᚲ ᛏ</div>
+      <h2 class="section-title"><span data-i18n="downloadTitle1">Disponible dès aujourd’hui.</span> <span data-i18n="downloadTitle2">Gratuitement et pour toujours.</span></h2>
+      <p data-i18n="downloadText">Choisis la version qui te convient : l’application portable à extraire et lancer directement, ou l’installation simplifiée depuis le Microsoft Store.</p>
+      <div class="download-actions">
+        <a class="legal-button" href="https://github.com/barbaredestroy/barbaredestroy/releases/download/runvakt/RunVakt.zip" data-i18n="downloadPortable">Télécharger la version portable ZIP</a>
+        <a class="legal-button" href="https://apps.microsoft.com/store/detail/9NFFMSS82M6R?cid=DevShareMCLPCS" target="_blank" rel="noopener noreferrer" data-i18n="downloadStore">Obtenir sur le Microsoft Store</a>
+      </div>
     </section>
   </main>
 
