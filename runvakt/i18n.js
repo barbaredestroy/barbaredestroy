@@ -2,7 +2,7 @@ var translations = {
   fr: {
     tagline: "La sentinelle de vos gravures",
     lead: "Lance ta gravure dans LightBurn, éloigne-toi sereinement et reçois une notification sur ton téléphone dès que le travail est terminé.",
-    status: "Disponible dès aujourd’hui, gratuitement et pour toujours",
+    status: "Microsoft Store",
     featuresTitle1: "Une surveillance simple.",
     featuresTitle2: "Une vraie tranquillité.",
     f1Title: "Surveillance LightBurn",
@@ -41,7 +41,7 @@ var translations = {
   de: {
     tagline: "Der Wächter deiner Gravuren",
     lead: "Starte deine Gravur in LightBurn, entferne dich in Ruhe und erhalte eine Benachrichtigung auf deinem Telefon, sobald die Arbeit fertig ist.",
-    status: "Ab heute verfügbar – kostenlos und für immer",
+    status: "Microsoft Store",
     featuresTitle1: "Einfache Überwachung.",
     featuresTitle2: "Echte Ruhe.",
     f1Title: "LightBurn-Überwachung",
@@ -80,7 +80,7 @@ var translations = {
   en: {
     tagline: "The sentinel of your engravings",
     lead: "Start your engraving in LightBurn, step away with peace of mind, and get a notification on your phone as soon as the job is done.",
-    status: "Available today, free forever",
+    status: "Microsoft Store",
     featuresTitle1: "Simple monitoring.",
     featuresTitle2: "Real peace of mind.",
     f1Title: "LightBurn monitoring",
@@ -119,7 +119,7 @@ var translations = {
   es: {
     tagline: "El centinela de tus grabados",
     lead: "Inicia tu grabado en LightBurn, aléjate tranquilamente y recibe una notificación en tu teléfono en cuanto termine el trabajo.",
-    status: "Disponible desde hoy, gratis para siempre",
+    status: "Microsoft Store",
     featuresTitle1: "Una vigilancia sencilla.",
     featuresTitle2: "Una tranquilidad real.",
     f1Title: "Vigilancia de LightBurn",
@@ -158,7 +158,7 @@ var translations = {
   hi: {
     tagline: "आपकी नक्काशी का प्रहरी",
     lead: "LightBurn में अपनी नक्काशी शुरू करें, निश्चिंत होकर दूर जाएँ और काम पूरा होते ही अपने फ़ोन पर सूचना पाएं।",
-    status: "आज से उपलब्ध, हमेशा के लिए निःशुल्क",
+    status: "Microsoft Store",
     featuresTitle1: "सरल निगरानी।",
     featuresTitle2: "असली मानसिक शांति।",
     f1Title: "LightBurn निगरानी",
@@ -197,7 +197,7 @@ var translations = {
   "in": {
     tagline: "Penjaga ukiranmu",
     lead: "Mulai ukiranmu di LightBurn, tinggalkan dengan tenang, dan terima notifikasi di ponselmu segera setelah pekerjaan selesai.",
-    status: "Tersedia mulai hari ini, gratis selamanya",
+    status: "Microsoft Store",
     featuresTitle1: "Pemantauan sederhana.",
     featuresTitle2: "Ketenangan yang sesungguhnya.",
     f1Title: "Pemantauan LightBurn",
@@ -236,7 +236,7 @@ var translations = {
   it: {
     tagline: "La sentinella delle tue incisioni",
     lead: "Avvia la tua incisione in LightBurn, allontanati serenamente e ricevi una notifica sul telefono non appena il lavoro è terminato.",
-    status: "Disponibile da oggi, gratis per sempre",
+    status: "Microsoft Store",
     featuresTitle1: "Un monitoraggio semplice.",
     featuresTitle2: "Una vera tranquillità.",
     f1Title: "Monitoraggio LightBurn",
@@ -275,7 +275,7 @@ var translations = {
   pt: {
     tagline: "A sentinela das tuas gravações",
     lead: "Inicia a tua gravação no LightBurn, afasta-te tranquilamente e recebe uma notificação no teu telemóvel assim que o trabalho terminar.",
-    status: "Disponível a partir de hoje, gratuitamente para sempre",
+    status: "Microsoft Store",
     featuresTitle1: "Uma vigilância simples.",
     featuresTitle2: "Uma verdadeira tranquilidade.",
     f1Title: "Vigilância do LightBurn",
@@ -314,7 +314,7 @@ var translations = {
   ru: {
     tagline: "Страж твоих гравировок",
     lead: "Запусти гравировку в LightBurn, спокойно отойди и получи уведомление на телефон, как только работа завершится.",
-    status: "Доступно уже сегодня и бесплатно навсегда",
+    status: "Microsoft Store",
     featuresTitle1: "Простое наблюдение.",
     featuresTitle2: "Настоящее спокойствие.",
     f1Title: "Наблюдение за LightBurn",
@@ -353,7 +353,7 @@ var translations = {
   ur: {
     tagline: "آپ کی کندہ کاری کا نگہبان",
     lead: "LightBurn میں اپنی کندہ کاری شروع کریں، اطمینان سے دور چلے جائیں اور کام مکمل ہوتے ہی اپنے فون پر اطلاع پائیں۔",
-    status: "آج سے دستیاب، ہمیشہ کے لیے مفت",
+    status: "Microsoft Store",
     featuresTitle1: "سادہ نگرانی۔",
     featuresTitle2: "حقیقی ذہنی سکون۔",
     f1Title: "LightBurn نگرانی",
@@ -392,7 +392,7 @@ var translations = {
   zh: {
     tagline: "你的雕刻守卫",
     lead: "在 LightBurn 中启动雕刻，安心离开，任务完成后立即在手机上收到通知。",
-    status: "即日起提供，永久免费",
+    status: "Microsoft Store",
     featuresTitle1: "简单的监控。",
     featuresTitle2: "真正的安心。",
     f1Title: "LightBurn 监控",
@@ -431,7 +431,7 @@ var translations = {
   ja: {
     tagline: "あなたの彫刻の見張り役",
     lead: "LightBurnで彫刻を開始し、安心してその場を離れましょう。作業が終わるとすぐにスマートフォンへ通知が届きます。",
-    status: "本日より提供開始、永久無料",
+    status: "Microsoft Store",
     featuresTitle1: "シンプルな監視。",
     featuresTitle2: "本当の安心。",
     f1Title: "LightBurn監視",
