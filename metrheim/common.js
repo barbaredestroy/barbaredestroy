@@ -1,3 +1,4 @@
+(()=>{
 const RUNES='ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ';
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 document.addEventListener('DOMContentLoaded',()=>{
@@ -18,3 +19,5 @@ document.addEventListener('DOMContentLoaded',()=>{
     rune.style.animationDuration=9+Math.random()*10+'s';runes.append(rune);
   }
 });
+
+})();

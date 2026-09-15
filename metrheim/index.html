@@ -1,75 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Metrheim, le convertisseur d'unités Android simple et sans publicité.">
-  <title>Metrheim — Convertisseur d'unités</title>
-  <link rel="icon" href="assetsmetreheim/logoindex.png">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Metrheim, le convertisseur d'unités Android simple et sans publicité." name="description"/>
+<title>Metrheim — Convertisseur d'unités</title>
+<link href="assetsmetreheim/logoindex.png" rel="icon"/>
+<link href="style.css" rel="stylesheet"/>
+<link href="../assets/site-common.css?v=20260915-3" rel="stylesheet"/><script defer="True" src="../assets/site-common.js?v=20260915-2"></script></head>
+<body class="bd-unified bd-product" data-app="metrheim">
 <div class="shell">
-  <div id="particles" aria-hidden="true"></div><div class="floating-runes" aria-hidden="true"></div>
-  <a class="back" href="../index.html" aria-label="Retour à BarbareDestroy"><img src="assetsmetreheim/logoindex.png" alt="BarbareDestroy"></a>
+<div aria-hidden="true" id="particles"></div><div aria-hidden="true" class="floating-runes"></div>
+<a aria-label="Accueil BarbareDestroy" class="back" href="../index.html"><img alt="BarbareDestroy" src="../assets/logoindex.png"/></a>
+<div class="lang">
+<button aria-expanded="false" aria-haspopup="true" aria-label="Choisir la langue" class="lang-btn" id="langBtn">
+<img alt="" src="assetsmetreheim/langue.png"/>
+</button>
+<div class="lang-menu" id="langMenu" role="menu">
+<button data-lang="fr" role="menuitem">Français</button>
+<button data-lang="en" role="menuitem">English</button>
+</div>
+</div>
+<main>
+<section class="hero">
+<div class="hero-copy hero-copy">
+<div class="sigil">ᛗ ᛖ ᛏ ᚱ ᚺ ᛖ ᛁ ᛗ</div>
+<h1>Metrheim</h1>
+<p class="tagline" data-i18n="tagline">Le convertisseur d'unités qui va à l'essentiel</p>
+<p class="lead" data-i18n="lead">Pouces, centimètres, miles, kilomètres, litres, gallons... Bascule d'une unité à l'autre en un instant, sans publicité ni superflu.</p>
+<div aria-label="Télécharger Metrheim" class="store-buttons"><a aria-label="Metrheim — Google Play" class="store-button" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.metrheim"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span>Google Play</span></a></div></div>
+<div class="mockup"><div class="logo-halo"></div><img alt="Aperçu de Metrheim" class="app-logo" src="assetsmetreheim/mockup-metrheim.png"/></div>
+</section>
+<section class="content">
+<h2 class="section-title"><span data-i18n="featuresTitle1">Toutes les unités.</span> <span data-i18n="featuresTitle2">Aucun superflu.</span></h2>
+<div class="features">
+<article class="feature"><b>ᚱ</b><h3 data-i18n="f1Title">Toutes les unités utiles</h3><p data-i18n="f1Desc">Longueur, poids, volume, vitesse et pression réunis dans une seule application.</p></article>
+<article class="feature"><b>ᛃ</b><h3 data-i18n="f2Title">Résultat instantané</h3><p data-i18n="f2Desc">La conversion s'affiche pendant la saisie, sans bouton à presser.</p></article>
+<article class="feature"><b>ᛏ</b><h3 data-i18n="f3Title">Mémoire par catégorie</h3><p data-i18n="f3Desc">Chaque catégorie retient les unités choisies, même après redémarrage du téléphone.</p></article>
+<article class="feature"><b>ᛇ</b><h3 data-i18n="f4Title">Catégories réordonnables</h3><p data-i18n="f4Desc">Range les catégories dans l'ordre qui te convient le mieux depuis les réglages.</p></article>
+<article class="feature"><b>ᚨ</b><h3 data-i18n="f5Title">Fond d'écran personnalisable</h3><p data-i18n="f5Desc">Choisis ton image et règle sa transparence pour créer l'ambiance qui te ressemble.</p></article>
+<article class="feature"><b>ᛟ</b><h3 data-i18n="f6Title">Sans publicité</h3><p data-i18n="f6Desc">Aucun compte, aucune publicité, aucun traceur et aucune collecte de données.</p></article>
+</div>
+</section>
+<section class="content steps">
+<div><span>01</span><h3 data-i18n="s1Title">Choisis</h3><p data-i18n="s1Desc">Sélectionne la catégorie qui t'intéresse.</p></div>
+<div><span>02</span><h3 data-i18n="s2Title">Saisis</h3><p data-i18n="s2Desc">Tape ta valeur dans l'unité de départ.</p></div>
+<div><span>03</span><h3 data-i18n="s3Title">Lis</h3><p data-i18n="s3Desc">Le résultat converti s'affiche immédiatement.</p></div>
+</section>
+<section aria-labelledby="download-title" class="bd-download" data-bd-app="Metrheim" id="telecharger"><div class="bd-download-heading"><img alt="" class="bd-download-logo" loading="lazy" src="../assets/metrheim-logo.png"/><div><p data-bd-copy="available">Disponible maintenant</p><h2 data-bd-copy="title" id="download-title">Télécharger Metrheim</h2><p data-bd-copy="androidIntro">Retrouve Metrheim sur ton téléphone Android.</p></div></div><div class="bd-download-options bd-options-1"><a class="bd-download-button" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.metrheim"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span class="bd-download-label"><strong>Google Play</strong><small data-bd-copy="android">Pour Android</small></span><span aria-hidden="true" class="bd-download-arrow">↗</span></a></div></section>
+</main>
+<footer><div aria-label="Barbare" class="rune-line bd-footer-signature" lang="non" translate="no">ᛒᚨᚱᛒᚨᚱᛖ</div>
+<nav>
+<a data-i18n="navHome" href="../index.html">Accueil BarbareDestroy</a>
+<a data-i18n="navPrivacy" href="confidentialite.html">Politique de confidentialité</a>
+<a data-i18n="navTerms" href="conditions.html">Conditions d'utilisation</a>
+</nav>
 
-  <div class="lang">
-    <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
-      <img src="assetsmetreheim/langue.png" alt="">
-    </button>
-    <div class="lang-menu" id="langMenu" role="menu">
-      <button role="menuitem" data-lang="fr">Français</button>
-      <button role="menuitem" data-lang="en">English</button>
-    </div>
-  </div>
-
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="sigil">ᛗ ᛖ ᛏ ᚱ ᚺ ᛖ ᛁ ᛗ</div>
-        <h1>Metrheim</h1>
-        <p class="tagline" data-i18n="tagline">Le convertisseur d'unités qui va à l'essentiel</p>
-        <p class="lead" data-i18n="lead">Pouces, centimètres, miles, kilomètres, litres, gallons... Bascule d'une unité à l'autre en un instant, sans publicité ni superflu.</p>
-        <div class="status" data-i18n="status">Bientôt disponible sur Google Play</div>
-      </div>
-      <div class="mockup"><div class="logo-halo"></div><img class="app-logo" src="assetsmetreheim/mockup-metrheim.png" alt="Aperçu de Metrheim"></div>
-    </section>
-
-    <section class="content">
-      <h2 class="section-title"><span data-i18n="featuresTitle1">Toutes les unités.</span> <span data-i18n="featuresTitle2">Aucun superflu.</span></h2>
-      <div class="features">
-        <article class="feature"><b>ᚱ</b><h3 data-i18n="f1Title">Toutes les unités utiles</h3><p data-i18n="f1Desc">Longueur, poids, volume, vitesse et pression réunis dans une seule application.</p></article>
-        <article class="feature"><b>ᛃ</b><h3 data-i18n="f2Title">Résultat instantané</h3><p data-i18n="f2Desc">La conversion s'affiche pendant la saisie, sans bouton à presser.</p></article>
-        <article class="feature"><b>ᛏ</b><h3 data-i18n="f3Title">Mémoire par catégorie</h3><p data-i18n="f3Desc">Chaque catégorie retient les unités choisies, même après redémarrage du téléphone.</p></article>
-        <article class="feature"><b>ᛇ</b><h3 data-i18n="f4Title">Catégories réordonnables</h3><p data-i18n="f4Desc">Range les catégories dans l'ordre qui te convient le mieux depuis les réglages.</p></article>
-        <article class="feature"><b>ᚨ</b><h3 data-i18n="f5Title">Fond d'écran personnalisable</h3><p data-i18n="f5Desc">Choisis ton image et règle sa transparence pour créer l'ambiance qui te ressemble.</p></article>
-        <article class="feature"><b>ᛟ</b><h3 data-i18n="f6Title">Sans publicité</h3><p data-i18n="f6Desc">Aucun compte, aucune publicité, aucun traceur et aucune collecte de données.</p></article>
-      </div>
-    </section>
-
-    <section class="content steps">
-      <div><span>01</span><h3 data-i18n="s1Title">Choisis</h3><p data-i18n="s1Desc">Sélectionne la catégorie qui t'intéresse.</p></div>
-      <div><span>02</span><h3 data-i18n="s2Title">Saisis</h3><p data-i18n="s2Desc">Tape ta valeur dans l'unité de départ.</p></div>
-      <div><span>03</span><h3 data-i18n="s3Title">Lis</h3><p data-i18n="s3Desc">Le résultat converti s'affiche immédiatement.</p></div>
-    </section>
-
-    <section class="content manifesto">
-      <div class="sigil">ᛗ ᛖ ᛏ ᚱ ᚺ ᛖ ᛁ ᛗ</div>
-      <h2 class="section-title"><span data-i18n="manifestoTitle1">Une conversion</span> <span data-i18n="manifestoTitle2">sans détour</span></h2>
-      <p data-i18n="manifestoText">Tout reste sur ton téléphone. Aucune donnée n'est envoyée où que ce soit.</p>
-      <a class="legal-button" href="confidentialite.html" data-i18n="legalButton">Consulter la confidentialité</a>
-    </section>
-  </main>
-
-  <footer>
-    <nav>
-      <a href="../index.html" data-i18n="navHome">Accueil BarbareDestroy</a>
-      <a href="confidentialite.html" data-i18n="navPrivacy">Politique de confidentialité</a>
-      <a href="conditions.html" data-i18n="navTerms">Conditions d'utilisation</a>
-    </nav>
-    <div class="rune-line">ᛒᚨᚱᛒᚨᚱᛖ ᛞᛖᛋᛏᚱᛟᛃ</div>
-    <span class="copyright">© 2026 BarbareDestroy — Serge Hinzelin</span>
-  </footer>
+<span class="copyright">© 2026 BarbareDestroy — Serge Hinzelin</span>
+</footer>
 </div>
 <script src="common.js"></script>
 <script>
@@ -77,7 +66,7 @@ var translations = {
   fr: {
     tagline: "Le convertisseur d'unités qui va à l'essentiel",
     lead: "Pouces, centimètres, miles, kilomètres, litres, gallons... Bascule d'une unité à l'autre en un instant, sans publicité ni superflu.",
-    status: "Bientôt disponible sur Google Play",
+    status: "Google Play",
     featuresTitle1: "Toutes les unités.",
     featuresTitle2: "Aucun superflu.",
     f1Title: "Toutes les unités utiles",
@@ -109,7 +98,7 @@ var translations = {
   en: {
     tagline: "The unit converter that goes straight to the point",
     lead: "Inches, centimetres, miles, kilometres, litres, gallons... Switch from one unit to another instantly, with no ads and no clutter.",
-    status: "Coming soon to Google Play",
+    status: "Google Play",
     featuresTitle1: "Every unit you need.",
     featuresTitle2: "Nothing you don't.",
     f1Title: "Every unit that matters",
@@ -177,53 +166,7 @@ function randomRune(){
   return RUNES[Math.floor(Math.random() * RUNES.length)];
 }
 
-function decodeText(el, text){
-  var final = (text !== undefined) ? text : el.textContent;
-  if (reduceMotion){ el.textContent = final; return; }
-
-  el.innerHTML = '';
-  var words = final.split(' ');
-  var chars = [];
-  var spans = [];
-
-  words.forEach(function(word, wi){
-    if (word.length){
-      var wrap = document.createElement('span');
-      wrap.style.whiteSpace = 'nowrap';
-      for (var c = 0; c < word.length; c++){
-        var s = document.createElement('span');
-        s.className = 'rune-char';
-        s.textContent = randomRune();
-        wrap.appendChild(s);
-        spans.push(s);
-        chars.push(word[c]);
-      }
-      el.appendChild(wrap);
-    }
-    if (wi < words.length - 1){
-      el.appendChild(document.createTextNode(' '));
-    }
-  });
-
-  chars.forEach(function(ch, i){
-    var span = spans[i];
-    var flickers = 5 + Math.floor(Math.random() * 4);
-    var startDelay = i * 70;
-    var flickerInterval = 80;
-
-    for (var f = 0; f < flickers; f++){
-      (function(f){
-        setTimeout(function(){ span.textContent = randomRune(); }, startDelay + f * flickerInterval);
-      })(f);
-    }
-
-    setTimeout(function(){
-      span.textContent = ch;
-      span.classList.add('settling');
-      setTimeout(function(){ span.classList.remove('settling'); }, 1000);
-    }, startDelay + flickers * flickerInterval);
-  });
-}
+function decodeText(el, text){if(text!==undefined)el.textContent=text;}
 
 function decodeCascade(){
   if (reduceMotion) return;
@@ -235,5 +178,5 @@ function decodeCascade(){
 
 document.addEventListener('DOMContentLoaded', decodeCascade);
 </script>
-<script data-goatcounter="https://barbaredestroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script async="" data-goatcounter="https://barbaredestroy.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
 </body></html>
