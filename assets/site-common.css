@@ -1,0 +1,100 @@
+/* Shared layout for BarbareDestroy. KidQuest deliberately keeps its own stylesheet. */
+.bd-unified{--bd-width:1120px;--bd-accent:var(--c,#d5b77c);font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6}
+.bd-unified *{box-sizing:border-box}
+.bd-unified .page,.bd-unified .shell{width:100%;max-width:none;margin:0;padding:112px 32px 32px;overflow-x:clip}
+.bd-unified .back,.bd-unified .lang{position:absolute;top:24px;z-index:30;width:64px;height:64px}
+.bd-unified .back{left:32px}.bd-unified .lang{right:32px}
+.bd-unified .back img,.bd-unified .lang-btn,.bd-unified .lang-btn img{display:block;width:64px;height:64px;max-width:none;max-height:none;object-fit:contain}
+.bd-unified .lang-btn{padding:0;border:0;border-radius:0;background:none;box-shadow:none;cursor:pointer}
+.bd-unified .lang-menu{top:72px;right:0;min-width:190px;width:190px;max-height:65vh;overflow:auto;line-height:1.4}
+.bd-unified .lang-menu button{font:14px/1.4 Arial,sans-serif;min-height:42px;padding:10px 12px}
+.bd-unified a:focus-visible,.bd-unified button:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.bd-product .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:48px;width:100%;max-width:var(--bd-width);margin:24px auto 64px;text-align:left}
+.bd-product .hero-copy{min-width:0;width:100%}
+.bd-product .hero h1{font-family:Georgia,serif;font-size:clamp(36px,4.5vw,64px);font-weight:700;line-height:1.08;letter-spacing:0;text-transform:none;white-space:normal;overflow-wrap:normal;margin:12px 0 24px}
+.bd-product .hero .lead,.bd-product .hero .subtitle,.bd-product .hero .tagline{font-size:17px;line-height:1.75;letter-spacing:0;max-width:620px;margin:16px 0}
+.bd-product .hero .mockup,.bd-product .hero .app-mockup-img{display:block;width:100%;max-width:480px;height:360px;margin:auto;object-fit:contain;min-width:0}
+.bd-product .hero .mockup img{display:block;width:100%;height:100%;max-height:360px;object-fit:contain;margin:auto}
+.bd-product .hero .mark{width:48px;height:48px;margin:0 0 24px 8px;font-size:25px}
+.bd-product .hero .sigil{font-size:20px;line-height:1.5;margin:0 0 24px;letter-spacing:.3em}
+.bd-unified .content,.bd-unified .block,.bd-unified .cta,.bd-unified .actions,.bd-unified .download-actions{width:100%;max-width:var(--bd-width);margin:40px auto}
+.bd-product .features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;width:100%}
+.bd-product .feature{padding:26px;border-radius:12px;min-width:0;text-align:left}
+.bd-product .feature h3,.bd-product .feature>b:not(:only-child){font-size:18px;line-height:1.4;letter-spacing:0}
+.bd-product .feature p,.bd-product .manifesto p,.bd-product .cta p{font-size:15px;line-height:1.75}
+.bd-product .section-title{font:700 25px/1.4 Georgia,serif;letter-spacing:0;text-transform:none;text-align:center;margin:0 0 28px}
+.bd-product .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bd-unified .button,.bd-unified .legal-button,.bd-unified .download-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;font:600 14px/1.4 Arial,sans-serif;border-radius:8px;letter-spacing:0;text-transform:none;text-align:center}
+.bd-unified .actions,.bd-unified .download-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.bd-unified .store-buttons{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0}
+.bd-unified .store-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:184px;min-height:54px;padding:13px 18px;border:1px solid #ffffff55;border-radius:9px;background:#111;color:#fff;text-decoration:none;font:600 15px/1.4 Arial,sans-serif;box-shadow:0 6px 18px #0003;transition:background .18s,border-color .18s}
+.bd-unified .store-button:hover{background:#252525;border-color:#fff}.bd-unified .store-button svg{width:26px;height:26px;flex:none}
+.bd-unified footer,.bd-unified .footer{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;width:100%;max-width:var(--bd-width);margin:64px auto 0;padding:24px 0;border-top:1px solid #ffffff26;text-align:center;font-size:13px}
+.bd-unified footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}.bd-unified footer a,.bd-unified .footer a{font-size:13px;margin:0}.bd-unified .copyright,.bd-unified footer small,.bd-unified .rune-line{width:100%;margin:0}
+.bd-document .legal,.bd-document .panel{width:100%;max-width:960px;margin:24px auto 0;padding:40px;border-radius:12px}
+.bd-document .legal h1,.bd-document .panel h1{font:700 clamp(28px,4vw,42px)/1.2 Georgia,serif;letter-spacing:0;margin:0 0 32px;text-align:left}
+.bd-document .legal h2{font:700 22px/1.4 Georgia,serif;letter-spacing:0;margin:30px 0 12px}
+.bd-document .legal p,.bd-document .legal .para,.bd-document .legal li{font-size:15px;line-height:1.8}
+.bd-home .card h2{font-size:clamp(25px,3vw,34px);line-height:1.2}.bd-home .card .desc{font-size:15px;line-height:1.7}.bd-home .card .logo img{width:100%;height:100%;object-fit:contain}
+@media(max-width:800px){.bd-unified .page,.bd-unified .shell{padding:96px 20px 24px}.bd-unified .back,.bd-unified .lang{top:16px;width:56px;height:56px}.bd-unified .back{left:20px}.bd-unified .lang{right:20px}.bd-unified .back img,.bd-unified .lang-btn,.bd-unified .lang-btn img{width:56px;height:56px}.bd-unified .lang-menu{top:64px}.bd-product .hero{grid-template-columns:1fr;gap:28px;margin:20px auto 40px;text-align:center}.bd-product .hero .lead,.bd-product .hero .subtitle,.bd-product .hero .tagline{margin:16px auto}.bd-product .hero .mark{margin:0 auto 24px}.bd-product .hero .mockup,.bd-product .hero .app-mockup-img{height:280px;max-width:400px}.bd-unified .store-buttons{justify-content:center}.bd-product .features{grid-template-columns:repeat(2,minmax(0,1fr))}.bd-document .legal,.bd-document .panel{padding:28px 24px}}
+@media(max-width:520px){.bd-product .features,.bd-product .steps{grid-template-columns:1fr}.bd-product .hero h1{font-size:38px}.bd-product .hero .lead,.bd-product .hero .subtitle,.bd-product .hero .tagline{font-size:16px}.bd-unified .store-buttons{flex-direction:column}.bd-unified .store-button{width:100%}.bd-unified footer nav{flex-direction:column;gap:12px}.bd-document .legal,.bd-document .panel{padding:24px 18px}.bd-product .feature{padding:22px}}
+
+/* Replace former spark and duplicate rune layers with one consistent background. */
+.bd-unified #particles,.bd-unified .floating-runes,.bd-unified .runes{display:none!important}
+.bd-unified{isolation:isolate}
+.bd-rune-background{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;color:var(--c,rgb(var(--glow,190,151,104)))}
+.bd-rune-background span{position:absolute;bottom:-70px;font-family:"Segoe UI Historic","Noto Sans Runic",serif;font-style:normal;opacity:0;text-shadow:0 0 15px currentColor;animation:bd-rune-rise linear infinite;will-change:transform}
+@keyframes bd-rune-rise{0%{transform:translate3d(0,0,0) rotate(-10deg);opacity:0}12%{opacity:.22}80%{opacity:.16}100%{transform:translate3d(var(--rune-drift),-115vh,0) rotate(15deg);opacity:0}}
+@media(max-width:600px){.bd-rune-background span:nth-child(n+13){display:none}}
+@media(prefers-reduced-motion:reduce){.bd-rune-background{display:none}}
+/* Consistent hero spacing and cards regardless of the original page layout. */
+.bd-product .hero{padding:0;min-height:380px;overflow:visible}
+.bd-product .features:has(>.feature:nth-child(4):last-child){grid-template-columns:repeat(4,minmax(0,1fr))}
+.bd-product .feature h3{font-family:Georgia,serif;margin:14px 0 10px}
+.bd-product .feature{display:block;clip-path:none;background:linear-gradient(145deg,#ffffff07,#00000025);border:1px solid #ffffff2e;box-shadow:none}
+.bd-product .feature-rune,.bd-product .feature>.rune,.bd-product .feature>b:first-child{display:block;width:auto;height:36px;border:none;box-shadow:none;background:none;transform:none;font-size:26px;line-height:36px;margin:0 0 12px;padding:0}
+.bd-unified .page,.bd-unified .shell{isolation:isolate}
+.bd-rune-background{z-index:0}
+.bd-unified .page>main,.bd-unified .shell>main,.bd-unified .page>section,.bd-unified .shell>section,.bd-unified footer,.bd-unified .footer,.bd-unified .page>.block,.bd-unified .page>.cta{position:relative;z-index:1}
+.bd-rune-background span{font-family:BDRunic,serif}
+@media(max-width:1000px){.bd-product .features:has(>.feature:nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.bd-product .hero{min-height:0}}
+@media(max-width:520px){.bd-product .features:has(>.feature:nth-child(4):last-child){grid-template-columns:1fr}}
+@font-face{font-family:BDRunic;src:url('runes.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+16A0-16FF}
+.bd-unified{font-family:Arial,BDRunic,sans-serif}
+.bd-unified .sigil,.bd-unified .rune,.bd-unified .rune-line,.bd-unified .mark span,.bd-unified .feature-rune,.bd-unified .feature>b:first-child{font-family:BDRunic,Georgia,serif}
+.bd-unified[data-app="maildrasil"]{--bd-rune-color:#39dce8}.bd-unified[data-app="hildruna"]{--bd-rune-color:#ff3434}.bd-unified[data-app="metrheim"]{--bd-rune-color:#45caff}.bd-unified[data-app="runvakt"]{--bd-rune-color:#b58aff}.bd-unified[data-app="nordikafidelia"]{--bd-rune-color:#45caff}.bd-unified[data-app="valhallacalendar"]{--bd-rune-color:#31d8db}.bd-unified[data-app="valkyria"]{--bd-rune-color:#d9b34e}.bd-unified[data-app="runaskra"]{--bd-rune-color:#ef3942}.bd-unified[data-app="ragnaclock"]{--bd-rune-color:#2fffea}.bd-rune-background{color:var(--bd-rune-color,#bd916d)}
+
+/* Download area: one clear destination at the end of every product page. */
+.bd-unified .bd-download{position:relative;z-index:1;width:100%;max-width:var(--bd-width);margin:72px auto 0;padding:44px;border:1px solid color-mix(in srgb,var(--bd-rune-color,#37ced4) 35%,#152124);border-radius:20px;background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--bd-rune-color,#37ced4) 12%,transparent),transparent 68%),#080e12;box-shadow:0 24px 64px #0005;overflow:hidden;scroll-margin-top:32px;text-align:left}
+.bd-unified .bd-download:before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--bd-rune-color,#37ced4),transparent)}
+.bd-download-heading{display:flex;align-items:center;justify-content:center;gap:24px;margin:0 auto 32px;max-width:900px}
+.bd-unified .bd-download-logo{width:88px;height:88px;object-fit:contain;flex:none;filter:drop-shadow(0 10px 18px #0006)}
+.bd-unified .bd-download-heading p{padding:0;margin:12px 0 0;color:#b3c3c6;font:400 16px/1.65 Arial,sans-serif}
+.bd-unified .bd-download-heading p[data-bd-copy="available"]{margin:0 0 10px;color:var(--bd-rune-color,#37ced4);font:700 11px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.18em}
+.bd-unified .bd-download h2{margin:0;padding:0;color:#f2f5f4;font:600 clamp(28px,3vw,38px)/1.2 Georgia,serif;letter-spacing:0;text-transform:none;text-shadow:none}
+.bd-unified .bd-download h2:after{display:none}
+.bd-download-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:auto}
+.bd-download-options.bd-options-1{grid-template-columns:minmax(0,400px);justify-content:center}
+.bd-download-options.bd-options-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:780px}
+.bd-unified .bd-download-button{display:flex;align-items:center;gap:16px;min-width:0;min-height:100px;padding:24px 22px;border:1px solid #a6c3ca55;border-radius:12px;background:linear-gradient(145deg,#1d252b,#11171b);color:#fff;text-decoration:none;box-shadow:0 6px 20px #0003;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.bd-unified .bd-download-button:hover{transform:translateY(-3px);border-color:var(--bd-rune-color,#37ced4);background:linear-gradient(145deg,#29353d,#172229)}
+.bd-unified .bd-download-button svg{display:block;width:36px;height:36px;flex:none;color:var(--bd-rune-color,#37ced4)}
+.bd-download-label{min-width:0;display:flex;flex-direction:column;gap:6px}
+.bd-unified .bd-download-button strong{color:#fff;font:700 19px/1.3 Arial,sans-serif;letter-spacing:0}
+.bd-unified .bd-download-button small{font:400 12px/1.5 Arial,sans-serif;color:#afc0c7}
+.bd-download-arrow{font:400 21px/1 Arial,sans-serif;color:#8babb3;margin-inline-start:auto}
+.bd-unified .bd-download-help{margin:24px 0 0;padding:0;text-align:center;color:#93a9b2;font:400 13px/1.6 Arial,sans-serif}
+.bd-unified .bd-direct-download{display:inline-flex;align-items:center;gap:9px;margin-top:18px;color:#c4dadd;font:400 14px/1.5 Arial,sans-serif;text-decoration:underline;text-decoration-color:#527780;text-underline-offset:4px}
+.bd-direct-download svg{width:17px;height:17px;flex:none}.bd-direct-download:hover{color:#fff}
+@media(max-width:1000px){.bd-unified .bd-download{padding:34px 28px}.bd-unified .bd-download-button{padding:20px 18px;gap:12px}.bd-unified .bd-download-button strong{font-size:17px}.bd-unified .bd-download-button svg{width:30px;height:30px}.bd-options-3{grid-template-columns:repeat(2,minmax(0,1fr))}.bd-options-3>.bd-download-button:last-child{grid-column:1/-1}}
+@media(max-width:600px){.bd-unified .bd-download{margin-top:44px;padding:28px 20px;border-radius:16px}.bd-download-heading{flex-direction:column;gap:18px;text-align:center;margin-bottom:26px}.bd-unified .bd-download-logo{width:80px;height:80px}.bd-unified .bd-download h2{font-size:29px}.bd-unified .bd-download-heading p{font-size:15px}.bd-download-options,.bd-download-options.bd-options-1,.bd-download-options.bd-options-2{grid-template-columns:1fr;gap:12px}.bd-unified .bd-download-button{min-height:92px;padding:20px 18px}.bd-unified .bd-download-button strong{font-size:18px}.bd-unified .bd-download-button small{font-size:12px}.bd-unified .bd-download-button svg{width:32px;height:32px}}
+@media(prefers-reduced-motion:reduce){.bd-unified .bd-download-button{transition:none}.bd-unified .bd-download-button:hover{transform:none}}
+
+/* Runic ornaments also use the embedded font, including pseudo-elements. */
+.bd-unified .corners:before,.bd-unified .corners:after,.bd-unified .enter b,.bd-unified .path-callout:before,.bd-unified .path-callout:after,.bd-unified .forge-divider:after{font-family:BDRunic,Georgia,serif}
+
+/* The same BARBARE signature above every legal footer, in the page accent. */
+.bd-unified footer>.bd-footer-signature,.bd-unified .footer>.bd-footer-signature{display:block;flex:0 0 100%;width:100%;margin:0 0 8px;padding:0;text-align:center;font:400 23px/1.6 BDRunic,serif;letter-spacing:.32em;color:var(--bd-rune-color,rgb(var(--glow,61,212,223)));text-shadow:0 0 16px color-mix(in srgb,currentColor 22%,transparent)}
+.bd-unified footer>[data-i18n="copyright"],.bd-unified .footer>[data-i18n="copyright"]{width:100%;margin:0}
+@media(max-width:600px){.bd-unified footer>.bd-footer-signature,.bd-unified .footer>.bd-footer-signature{font-size:21px;letter-spacing:.28em}}
