@@ -1,13 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Nordika Fidélia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Nordika Fidélia</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&amp;family=Cinzel:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{--glow:36,190,255;--cyan:#2fc6ff;--ice:#a8e8ff;--steel:#879ba7;--void:#03070b;--emerald:#18db8e;--magenta:#dc22ee;--amber:#e77d23}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#02060a;color:#edf7fb}body{font-family:Arial,sans-serif}a{color:inherit;text-decoration:none}
     .page{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:72px 24px 34px;background:radial-gradient(circle at 75% 12%,rgba(0,130,190,.17),transparent 25%),radial-gradient(circle at 12% 38%,rgba(21,94,125,.16),transparent 30%),linear-gradient(180deg,#07131c 0,#03080d 58%,#020508 100%)}
@@ -30,99 +31,86 @@
     .rune-char{display:inline}
     .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.7);transition:color 1s ease,text-shadow 1s ease}
   </style>
-</head>
-<body>
-  <main class="page">
-    <div id="particles" aria-hidden="true"></div>
-    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
-
-    <a class="back" href="../" aria-label="Retour à l'accueil"><img src="assetsnordika/logoindex.png" alt=""></a>
-
-    <div class="lang">
-      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
-        <img src="assetsnordika/langue.png" alt="">
-      </button>
-      <div class="lang-menu" id="langMenu" role="menu">
-        <button role="menuitem" data-lang="fr">Français</button>
-        <button role="menuitem" data-lang="de">Deutsch</button>
-        <button role="menuitem" data-lang="en">English</button>
-        <button role="menuitem" data-lang="es">Español</button>
-        <button role="menuitem" data-lang="hi">हिन्दी</button>
-        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
-        <button role="menuitem" data-lang="it">Italiano</button>
-        <button role="menuitem" data-lang="pt">Português</button>
-        <button role="menuitem" data-lang="ru">Русский</button>
-        <button role="menuitem" data-lang="ur">اردو</button>
-        <button role="menuitem" data-lang="zh">中文</button>
-      </div>
-    </div>
-
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="mark" aria-hidden="true"><span>ᚠ</span></div>
-        <p class="eyebrow" data-i18n="eyebrow">Fidélité nordique</p>
-        <h1 class="brand">Nordika&#10;Fidélia</h1>
-        <p class="subtitle" data-i18n="subtitle">Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.</p>
-        <a class="status" href="https://play.google.com/store/apps/details?id=com.nordika.fidelia" target="_blank" rel="noopener" data-i18n="status">Disponible sur Play Store</a>
-      </div>
-	  <img class="app-mockup-img" src="assetsnordika/mockup-nordika.png" alt="Nordika Fidélia">
-    </section>
-
-    <div class="forge-divider" aria-hidden="true"></div>
-
-    <section class="block">
-      <p class="section-title" data-i18n="featuresTitle">Ce que renferme le coffre</p>
-      <div class="features">
-        <div class="feature">
-          <span class="feature-rune">ᛒ</span>
-          <h3 data-i18n="f1t">Scan en un instant</h3>
-          <p data-i18n="f1d">Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚱ</span>
-          <h3 data-i18n="f2t">100% hors-ligne</h3>
-          <p data-i18n="f2d">Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚨ</span>
-          <h3 data-i18n="f3t">Sauvegarde par QR</h3>
-          <p data-i18n="f3d">Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚲ</span>
-          <h3 data-i18n="f4t">12 langues, 19 polices</h3>
-          <p data-i18n="f4d">Une interface qui s'habille à ta manière, où que tu sois dans le monde.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="cta">
-      <h2 data-i18n="ctaTitle">Disponible dans ta poche</h2>
-      <p data-i18n="ctaDesc">Nordika Fidélia est maintenant disponible sur le Play Store.</p>
-      <a class="cta-note" href="https://play.google.com/store/apps/details?id=com.nordika.fidelia" target="_blank" rel="noopener" data-i18n="ctaNote">Disponible sur Play Store</a>
-    </div>
-
-    <footer>
-      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
-      <a href="conditions.html" data-i18n="footerTerms">Conditions d'utilisation</a>
-      <a href="../" data-i18n="footerHome">← Accueil</a>
-      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
-    </footer>
-  </main>
-
+<link href="../assets/site-common.css?v=20260915-3" rel="stylesheet"/><script defer="True" src="../assets/site-common.js?v=20260915-2"></script></head>
+<body class="bd-unified bd-product" data-app="nordikafidelia">
+<main class="page">
+<div aria-hidden="true" id="particles"></div>
+<div aria-hidden="true" class="runes"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+<a aria-label="Accueil BarbareDestroy" class="back" href="../index.html"><img alt="BarbareDestroy" src="../assets/logoindex.png"/></a>
+<div class="lang">
+<button aria-expanded="false" aria-haspopup="true" aria-label="Choisir la langue" class="lang-btn" id="langBtn">
+<img alt="" src="assetsnordika/langue.png"/>
+</button>
+<div class="lang-menu" id="langMenu" role="menu">
+<button data-lang="fr" role="menuitem">Français</button>
+<button data-lang="de" role="menuitem">Deutsch</button>
+<button data-lang="en" role="menuitem">English</button>
+<button data-lang="es" role="menuitem">Español</button>
+<button data-lang="hi" role="menuitem">हिन्दी</button>
+<button data-lang="in" role="menuitem">Bahasa Indonesia</button>
+<button data-lang="it" role="menuitem">Italiano</button>
+<button data-lang="pt" role="menuitem">Português</button>
+<button data-lang="ru" role="menuitem">Русский</button>
+<button data-lang="ur" role="menuitem">اردو</button>
+<button data-lang="zh" role="menuitem">中文</button>
+</div>
+</div>
+<section class="hero">
+<div class="hero-copy hero-copy">
+<div aria-hidden="true" class="mark"><span>ᚠ</span></div>
+<p class="eyebrow" data-i18n="eyebrow">Fidélité nordique</p>
+<h1 class="brand">Nordika Fidélia</h1>
+<p class="subtitle" data-i18n="subtitle">Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.</p>
+<div aria-label="Télécharger Nordika Fidélia" class="store-buttons"><a aria-label="Nordika Fidélia — Google Play" class="store-button" href="https://play.google.com/store/apps/details?id=com.nordika.fidelia"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span>Google Play</span></a></div></div>
+<img alt="Nordika Fidélia" class="app-mockup-img" src="assetsnordika/mockup-nordika.png"/>
+</section>
+<div aria-hidden="true" class="forge-divider"></div>
+<section class="block">
+<p class="section-title" data-i18n="featuresTitle">Ce que renferme le coffre</p>
+<div class="features">
+<div class="feature">
+<span class="feature-rune">ᛒ</span>
+<h3 data-i18n="f1t">Scan en un instant</h3>
+<p data-i18n="f1d">Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚱ</span>
+<h3 data-i18n="f2t">100% hors-ligne</h3>
+<p data-i18n="f2d">Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚨ</span>
+<h3 data-i18n="f3t">Sauvegarde par QR</h3>
+<p data-i18n="f3d">Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚲ</span>
+<h3 data-i18n="f4t">12 langues, 19 polices</h3>
+<p data-i18n="f4d">Une interface qui s'habille à ta manière, où que tu sois dans le monde.</p>
+</div>
+</div>
+</section>
+<section aria-labelledby="download-title" class="bd-download" data-bd-app="Nordika Fidélia" id="telecharger"><div class="bd-download-heading"><img alt="" class="bd-download-logo" loading="lazy" src="../assets/logofidelia.png"/><div><p data-bd-copy="available">Disponible maintenant</p><h2 data-bd-copy="title" id="download-title">Télécharger Nordika Fidélia</h2><p data-bd-copy="androidIntro">Retrouve Nordika Fidélia sur ton téléphone Android.</p></div></div><div class="bd-download-options bd-options-1"><a class="bd-download-button" href="https://play.google.com/store/apps/details?id=com.nordika.fidelia"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span class="bd-download-label"><strong>Google Play</strong><small data-bd-copy="android">Pour Android</small></span><span aria-hidden="true" class="bd-download-arrow">↗</span></a></div></section>
+<footer><div aria-label="Barbare" class="rune-line bd-footer-signature" lang="non" translate="no">ᛒᚨᚱᛒᚨᚱᛖ</div>
+<a data-i18n="footerPrivacy" href="confidentialite.html">Politique de confidentialité</a>
+<a data-i18n="footerTerms" href="conditions.html">Conditions d'utilisation</a>
+<a data-i18n="footerHome" href="../">← Accueil</a>
+<div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+</footer>
+</main>
 <script>
   var translations = {
-    fr:{eyebrow:"Fidélité nordique",subtitle:"Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.",status:"Disponible sur Play Store",featuresTitle:"Ce que renferme le coffre",f1t:"Scan en un instant",f1d:"Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.",f2t:"100% hors-ligne",f2d:"Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.",f3t:"Sauvegarde par QR",f3d:"Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.",f4t:"12 langues, 19 polices",f4d:"Une interface qui s'habille à ta manière, où que tu sois dans le monde.",ctaTitle:"Disponible dans ta poche",ctaDesc:"Nordika Fidélia est maintenant disponible sur le Play Store.",ctaNote:"Disponible sur Play Store",footerPrivacy:"Politique de confidentialité",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
-    de:{eyebrow:"Nordische Treue",subtitle:"Alle deine Treuekarten, vereint in einem einzigen Reisebuch.",status:"Verfügbar im Play Store",featuresTitle:"Was der Schatz birgt",f1t:"Scan im Nu",f1d:"Fotografiere den Barcode einer Karte und sie landet sofort in deinem Schatz.",f2t:"100% offline",f2d:"Keine Karte verlässt dein Telefon. Kein Konto, kein Server, kein Tracking.",f3t:"Sicherung per QR",f3d:"Exportiere und stelle deinen gesamten Schatz im Handumdrehen wieder her, von einem Telefon zum anderen.",f4t:"12 Sprachen, 19 Schriftarten",f4d:"Eine Oberfläche, die sich nach dir richtet, wo auch immer du auf der Welt bist.",ctaTitle:"Bald in deiner Tasche",ctaDesc:"Nordika Fidélia beendet seine geschlossene Alpha-Phase, bevor es in den Play Store kommt.",ctaNote:"Verfügbar im Play Store",footerPrivacy:"Datenschutzerklärung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
-    en:{eyebrow:"Nordic loyalty",subtitle:"All your loyalty cards, gathered in a single travel ledger.",status:"Available on Play Store",featuresTitle:"What the hoard holds",f1t:"Scan in an instant",f1d:"Photograph a card's barcode and it joins your hoard right away.",f2t:"100% offline",f2d:"No card ever leaves your phone. No account, no server, no tracking.",f3t:"QR backup",f3d:"Export and restore your whole hoard in a flash, from one phone to another.",f4t:"12 languages, 19 fonts",f4d:"An interface that dresses itself to your taste, wherever you are in the world.",ctaTitle:"Now in your pocket",ctaDesc:"Nordika Fidélia is now available on the Play Store.",ctaNote:"Available on Play Store",footerPrivacy:"Privacy policy",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
-    es:{eyebrow:"Fidelidad nórdica",subtitle:"Todas tus tarjetas de fidelidad, reunidas en un solo cuaderno de viaje.",status:"Disponible en Play Store",featuresTitle:"Lo que guarda el tesoro",f1t:"Escaneo al instante",f1d:"Fotografía el código de barras de una tarjeta y se une al instante a tu tesoro.",f2t:"100% sin conexión",f2d:"Ninguna tarjeta sale de tu teléfono. Sin cuenta, sin servidor, sin seguimiento.",f3t:"Copia de seguridad por QR",f3d:"Exporta y restaura todo tu tesoro en un instante, de un teléfono a otro.",f4t:"12 idiomas, 19 tipografías",f4d:"Una interfaz que se viste a tu manera, estés donde estés en el mundo.",ctaTitle:"Pronto en tu bolsillo",ctaDesc:"Nordika Fidélia está terminando su alfa cerrada antes de llegar a la Play Store.",ctaNote:"Disponible en Play Store",footerPrivacy:"Política de privacidad",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
-    hi:{eyebrow:"नॉर्डिक वफ़ादारी",subtitle:"आपके सभी लॉयल्टी कार्ड, एक ही यात्रा बहीखाते में एकत्रित।",status:"Play Store पर उपलब्ध",featuresTitle:"खज़ाने में क्या है",f1t:"पल भर में स्कैन",f1d:"किसी कार्ड का बारकोड फोटो खींचें और वह तुरंत आपके खज़ाने में शामिल हो जाता है।",f2t:"100% ऑफ़लाइन",f2d:"कोई भी कार्ड आपके फोन से बाहर नहीं जाता। कोई खाता नहीं, कोई सर्वर नहीं, कोई ट्रैकिंग नहीं।",f3t:"QR के ज़रिए बैकअप",f3d:"अपने पूरे खज़ाने को एक फ़ोन से दूसरे में पल भर में निर्यात और पुनर्स्थापित करें।",f4t:"12 भाषाएँ, 19 फ़ॉन्ट",f4d:"एक इंटरफ़ेस जो आपकी पसंद के अनुसार ढल जाता है, चाहे आप दुनिया में कहीं भी हों।",ctaTitle:"जल्द ही आपकी जेब में",ctaDesc:"नॉर्डिका फिडेलिया प्ले स्टोर पर आने से पहले अपना बंद अल्फा चरण पूरा कर रहा है।",ctaNote:"Play Store पर उपलब्ध",footerPrivacy:"गोपनीयता नीति",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
-    "in":{eyebrow:"Loyalitas Nordik",subtitle:"Semua kartu loyalitasmu, terkumpul dalam satu buku catatan perjalanan.",status:"Tersedia di Play Store",featuresTitle:"Isi harta karun",f1t:"Pindai dalam sekejap",f1d:"Foto kode batang sebuah kartu dan langsung bergabung ke harta karunmu.",f2t:"100% offline",f2d:"Tidak ada kartu yang meninggalkan ponselmu. Tanpa akun, tanpa server, tanpa pelacakan.",f3t:"Cadangan via QR",f3d:"Ekspor dan pulihkan seluruh harta karunmu dalam sekejap, dari satu ponsel ke ponsel lain.",f4t:"12 bahasa, 19 font",f4d:"Antarmuka yang menyesuaikan seleramu, di mana pun kamu berada di dunia.",ctaTitle:"Segera di sakumu",ctaDesc:"Nordika Fidélia sedang menyelesaikan fase alpha tertutup sebelum bergabung dengan Play Store.",ctaNote:"Tersedia di Play Store",footerPrivacy:"Kebijakan privasi",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
-    it:{eyebrow:"Fedeltà nordica",subtitle:"Tutte le tue carte fedeltà, riunite in un unico taccuino di viaggio.",status:"Disponibile su Play Store",featuresTitle:"Cosa custodisce il forziere",f1t:"Scansione in un istante",f1d:"Fotografa il codice a barre di una carta e si unisce subito al tuo forziere.",f2t:"100% offline",f2d:"Nessuna carta lascia il tuo telefono. Nessun account, nessun server, nessun tracciamento.",f3t:"Backup tramite QR",f3d:"Esporta e ripristina tutto il tuo forziere in un lampo, da un telefono all'altro.",f4t:"12 lingue, 19 font",f4d:"Un'interfaccia che si veste a modo tuo, ovunque tu sia nel mondo.",ctaTitle:"Presto in tasca",ctaDesc:"Nordika Fidélia sta terminando la sua fase alpha chiusa prima di arrivare sul Play Store.",ctaNote:"Disponibile su Play Store",footerPrivacy:"Informativa sulla privacy",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
-    pt:{eyebrow:"Fidelidade nórdica",subtitle:"Todos os teus cartões de fidelidade, reunidos num único caderno de viagem.",status:"Disponível na Play Store",featuresTitle:"O que guarda o tesouro",f1t:"Digitalização num instante",f1d:"Fotografa o código de barras de um cartão e ele junta-se logo ao teu tesouro.",f2t:"100% offline",f2d:"Nenhum cartão sai do teu telemóvel. Sem conta, sem servidor, sem rastreamento.",f3t:"Cópia de segurança por QR",f3d:"Exporta e restaura todo o teu tesouro num instante, de um telemóvel para outro.",f4t:"12 idiomas, 19 tipos de letra",f4d:"Uma interface que se veste à tua maneira, onde quer que estejas no mundo.",ctaTitle:"Em breve no teu bolso",ctaDesc:"Nordika Fidélia está a terminar a fase alfa fechada antes de chegar à Play Store.",ctaNote:"Disponível na Play Store",footerPrivacy:"Política de privacidade",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
-    ru:{eyebrow:"Северная лояльность",subtitle:"Все твои карты лояльности собраны в единой дорожной книге.",status:"Доступно в Play Store",featuresTitle:"Что хранит сокровищница",f1t:"Сканирование за миг",f1d:"Сфотографируй штрихкод карты, и она сразу окажется в твоей сокровищнице.",f2t:"100% офлайн",f2d:"Ни одна карта не покидает твой телефон. Без аккаунта, без сервера, без слежки.",f3t:"Резервная копия через QR",f3d:"Экспортируй и восстанавливай всю сокровищницу мгновенно, с одного телефона на другой.",f4t:"12 языков, 19 шрифтов",f4d:"Интерфейс, который подстраивается под тебя, где бы ты ни находился в мире.",ctaTitle:"Скоро в твоём кармане",ctaDesc:"Nordika Fidélia завершает закрытую альфа-версию перед выходом в Play Store.",ctaNote:"Доступно в Play Store",footerPrivacy:"Политика конфиденциальности",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
-    ur:{eyebrow:"شمالی وفاداری",subtitle:"آپ کے تمام لائلٹی کارڈز، ایک ہی سفری کتاب میں جمع۔",status:"Play Store پر دستیاب",featuresTitle:"خزانے میں کیا ہے",f1t:"لمحوں میں اسکین",f1d:"کسی کارڈ کا بار کوڈ فوٹو کھینچیں اور وہ فوراً آپ کے خزانے میں شامل ہو جاتا ہے۔",f2t:"100% آف لائن",f2d:"کوئی کارڈ آپ کے فون سے باہر نہیں جاتا۔ کوئی اکاؤنٹ نہیں، کوئی سرور نہیں، کوئی ٹریکنگ نہیں۔",f3t:"QR کے ذریعے بیک اپ",f3d:"اپنے پورے خزانے کو ایک لمحے میں ایک فون سے دوسرے فون میں برآمد اور بحال کریں۔",f4t:"12 زبانیں، 19 فونٹس",f4d:"ایک انٹرفیس جو آپ کی پسند کے مطابق ڈھلتا ہے، آپ دنیا میں کہیں بھی ہوں۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"نورڈیکا فیڈیلیا پلے اسٹور پر آنے سے پہلے اپنا بند الفا مرحلہ مکمل کر رہا ہے۔",ctaNote:"Play Store پر دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
-    zh:{eyebrow:"北欧忠诚",subtitle:"你所有的会员卡，汇聚于一本旅行手册之中。",status:"已在 Play Store 上架",featuresTitle:"宝库中有什么",f1t:"瞬间扫描",f1d:"拍下卡片的条形码，它便立即加入你的宝库。",f2t:"100% 离线",f2d:"没有任何卡片离开你的手机。无需账号，无需服务器，无任何追踪。",f3t:"二维码备份",f3d:"瞬间导出并恢复你的整个宝库，从一部手机到另一部。",f4t:"12种语言，19种字体",f4d:"无论你身在世界何处，界面都能按你的喜好呈现。",ctaTitle:"即将装进你的口袋",ctaDesc:"Nordika Fidélia 正在完成封闭内测，随后即将上线 Play 商店。",ctaNote:"已在 Play Store 上架",footerPrivacy:"隐私政策",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+    fr:{eyebrow:"Fidélité nordique",subtitle:"Toutes tes cartes de fidélité, réunies dans un seul carnet de voyage.",status:"Google Play",featuresTitle:"Ce que renferme le coffre",f1t:"Scan en un instant",f1d:"Photographie le code-barres d'une carte et elle rejoint aussitôt ton coffre.",f2t:"100% hors-ligne",f2d:"Aucune carte ne quitte ton téléphone. Pas de compte, pas de serveur, pas de suivi.",f3t:"Sauvegarde par QR",f3d:"Exporte et restaure tout ton coffre en un flash, d'un téléphone à l'autre.",f4t:"12 langues, 19 polices",f4d:"Une interface qui s'habille à ta manière, où que tu sois dans le monde.",ctaTitle:"Disponible dans ta poche",ctaDesc:"Nordika Fidélia est maintenant disponible sur le Play Store.",ctaNote:"Disponible sur Play Store",footerPrivacy:"Politique de confidentialité",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{eyebrow:"Nordische Treue",subtitle:"Alle deine Treuekarten, vereint in einem einzigen Reisebuch.",status:"Google Play",featuresTitle:"Was der Schatz birgt",f1t:"Scan im Nu",f1d:"Fotografiere den Barcode einer Karte und sie landet sofort in deinem Schatz.",f2t:"100% offline",f2d:"Keine Karte verlässt dein Telefon. Kein Konto, kein Server, kein Tracking.",f3t:"Sicherung per QR",f3d:"Exportiere und stelle deinen gesamten Schatz im Handumdrehen wieder her, von einem Telefon zum anderen.",f4t:"12 Sprachen, 19 Schriftarten",f4d:"Eine Oberfläche, die sich nach dir richtet, wo auch immer du auf der Welt bist.",ctaTitle:"Bald in deiner Tasche",ctaDesc:"Nordika Fidélia beendet seine geschlossene Alpha-Phase, bevor es in den Play Store kommt.",ctaNote:"Verfügbar im Play Store",footerPrivacy:"Datenschutzerklärung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{eyebrow:"Nordic loyalty",subtitle:"All your loyalty cards, gathered in a single travel ledger.",status:"Google Play",featuresTitle:"What the hoard holds",f1t:"Scan in an instant",f1d:"Photograph a card's barcode and it joins your hoard right away.",f2t:"100% offline",f2d:"No card ever leaves your phone. No account, no server, no tracking.",f3t:"QR backup",f3d:"Export and restore your whole hoard in a flash, from one phone to another.",f4t:"12 languages, 19 fonts",f4d:"An interface that dresses itself to your taste, wherever you are in the world.",ctaTitle:"Now in your pocket",ctaDesc:"Nordika Fidélia is now available on the Play Store.",ctaNote:"Available on Play Store",footerPrivacy:"Privacy policy",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{eyebrow:"Fidelidad nórdica",subtitle:"Todas tus tarjetas de fidelidad, reunidas en un solo cuaderno de viaje.",status:"Google Play",featuresTitle:"Lo que guarda el tesoro",f1t:"Escaneo al instante",f1d:"Fotografía el código de barras de una tarjeta y se une al instante a tu tesoro.",f2t:"100% sin conexión",f2d:"Ninguna tarjeta sale de tu teléfono. Sin cuenta, sin servidor, sin seguimiento.",f3t:"Copia de seguridad por QR",f3d:"Exporta y restaura todo tu tesoro en un instante, de un teléfono a otro.",f4t:"12 idiomas, 19 tipografías",f4d:"Una interfaz que se viste a tu manera, estés donde estés en el mundo.",ctaTitle:"Pronto en tu bolsillo",ctaDesc:"Nordika Fidélia está terminando su alfa cerrada antes de llegar a la Play Store.",ctaNote:"Disponible en Play Store",footerPrivacy:"Política de privacidad",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{eyebrow:"नॉर्डिक वफ़ादारी",subtitle:"आपके सभी लॉयल्टी कार्ड, एक ही यात्रा बहीखाते में एकत्रित।",status:"Google Play",featuresTitle:"खज़ाने में क्या है",f1t:"पल भर में स्कैन",f1d:"किसी कार्ड का बारकोड फोटो खींचें और वह तुरंत आपके खज़ाने में शामिल हो जाता है।",f2t:"100% ऑफ़लाइन",f2d:"कोई भी कार्ड आपके फोन से बाहर नहीं जाता। कोई खाता नहीं, कोई सर्वर नहीं, कोई ट्रैकिंग नहीं।",f3t:"QR के ज़रिए बैकअप",f3d:"अपने पूरे खज़ाने को एक फ़ोन से दूसरे में पल भर में निर्यात और पुनर्स्थापित करें।",f4t:"12 भाषाएँ, 19 फ़ॉन्ट",f4d:"एक इंटरफ़ेस जो आपकी पसंद के अनुसार ढल जाता है, चाहे आप दुनिया में कहीं भी हों।",ctaTitle:"जल्द ही आपकी जेब में",ctaDesc:"नॉर्डिका फिडेलिया प्ले स्टोर पर आने से पहले अपना बंद अल्फा चरण पूरा कर रहा है।",ctaNote:"Play Store पर उपलब्ध",footerPrivacy:"गोपनीयता नीति",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{eyebrow:"Loyalitas Nordik",subtitle:"Semua kartu loyalitasmu, terkumpul dalam satu buku catatan perjalanan.",status:"Google Play",featuresTitle:"Isi harta karun",f1t:"Pindai dalam sekejap",f1d:"Foto kode batang sebuah kartu dan langsung bergabung ke harta karunmu.",f2t:"100% offline",f2d:"Tidak ada kartu yang meninggalkan ponselmu. Tanpa akun, tanpa server, tanpa pelacakan.",f3t:"Cadangan via QR",f3d:"Ekspor dan pulihkan seluruh harta karunmu dalam sekejap, dari satu ponsel ke ponsel lain.",f4t:"12 bahasa, 19 font",f4d:"Antarmuka yang menyesuaikan seleramu, di mana pun kamu berada di dunia.",ctaTitle:"Segera di sakumu",ctaDesc:"Nordika Fidélia sedang menyelesaikan fase alpha tertutup sebelum bergabung dengan Play Store.",ctaNote:"Tersedia di Play Store",footerPrivacy:"Kebijakan privasi",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{eyebrow:"Fedeltà nordica",subtitle:"Tutte le tue carte fedeltà, riunite in un unico taccuino di viaggio.",status:"Google Play",featuresTitle:"Cosa custodisce il forziere",f1t:"Scansione in un istante",f1d:"Fotografa il codice a barre di una carta e si unisce subito al tuo forziere.",f2t:"100% offline",f2d:"Nessuna carta lascia il tuo telefono. Nessun account, nessun server, nessun tracciamento.",f3t:"Backup tramite QR",f3d:"Esporta e ripristina tutto il tuo forziere in un lampo, da un telefono all'altro.",f4t:"12 lingue, 19 font",f4d:"Un'interfaccia che si veste a modo tuo, ovunque tu sia nel mondo.",ctaTitle:"Presto in tasca",ctaDesc:"Nordika Fidélia sta terminando la sua fase alpha chiusa prima di arrivare sul Play Store.",ctaNote:"Disponibile su Play Store",footerPrivacy:"Informativa sulla privacy",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{eyebrow:"Fidelidade nórdica",subtitle:"Todos os teus cartões de fidelidade, reunidos num único caderno de viagem.",status:"Google Play",featuresTitle:"O que guarda o tesouro",f1t:"Digitalização num instante",f1d:"Fotografa o código de barras de um cartão e ele junta-se logo ao teu tesouro.",f2t:"100% offline",f2d:"Nenhum cartão sai do teu telemóvel. Sem conta, sem servidor, sem rastreamento.",f3t:"Cópia de segurança por QR",f3d:"Exporta e restaura todo o teu tesouro num instante, de um telemóvel para outro.",f4t:"12 idiomas, 19 tipos de letra",f4d:"Uma interface que se veste à tua maneira, onde quer que estejas no mundo.",ctaTitle:"Em breve no teu bolso",ctaDesc:"Nordika Fidélia está a terminar a fase alfa fechada antes de chegar à Play Store.",ctaNote:"Disponível na Play Store",footerPrivacy:"Política de privacidade",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{eyebrow:"Северная лояльность",subtitle:"Все твои карты лояльности собраны в единой дорожной книге.",status:"Google Play",featuresTitle:"Что хранит сокровищница",f1t:"Сканирование за миг",f1d:"Сфотографируй штрихкод карты, и она сразу окажется в твоей сокровищнице.",f2t:"100% офлайн",f2d:"Ни одна карта не покидает твой телефон. Без аккаунта, без сервера, без слежки.",f3t:"Резервная копия через QR",f3d:"Экспортируй и восстанавливай всю сокровищницу мгновенно, с одного телефона на другой.",f4t:"12 языков, 19 шрифтов",f4d:"Интерфейс, который подстраивается под тебя, где бы ты ни находился в мире.",ctaTitle:"Скоро в твоём кармане",ctaDesc:"Nordika Fidélia завершает закрытую альфа-версию перед выходом в Play Store.",ctaNote:"Доступно в Play Store",footerPrivacy:"Политика конфиденциальности",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{eyebrow:"شمالی وفاداری",subtitle:"آپ کے تمام لائلٹی کارڈز، ایک ہی سفری کتاب میں جمع۔",status:"Google Play",featuresTitle:"خزانے میں کیا ہے",f1t:"لمحوں میں اسکین",f1d:"کسی کارڈ کا بار کوڈ فوٹو کھینچیں اور وہ فوراً آپ کے خزانے میں شامل ہو جاتا ہے۔",f2t:"100% آف لائن",f2d:"کوئی کارڈ آپ کے فون سے باہر نہیں جاتا۔ کوئی اکاؤنٹ نہیں، کوئی سرور نہیں، کوئی ٹریکنگ نہیں۔",f3t:"QR کے ذریعے بیک اپ",f3d:"اپنے پورے خزانے کو ایک لمحے میں ایک فون سے دوسرے فون میں برآمد اور بحال کریں۔",f4t:"12 زبانیں، 19 فونٹس",f4d:"ایک انٹرفیس جو آپ کی پسند کے مطابق ڈھلتا ہے، آپ دنیا میں کہیں بھی ہوں۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"نورڈیکا فیڈیلیا پلے اسٹور پر آنے سے پہلے اپنا بند الفا مرحلہ مکمل کر رہا ہے۔",ctaNote:"Play Store پر دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{eyebrow:"北欧忠诚",subtitle:"你所有的会员卡，汇聚于一本旅行手册之中。",status:"Google Play",featuresTitle:"宝库中有什么",f1t:"瞬间扫描",f1d:"拍下卡片的条形码，它便立即加入你的宝库。",f2t:"100% 离线",f2d:"没有任何卡片离开你的手机。无需账号，无需服务器，无任何追踪。",f3t:"二维码备份",f3d:"瞬间导出并恢复你的整个宝库，从一部手机到另一部。",f4t:"12种语言，19种字体",f4d:"无论你身在世界何处，界面都能按你的喜好呈现。",ctaTitle:"即将装进你的口袋",ctaDesc:"Nordika Fidélia 正在完成封闭内测，随后即将上线 Play 商店。",ctaNote:"已在 Play Store 上架",footerPrivacy:"隐私政策",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
   };
   Object.assign(translations.fr,{footerTerms:"Conditions d'utilisation"});Object.assign(translations.de,{footerTerms:"Nutzungsbedingungen"});Object.assign(translations.en,{footerTerms:"Terms of use"});Object.assign(translations.es,{footerTerms:"Condiciones de uso"});Object.assign(translations.hi,{footerTerms:"उपयोग की शर्तें"});Object.assign(translations.in,{footerTerms:"Syarat penggunaan"});Object.assign(translations.it,{footerTerms:"Termini di utilizzo"});Object.assign(translations.pt,{footerTerms:"Termos de utilização"});Object.assign(translations.ru,{footerTerms:"Условия использования"});Object.assign(translations.ur,{footerTerms:"استعمال کی شرائط"});Object.assign(translations.zh,{footerTerms:"使用条款"});
 
@@ -131,22 +119,7 @@
   var RUNES = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
-  function decodeText(el,text){
-    var final=text!==undefined?text:el.textContent;
-    if(reduceMotion){el.textContent=final;return;}
-    el.innerHTML='';
-    var chars=Array.from(final),spans=[];
-    chars.forEach(function(ch){
-      if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}
-      var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);
-    });
-    chars.forEach(function(ch,i){
-      var span=spans[i];if(!span)return;
-      var flickers=5+Math.floor(Math.random()*4),startDelay=i*70,flickerInterval=80;
-      for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){span.textContent=randomRune();},startDelay+f*flickerInterval);})(f);
-      setTimeout(function(){span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},startDelay+flickers*flickerInterval);
-    });
-  }
+  function decodeText(el,text){if(text!==undefined)el.textContent=text;}
   function decodeCascade(){
     if(reduceMotion)return;
     var targets=document.querySelectorAll('.eyebrow,.brand,.subtitle,.status,.section-title,.feature h3,.feature p,.cta h2,.cta p,.cta-note,footer a,.copyright');
@@ -154,6 +127,8 @@
   }
 
   function applyLang(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ur'?'rtl':'ltr';
     var dict = translations[lang];
     if(!dict) return;
     var dir = rtlLangs.indexOf(lang) !== -1 ? "rtl" : "ltr";
@@ -205,6 +180,6 @@
   }
   decodeCascade();
 </script>
-<script data-goatcounter="https://barbaredestroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script async="" data-goatcounter="https://barbaredestroy.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -12,32 +12,7 @@
 
   function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
 
-  function decodeText(element,text,delay,run){
-    var finalText=text!==undefined?text:element.textContent;
-    if(reduceMotion){element.textContent=finalText;return;}
-    element.innerHTML='';
-    var chars=Array.from(finalText),spans=[];
-    chars.forEach(function(character){
-      if(/\s/u.test(character)){element.appendChild(document.createTextNode(character));spans.push(null);return;}
-      var span=document.createElement('span');
-      span.className='rune-char';span.textContent=randomRune();element.appendChild(span);spans.push(span);
-    });
-    var isLong=chars.length>90;
-    var step=isLong?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70;
-    var interval=isLong?45:80;
-    chars.forEach(function(character,index){
-      var span=spans[index];if(!span)return;
-      var flickers=isLong?3:5+Math.floor(Math.random()*4),start=delay+index*step;
-      for(var flicker=0;flicker<flickers;flicker++)(function(flickerIndex){
-        setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+flickerIndex*interval);
-      })(flicker);
-      setTimeout(function(){
-        if(run!==animationRun)return;
-        span.textContent=character;span.classList.add('settling');
-        setTimeout(function(){span.classList.remove('settling');},1000);
-      },start+flickers*interval);
-    });
-  }
+  function decodeText(element,text,delay,run){if(text!==undefined)element.textContent=text;}
 
   function setLanguage(lang){
     var dictionary=translations[lang]||translations.fr;if(!dictionary)return;
