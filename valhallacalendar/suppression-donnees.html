@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Valhalla Calendar — Suppression des données</title>
-  <meta name="description" content="Comment révoquer l'accès de Valhalla Calendar à votre Google Calendar et supprimer les données locales de l'application.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Valhalla Calendar — Suppression des données</title>
+<meta content="Comment révoquer l'accès de Valhalla Calendar à votre Google Calendar et supprimer les données locales de l'application." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&amp;family=Cinzel:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{--glow:35,221,217;--glow2:11,116,125;--bronze:154,118,72}
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
@@ -59,68 +60,59 @@
 
     @media(max-width:600px){.page{padding:74px 14px 22px}.runes{display:none}.back,.lang{position:absolute;top:8px}.back{left:8px}.lang{right:8px}.back,.back img,.lang-btn,.lang-btn img{width:64px;height:64px}.lang-menu{top:58px;right:2px;min-width:185px;max-height:55vh}.lang-menu button{font-size:14px;padding:11px}.legal{margin:60px auto 24px}.legal h1{font-size:1.5rem}.legal .intro{font-size:13.5px;padding:10px 0 10px 14px}.legal section{padding:20px 18px 18px}.legal h2{font-size:14.5px}.legal p,.legal ol{font-size:13px}footer{margin-top:1.4rem;padding-top:22px;gap:15px;flex-direction:column}footer .copyright{font-size:9px;line-height:1.5;margin-top:2px}}
   </style>
-</head>
-<body>
-  <main class="page">
-    <div id="particles" aria-hidden="true"></div>
-    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
-
-    <a class="back" href="index.html" aria-label="Retour"><img src="assetscalendar/logocalendar.png" alt="Valhalla Calendar logo"></a>
-
-    <div class="lang">
-      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
-        <img src="assetscalendar/langue.png" alt="">
-      </button>
-      <div class="lang-menu" id="langMenu" role="menu">
-        <button role="menuitem" data-lang="fr">Français</button>
-        <button role="menuitem" data-lang="de">Deutsch</button>
-        <button role="menuitem" data-lang="en">English</button>
-        <button role="menuitem" data-lang="es">Español</button>
-        <button role="menuitem" data-lang="hi">हिन्दी</button>
-        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
-        <button role="menuitem" data-lang="it">Italiano</button>
-        <button role="menuitem" data-lang="pt">Português</button>
-        <button role="menuitem" data-lang="ru">Русский</button>
-        <button role="menuitem" data-lang="ur">اردو</button>
-        <button role="menuitem" data-lang="zh">中文</button>
-      </div>
-    </div>
-
-    <div class="legal">
-      <div class="mark" aria-hidden="true"><span>ᛟ</span></div>
-      <h1 data-i18n="pageTitle">Suppression des données</h1>
-      <p class="sub" data-i18n="eyebrow">Valhalla Calendar</p>
-
-      <p class="intro" data-i18n="intro">Valhalla Calendar ne stocke aucune donnée de compte ni donnée personnelle sur ses propres serveurs. Toutes les données de calendrier sont lues, créées ou modifiées directement via l'API Google Calendar et restent dans votre compte Google.</p>
-
-      <section>
-        <h2 data-i18n="secAccessTitle">Révoquer l'accès à votre Google Calendar</h2>
-        <ol>
-          <li data-i18n="step1">Rendez-vous sur la page des autorisations de votre compte Google : myaccount.google.com/permissions</li>
-          <li data-i18n="step2">Recherchez « Valhalla Calendar » dans la liste des applications ayant accès à votre compte.</li>
-          <li data-i18n="step3">Sélectionnez-la puis cliquez sur « Supprimer l'accès » pour révoquer l'autorisation de l'application.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2 data-i18n="secLocalTitle">Supprimer les données locales de l'application</h2>
-        <p data-i18n="localText">Valhalla Calendar ne possède aucun compte propre. Désinstaller l'application de votre appareil supprime instantanément toutes les données locales, y compris les événements en cache, les préférences et les paramètres.</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="secContactTitle">Questions sur vos données</h2>
-        <p data-i18n="contactText">Pour toute question concernant vos données, contactez-nous à l'adresse barbaredestroy@gmail.com.</p>
-      </section>
-    </div>
-
-    <footer>
-      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
-      <a href="conditions.html" data-i18n="footerTerms">Conditions d'utilisation</a>
-      <a href="index.html" data-i18n="footerHome">← Accueil</a>
-      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
-    </footer>
-  </main>
-
+<link href="../assets/site-common.css?v=20260915-3" rel="stylesheet"/><script defer="True" src="../assets/site-common.js?v=20260915-2"></script></head>
+<body class="bd-unified bd-document" data-app="valhallacalendar">
+<main class="page">
+<div aria-hidden="true" id="particles"></div>
+<div aria-hidden="true" class="runes"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+<a aria-label="Accueil BarbareDestroy" class="back" href="../index.html"><img alt="BarbareDestroy" src="../assets/logoindex.png"/></a>
+<div class="lang">
+<button aria-expanded="false" aria-haspopup="true" aria-label="Choisir la langue" class="lang-btn" id="langBtn">
+<img alt="" src="assetscalendar/langue.png"/>
+</button>
+<div class="lang-menu" id="langMenu" role="menu">
+<button data-lang="fr" role="menuitem">Français</button>
+<button data-lang="de" role="menuitem">Deutsch</button>
+<button data-lang="en" role="menuitem">English</button>
+<button data-lang="es" role="menuitem">Español</button>
+<button data-lang="hi" role="menuitem">हिन्दी</button>
+<button data-lang="in" role="menuitem">Bahasa Indonesia</button>
+<button data-lang="it" role="menuitem">Italiano</button>
+<button data-lang="pt" role="menuitem">Português</button>
+<button data-lang="ru" role="menuitem">Русский</button>
+<button data-lang="ur" role="menuitem">اردو</button>
+<button data-lang="zh" role="menuitem">中文</button>
+</div>
+</div>
+<div class="legal">
+<div aria-hidden="true" class="mark"><span>ᛟ</span></div>
+<h1 data-i18n="pageTitle">Suppression des données</h1>
+<p class="sub" data-i18n="eyebrow">Valhalla Calendar</p>
+<p class="intro" data-i18n="intro">Valhalla Calendar ne stocke aucune donnée de compte ni donnée personnelle sur ses propres serveurs. Toutes les données de calendrier sont lues, créées ou modifiées directement via l'API Google Calendar et restent dans votre compte Google.</p>
+<section>
+<h2 data-i18n="secAccessTitle">Révoquer l'accès à votre Google Calendar</h2>
+<ol>
+<li data-i18n="step1">Rendez-vous sur la page des autorisations de votre compte Google : myaccount.google.com/permissions</li>
+<li data-i18n="step2">Recherchez « Valhalla Calendar » dans la liste des applications ayant accès à votre compte.</li>
+<li data-i18n="step3">Sélectionnez-la puis cliquez sur « Supprimer l'accès » pour révoquer l'autorisation de l'application.</li>
+</ol>
+</section>
+<section>
+<h2 data-i18n="secLocalTitle">Supprimer les données locales de l'application</h2>
+<p data-i18n="localText">Valhalla Calendar ne possède aucun compte propre. Désinstaller l'application de votre appareil supprime instantanément toutes les données locales, y compris les événements en cache, les préférences et les paramètres.</p>
+</section>
+<section>
+<h2 data-i18n="secContactTitle">Questions sur vos données</h2>
+<p data-i18n="contactText">Pour toute question concernant vos données, contactez-nous à l'adresse barbaredestroy@gmail.com.</p>
+</section>
+</div>
+<footer><div aria-label="Barbare" class="rune-line bd-footer-signature" lang="non" translate="no">ᛒᚨᚱᛒᚨᚱᛖ</div>
+<a data-i18n="footerPrivacy" href="confidentialite.html">Politique de confidentialité</a>
+<a data-i18n="footerTerms" href="conditions.html">Conditions d'utilisation</a>
+<a data-i18n="footerHome" href="index.html">← Accueil</a>
+<div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+</footer>
+</main>
 <script>
   var translations = {
     fr:{eyebrow:"Valhalla Calendar",pageTitle:"Suppression des données",intro:"Valhalla Calendar ne stocke aucune donnée de compte ni donnée personnelle sur ses propres serveurs. Toutes les données de calendrier sont lues, créées ou modifiées directement via l'API Google Calendar et restent dans votre compte Google.",secAccessTitle:"Révoquer l'accès à votre Google Calendar",step1:"Rendez-vous sur la page des autorisations de votre compte Google : myaccount.google.com/permissions",step2:"Recherchez « Valhalla Calendar » dans la liste des applications ayant accès à votre compte.",step3:"Sélectionnez-la puis cliquez sur « Supprimer l'accès » pour révoquer l'autorisation de l'application.",secLocalTitle:"Supprimer les données locales de l'application",localText:"Valhalla Calendar ne possède aucun compte propre. Désinstaller l'application de votre appareil supprime instantanément toutes les données locales, y compris les événements en cache, les préférences et les paramètres.",secContactTitle:"Questions sur vos données",contactText:"Pour toute question concernant vos données, contactez-nous à l'adresse barbaredestroy@gmail.com.",footerPrivacy:"Politique de confidentialité",footerTerms:"Conditions d'utilisation",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
@@ -141,15 +133,7 @@
   var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var animationRun=0;
   function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
-  function decodeText(el,text,delay,run){
-    var final=text!==undefined?text:el.textContent;
-    if(reduceMotion){el.textContent=final;return;}
-    el.innerHTML='';
-    var chars=Array.from(final),spans=[];
-    chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});
-    var longText=chars.length>90,step=longText?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70,interval=longText?45:80;
-    chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=longText?3:5+Math.floor(Math.random()*4),start=delay+i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){if(run!==animationRun)return;span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});
-  }
+  function decodeText(el,text,delay,run){if(text!==undefined)el.textContent=text;}
   function decodeCascade(){animationRun++;var run=animationRun;document.querySelectorAll('[data-i18n]').forEach(function(el,idx){setTimeout(function(){decodeText(el,el.textContent,0,run);},idx*140);});}
 
   function applyLang(lang){
@@ -205,6 +189,6 @@
   }
   decodeCascade();
 </script>
-<script data-goatcounter="https://barbaredestroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script async="" data-goatcounter="https://barbaredestroy.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

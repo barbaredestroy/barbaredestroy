@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Valhalla Calendar</title>
-  <meta name="description" content="Valhalla Calendar est une application de calendrier permettant de créer et gérer des événements, rappels et anniversaires, et de synchroniser son calendrier avec Google Calendar.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Valhalla Calendar</title>
+<meta content="Valhalla Calendar est une application de calendrier permettant de créer et gérer des événements, rappels et anniversaires, et de synchroniser son calendrier avec Google Calendar." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&amp;family=Cinzel:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{--glow:35,221,217;--glow2:11,116,125;--bronze:154,118,72}
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;background:#05090d;color:#edf7f8}
@@ -84,104 +85,91 @@
     .rune-char{display:inline}
     .rune-char.settling{color:rgb(var(--glow));text-shadow:0 0 10px rgba(var(--glow),.72);transition:color 1s ease,text-shadow 1s ease}
   </style>
-</head>
-<body>
-  <main class="page">
-    <div id="particles" aria-hidden="true"></div>
-    <div class="runes" aria-hidden="true"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
-
-    <a class="back" href="../" aria-label="Retour à l'accueil"><img src="assetscalendar/logoindex.png" alt="Valhalla Calendar logo"></a>
-
-    <div class="lang">
-      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
-        <img src="assetscalendar/langue.png" alt="">
-      </button>
-      <div class="lang-menu" id="langMenu" role="menu">
-        <button role="menuitem" data-lang="fr">Français</button>
-        <button role="menuitem" data-lang="de">Deutsch</button>
-        <button role="menuitem" data-lang="en">English</button>
-        <button role="menuitem" data-lang="es">Español</button>
-        <button role="menuitem" data-lang="hi">हिन्दी</button>
-        <button role="menuitem" data-lang="in">Bahasa Indonesia</button>
-        <button role="menuitem" data-lang="it">Italiano</button>
-        <button role="menuitem" data-lang="pt">Português</button>
-        <button role="menuitem" data-lang="ru">Русский</button>
-        <button role="menuitem" data-lang="ur">اردو</button>
-        <button role="menuitem" data-lang="zh">中文</button>
-      </div>
-    </div>
-
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="mark" aria-hidden="true"><span>ᛟ</span></div>
-        <h1 class="brand">Valhalla Calendar</h1>
-        <p class="subtitle" data-i18n="subtitle">Valhalla Calendar est votre calendrier viking, synchronisé et gardé par les dieux du temps.</p>
-        <p class="purpose" data-i18n="purpose">Valhalla Calendar accède à votre compte Google Calendar pour lire, créer et modifier vos événements directement depuis l'application. Vos données sont utilisées uniquement pour la synchronisation et ne sont jamais partagées à des tiers.</p>
-        <a class="status" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.valhallacalendar" target="_blank" rel="noopener" data-i18n="status">Disponible sur Play Store</a>
-      </div>
-      <div class="device-stage" aria-hidden="true"><img class="app-mockup-img" src="assetscalendar/mockup-valhalla.png" alt="Aperçu Valhalla Calendar"></div>
-    </section>
-
-    <section class="block">
-      <p class="section-title" data-i18n="featuresTitle">Ce que garde Valhalla</p>
-      <div class="features">
-        <div class="feature">
-          <span class="feature-rune">ᛟ</span>
-          <h3 data-i18n="f1t">Synchronisation Google</h3>
-          <p data-i18n="f1d">Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚱ</span>
-          <h3 data-i18n="f2t">Alarmes qui réveillent</h3>
-          <p data-i18n="f2d">Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚨ</span>
-          <h3 data-i18n="f3t">Habillage runique</h3>
-          <p data-i18n="f3d">19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.</p>
-        </div>
-        <div class="feature">
-          <span class="feature-rune">ᚲ</span>
-          <h3 data-i18n="f4t">Fluide et hors-ligne</h3>
-          <p data-i18n="f4d">Un cache local garde ton mois sous la main, même sans connexion.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="showcase" aria-label="Aperçu de l'univers Valhalla">
-      <div class="show-panel"><span class="show-kicker">VALHALLA</span><h3 data-i18n="f1t">Synchronisation Google</h3><p data-i18n="f1d">Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.</p><div class="aurora"></div></div>
-      <div class="show-panel"><span class="show-kicker">RUNES</span><h3 data-i18n="f3t">Habillage runique</h3><p data-i18n="f3d">19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.</p><div class="colors"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-      <div class="show-panel"><span class="show-kicker">ODIN</span><h3 data-i18n="f2t">Alarmes qui réveillent</h3><p data-i18n="f2d">Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.</p><div class="horn">ᚦ</div></div>
-    </section>
-
-    <div class="cta">
-      <h2 data-i18n="ctaTitle">Disponible dans ta poche</h2>
-      <p data-i18n="ctaDesc">Valhalla Calendar est maintenant disponible sur le Play Store.</p>
-      <a class="cta-note" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.valhallacalendar" target="_blank" rel="noopener" data-i18n="ctaNote">Disponible sur Play Store</a>
-    </div>
-
-    <footer>
-      <a href="confidentialite.html" data-i18n="footerPrivacy">Politique de confidentialité</a>
-      <a href="conditions.html" data-i18n="footerTerms">Conditions d'utilisation</a>
-      <a href="suppression-donnees.html" data-i18n="footerDeletion">Suppression des données</a>
-      <a href="../index.html" data-i18n="footerHome">← Accueil</a>
-      <div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
-    </footer>
-  </main>
-
+<link href="../assets/site-common.css?v=20260915-3" rel="stylesheet"/><script defer="True" src="../assets/site-common.js?v=20260915-2"></script></head>
+<body class="bd-unified bd-product" data-app="valhallacalendar">
+<main class="page">
+<div aria-hidden="true" id="particles"></div>
+<div aria-hidden="true" class="runes"><span>ᚠ</span><span>ᚢ</span><span>ᚦ</span><span>ᚨ</span><span>ᚱ</span><span>ᚲ</span></div>
+<a aria-label="Accueil BarbareDestroy" class="back" href="../index.html"><img alt="BarbareDestroy" src="../assets/logoindex.png"/></a>
+<div class="lang">
+<button aria-expanded="false" aria-haspopup="true" aria-label="Choisir la langue" class="lang-btn" id="langBtn">
+<img alt="" src="assetscalendar/langue.png"/>
+</button>
+<div class="lang-menu" id="langMenu" role="menu">
+<button data-lang="fr" role="menuitem">Français</button>
+<button data-lang="de" role="menuitem">Deutsch</button>
+<button data-lang="en" role="menuitem">English</button>
+<button data-lang="es" role="menuitem">Español</button>
+<button data-lang="hi" role="menuitem">हिन्दी</button>
+<button data-lang="in" role="menuitem">Bahasa Indonesia</button>
+<button data-lang="it" role="menuitem">Italiano</button>
+<button data-lang="pt" role="menuitem">Português</button>
+<button data-lang="ru" role="menuitem">Русский</button>
+<button data-lang="ur" role="menuitem">اردو</button>
+<button data-lang="zh" role="menuitem">中文</button>
+</div>
+</div>
+<section class="hero">
+<div class="hero-copy hero-copy">
+<div aria-hidden="true" class="mark"><span>ᛟ</span></div>
+<h1 class="brand">Valhalla Calendar</h1>
+<p class="subtitle" data-i18n="subtitle">Valhalla Calendar est votre calendrier viking, synchronisé et gardé par les dieux du temps.</p>
+<p class="purpose" data-i18n="purpose">Valhalla Calendar accède à votre compte Google Calendar pour lire, créer et modifier vos événements directement depuis l'application. Vos données sont utilisées uniquement pour la synchronisation et ne sont jamais partagées à des tiers.</p>
+<div aria-label="Télécharger Valhalla Calendar" class="store-buttons"><a aria-label="Valhalla Calendar — Google Play" class="store-button" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.valhallacalendar"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span>Google Play</span></a></div></div>
+<div aria-hidden="true" class="device-stage"><img alt="Aperçu Valhalla Calendar" class="app-mockup-img" src="assetscalendar/mockup-valhalla.png"/></div>
+</section>
+<section class="block">
+<p class="section-title" data-i18n="featuresTitle">Ce que garde Valhalla</p>
+<div class="features">
+<div class="feature">
+<span class="feature-rune">ᛟ</span>
+<h3 data-i18n="f1t">Synchronisation Google</h3>
+<p data-i18n="f1d">Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚱ</span>
+<h3 data-i18n="f2t">Alarmes qui réveillent</h3>
+<p data-i18n="f2d">Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚨ</span>
+<h3 data-i18n="f3t">Habillage runique</h3>
+<p data-i18n="f3d">19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.</p>
+</div>
+<div class="feature">
+<span class="feature-rune">ᚲ</span>
+<h3 data-i18n="f4t">Fluide et hors-ligne</h3>
+<p data-i18n="f4d">Un cache local garde ton mois sous la main, même sans connexion.</p>
+</div>
+</div>
+</section>
+<section aria-label="Aperçu de l'univers Valhalla" class="showcase">
+<div class="show-panel"><span class="show-kicker">VALHALLA</span><h3 data-i18n="f1t">Synchronisation Google</h3><p data-i18n="f1d">Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.</p><div class="aurora"></div></div>
+<div class="show-panel"><span class="show-kicker">RUNES</span><h3 data-i18n="f3t">Habillage runique</h3><p data-i18n="f3d">19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.</p><div class="colors"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="show-panel"><span class="show-kicker">ODIN</span><h3 data-i18n="f2t">Alarmes qui réveillent</h3><p data-i18n="f2d">Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.</p><div class="horn">ᚦ</div></div>
+</section>
+<section aria-labelledby="download-title" class="bd-download" data-bd-app="Valhalla Calendar" id="telecharger"><div class="bd-download-heading"><img alt="" class="bd-download-logo" loading="lazy" src="../assets/logocalendar.png"/><div><p data-bd-copy="available">Disponible maintenant</p><h2 data-bd-copy="title" id="download-title">Télécharger Valhalla Calendar</h2><p data-bd-copy="androidIntro">Retrouve Valhalla Calendar sur ton téléphone Android.</p></div></div><div class="bd-download-options bd-options-1"><a class="bd-download-button" href="https://play.google.com/store/apps/details?id=com.barbaredestroy.valhallacalendar"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 2l12 10L3 22z" fill="#34a853"></path><path d="M3 2l14 8-2 2z" fill="#4285f4"></path><path d="M17 10l4 2-4 2-2-2z" fill="#fbbc04"></path><path d="M3 22l12-10 2 2z" fill="#ea4335"></path></svg><span class="bd-download-label"><strong>Google Play</strong><small data-bd-copy="android">Pour Android</small></span><span aria-hidden="true" class="bd-download-arrow">↗</span></a></div></section>
+<footer><div aria-label="Barbare" class="rune-line bd-footer-signature" lang="non" translate="no">ᛒᚨᚱᛒᚨᚱᛖ</div>
+<a data-i18n="footerPrivacy" href="confidentialite.html">Politique de confidentialité</a>
+<a data-i18n="footerTerms" href="conditions.html">Conditions d'utilisation</a>
+<a data-i18n="footerDeletion" href="suppression-donnees.html">Suppression des données</a>
+<a data-i18n="footerHome" href="../index.html">← Accueil</a>
+<div class="copyright" data-i18n="footerCopyright">© 2026 · Forgé dans la rage et le sang</div>
+</footer>
+</main>
 <script>
   var translations = {
-    fr:{eyebrow:"Calendrier viking",subtitle:"Valhalla Calendar est votre calendrier viking, synchronisé et gardé par les dieux du temps.",status:"Disponible sur Play Store",featuresTitle:"Ce que garde Valhalla",f1t:"Synchronisation Google",f1d:"Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.",f2t:"Alarmes qui réveillent",f2d:"Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.",f3t:"Habillage runique",f3d:"19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.",f4t:"Fluide et hors-ligne",f4d:"Un cache local garde ton mois sous la main, même sans connexion.",ctaTitle:"Disponible dans ta poche",ctaDesc:"Valhalla Calendar est maintenant disponible sur le Play Store.",ctaNote:"Disponible sur Play Store",footerPrivacy:"Politique de confidentialité",footerTerms:"Conditions d'utilisation",footerDeletion:"Suppression des données",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
-    de:{eyebrow:"Wikingerkalender",subtitle:"Valhalla Calendar ist Ihr Wikingerkalender, synchronisiert und behütet von den Göttern der Zeit.",status:"Verfügbar im Play Store",featuresTitle:"Was Valhalla bewahrt",f1t:"Google-Synchronisierung",f1d:"Verbinde dein Google-Konto und finde alle deine Termine wieder, ohne etwas neu einzugeben.",f2t:"Alarme, die dich wecken",f2d:"Individuelle Klingeltöne und Vollbild-Warnungen, damit du keinen Termin verpasst.",f3t:"Runisches Erscheinungsbild",f3d:"19 gotische und wikingische Schriftarten, ein anpassbarer Hintergrund, eine Atmosphäre, die zu dir passt.",f4t:"Flüssig und offline",f4d:"Ein lokaler Zwischenspeicher hält deinen Monat griffbereit, auch ohne Verbindung.",ctaTitle:"Bald in deiner Tasche",ctaDesc:"Valhalla Calendar erledigt die letzten Feinabstimmungen, bevor es in den Play Store kommt.",ctaNote:"Verfügbar im Play Store",footerPrivacy:"Datenschutzerklärung",footerTerms:"Nutzungsbedingungen",footerDeletion:"Datenlöschung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
-    en:{eyebrow:"Viking calendar",subtitle:"Valhalla Calendar is your viking calendar, synced and watched over by the gods of time.",status:"Available on Play Store",featuresTitle:"What Valhalla keeps",f1t:"Google sync",f1d:"Connect your Google account and find all your events again, without re-entering anything.",f2t:"Alarms that wake you",f2d:"Custom ringtones and full-screen alerts so you never miss an appointment.",f3t:"Runic styling",f3d:"19 gothic and viking fonts, a customisable background, an atmosphere that suits you.",f4t:"Smooth and offline",f4d:"A local cache keeps your month at hand, even without a connection.",ctaTitle:"Now in your pocket",ctaDesc:"Valhalla Calendar is putting the finishing touches before joining the Play Store.",ctaNote:"Available on Play Store",footerPrivacy:"Privacy policy",footerTerms:"Terms of use",footerDeletion:"Data deletion",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
-    es:{eyebrow:"Calendario vikingo",subtitle:"Valhalla Calendar es tu calendario vikingo, sincronizado y custodiado por los dioses del tiempo.",status:"Disponible en Play Store",featuresTitle:"Lo que guarda Valhalla",f1t:"Sincronización con Google",f1d:"Conecta tu cuenta de Google y recupera todos tus eventos, sin volver a introducir nada.",f2t:"Alarmas que despiertan",f2d:"Tonos personalizados y alertas a pantalla completa para no perder ninguna cita.",f3t:"Estilo rúnico",f3d:"19 tipografías góticas y vikingas, un fondo personalizable, un ambiente que se parece a ti.",f4t:"Fluido y sin conexión",f4d:"Una caché local mantiene tu mes a mano, incluso sin conexión.",ctaTitle:"Pronto en tu bolsillo",ctaDesc:"Valhalla Calendar está terminando sus últimos ajustes antes de llegar a la Play Store.",ctaNote:"Disponible en Play Store",footerPrivacy:"Política de privacidad",footerTerms:"Condiciones de uso",footerDeletion:"Eliminación de datos",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
-    hi:{eyebrow:"वाइकिंग कैलेंडर",subtitle:"Valhalla Calendar आपका वाइकिंग कैलेंडर है, जो सिंक है और समय के देवताओं द्वारा सुरक्षित है।",status:"Play Store पर उपलब्ध",featuresTitle:"वाल्हाला क्या सुरक्षित रखता है",f1t:"गूगल सिंक्रोनाइज़ेशन",f1d:"अपना गूगल खाता जोड़ें और बिना कुछ दोबारा टाइप किए अपने सभी इवेंट वापस पाएं।",f2t:"जगाने वाले अलार्म",f2d:"कस्टम रिंगटोन और फुल-स्क्रीन अलर्ट ताकि आप कोई अपॉइंटमेंट न चूकें।",f3t:"रूनिक रूप-सज्जा",f3d:"19 गॉथिक और वाइकिंग फ़ॉन्ट, एक अनुकूलन योग्य पृष्ठभूमि, एक माहौल जो आपको दर्शाता है।",f4t:"तेज़ और ऑफ़लाइन",f4d:"एक स्थानीय कैश आपके महीने को हाथों-हाथ रखता है, बिना कनेक्शन के भी।",ctaTitle:"जल्द ही आपकी जेब में",ctaDesc:"वाल्हाला कैलेंडर प्ले स्टोर पर आने से पहले अपने अंतिम समायोजन पूरे कर रहा है।",ctaNote:"Play Store पर उपलब्ध",footerPrivacy:"गोपनीयता नीति",footerTerms:"उपयोग की शर्तें",footerDeletion:"डेटा हटाना",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
-    "in":{eyebrow:"Kalender Viking",subtitle:"Valhalla Calendar adalah kalender viking Anda, tersinkron dan dijaga oleh para dewa waktu.",status:"Tersedia di Play Store",featuresTitle:"Apa yang dijaga Valhalla",f1t:"Sinkronisasi Google",f1d:"Hubungkan akun Google-mu dan temukan kembali semua acaramu, tanpa memasukkan ulang apa pun.",f2t:"Alarm yang membangunkan",f2d:"Nada dering khusus dan peringatan layar penuh agar kamu tidak melewatkan janji apa pun.",f3t:"Tampilan rune",f3d:"19 font gotik dan viking, latar belakang yang dapat disesuaikan, suasana yang mencerminkan dirimu.",f4t:"Lancar dan offline",f4d:"Cache lokal menjaga bulanmu tetap siap, bahkan tanpa koneksi.",ctaTitle:"Segera di sakumu",ctaDesc:"Valhalla Calendar sedang menyelesaikan sentuhan akhir sebelum bergabung dengan Play Store.",ctaNote:"Tersedia di Play Store",footerPrivacy:"Kebijakan privasi",footerTerms:"Syarat penggunaan",footerDeletion:"Penghapusan data",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
-    it:{eyebrow:"Calendario vichingo",subtitle:"Valhalla Calendar è il tuo calendario vichingo, sincronizzato e custodito dagli dei del tempo.",status:"Disponibile su Play Store",featuresTitle:"Cosa custodisce Valhalla",f1t:"Sincronizzazione Google",f1d:"Collega il tuo account Google e ritrova tutti i tuoi eventi, senza reinserire nulla.",f2t:"Allarmi che svegliano",f2d:"Suonerie personalizzate e avvisi a schermo intero per non perdere nessun appuntamento.",f3t:"Vestizione runica",f3d:"19 font gotici e vichinghi, uno sfondo personalizzabile, un'atmosfera che ti somiglia.",f4t:"Fluido e offline",f4d:"Una cache locale tiene il tuo mese a portata di mano, anche senza connessione.",ctaTitle:"Presto in tasca",ctaDesc:"Valhalla Calendar sta completando gli ultimi ritocchi prima di arrivare sul Play Store.",ctaNote:"Disponibile su Play Store",footerPrivacy:"Informativa sulla privacy",footerTerms:"Termini di utilizzo",footerDeletion:"Eliminazione dei dati",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
-    pt:{eyebrow:"Calendário viking",subtitle:"Valhalla Calendar é o teu calendário viking, sincronizado e guardado pelos deuses do tempo.",status:"Disponível na Play Store",featuresTitle:"O que Valhalla guarda",f1t:"Sincronização com o Google",f1d:"Liga a tua conta Google e recupera todos os teus eventos, sem voltar a inserir nada.",f2t:"Alarmes que acordam",f2d:"Toques personalizados e alertas em ecrã inteiro para não perderes nenhum compromisso.",f3t:"Visual rúnico",f3d:"19 tipos de letra góticos e vikings, um fundo personalizável, um ambiente que se parece contigo.",f4t:"Fluido e offline",f4d:"Uma cache local mantém o teu mês à mão, mesmo sem ligação.",ctaTitle:"Em breve no teu bolso",ctaDesc:"O Valhalla Calendar está a terminar os últimos ajustes antes de chegar à Play Store.",ctaNote:"Disponível na Play Store",footerPrivacy:"Política de privacidade",footerTerms:"Termos de utilização",footerDeletion:"Eliminação de dados",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
-    ru:{eyebrow:"Календарь викингов",subtitle:"Valhalla Calendar — это ваш календарь викингов, синхронизированный и хранимый богами времени.",status:"Доступно в Play Store",featuresTitle:"Что хранит Валгалла",f1t:"Синхронизация с Google",f1d:"Подключи свой аккаунт Google и найди все свои события заново, ничего не вводя повторно.",f2t:"Будильники, которые будят",f2d:"Персональные мелодии и полноэкранные уведомления, чтобы не пропустить ни одной встречи.",f3t:"Рунический стиль",f3d:"19 готических и викингских шрифтов, настраиваемый фон, атмосфера, которая тебе подходит.",f4t:"Плавно и офлайн",f4d:"Локальный кэш держит твой месяц под рукой, даже без подключения.",ctaTitle:"Скоро в твоём кармане",ctaDesc:"Valhalla Calendar завершает последние настройки перед выходом в Play Store.",ctaNote:"Доступно в Play Store",footerPrivacy:"Политика конфиденциальности",footerTerms:"Условия использования",footerDeletion:"Удаление данных",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
-    ur:{eyebrow:"وائکنگ کیلنڈر",subtitle:"Valhalla Calendar آپ کا وائکنگ کیلنڈر ہے، ہم وقت اور وقت کے دیوتاؤں کی نگرانی میں۔",status:"Play Store پر دستیاب",featuresTitle:"والہلا کیا محفوظ رکھتا ہے",f1t:"گوگل ہم وقتی",f1d:"اپنا گوگل اکاؤنٹ جوڑیں اور بغیر کچھ دوبارہ درج کیے اپنے تمام ایونٹس دوبارہ حاصل کریں۔",f2t:"جگانے والے الارم",f2d:"حسب ضرورت رنگ ٹونز اور فل اسکرین الرٹس تاکہ آپ کوئی ملاقات نہ چوکیں۔",f3t:"رونی انداز",f3d:"19 گوتھک اور وائکنگ فونٹس، ایک قابل تخصیص پس منظر، ایک ماحول جو آپ سے مشابہت رکھتا ہے۔",f4t:"روان اور آف لائن",f4d:"ایک مقامی کیش آپ کے مہینے کو ہاتھ میں رکھتا ہے، بغیر کنکشن کے بھی۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"والہلا کیلنڈر پلے اسٹور پر آنے سے پہلے اپنی آخری ترتیبات مکمل کر رہا ہے۔",ctaNote:"Play Store پر دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerTerms:"استعمال کی شرائط",footerDeletion:"ڈیٹا کا خاتمہ",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
-    zh:{eyebrow:"维京日历",subtitle:"Valhalla Calendar 是您的维京日历，由时间之神同步守护。",status:"已在 Play Store 上架",featuresTitle:"瓦尔哈拉守护的是什么",f1t:"谷歌同步",f1d:"连接你的谷歌账户，无需重新输入即可找回所有日程。",f2t:"唤醒式闹钟",f2d:"自定义铃声与全屏提醒，让你不错过任何约会。",f3t:"符文风格外观",f3d:"19种哥特与维京字体、可自定义的背景，营造属于你的氛围。",f4t:"流畅且可离线使用",f4d:"本地缓存让你的月历随时可用，即使没有网络连接。",ctaTitle:"即将装进你的口袋",ctaDesc:"Valhalla Calendar 正在做最后的调整，即将上线 Play 商店。",ctaNote:"已在 Play Store 上架",footerPrivacy:"隐私政策",footerTerms:"使用条款",footerDeletion:"数据删除",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
+    fr:{eyebrow:"Calendrier viking",subtitle:"Valhalla Calendar est votre calendrier viking, synchronisé et gardé par les dieux du temps.",status:"Google Play",featuresTitle:"Ce que garde Valhalla",f1t:"Synchronisation Google",f1d:"Connecte ton compte Google pour retrouver tous tes événements, sans rien ressaisir.",f2t:"Alarmes qui réveillent",f2d:"Sonneries personnalisées et alertes plein écran pour ne manquer aucun rendez-vous.",f3t:"Habillage runique",f3d:"19 polices gothiques et vikings, un fond personnalisable, une ambiance qui te ressemble.",f4t:"Fluide et hors-ligne",f4d:"Un cache local garde ton mois sous la main, même sans connexion.",ctaTitle:"Disponible dans ta poche",ctaDesc:"Valhalla Calendar est maintenant disponible sur le Play Store.",ctaNote:"Disponible sur Play Store",footerPrivacy:"Politique de confidentialité",footerTerms:"Conditions d'utilisation",footerDeletion:"Suppression des données",footerHome:"← Accueil",footerCopyright:"© 2026 · Forgé dans la rage et le sang"},
+    de:{eyebrow:"Wikingerkalender",subtitle:"Valhalla Calendar ist Ihr Wikingerkalender, synchronisiert und behütet von den Göttern der Zeit.",status:"Google Play",featuresTitle:"Was Valhalla bewahrt",f1t:"Google-Synchronisierung",f1d:"Verbinde dein Google-Konto und finde alle deine Termine wieder, ohne etwas neu einzugeben.",f2t:"Alarme, die dich wecken",f2d:"Individuelle Klingeltöne und Vollbild-Warnungen, damit du keinen Termin verpasst.",f3t:"Runisches Erscheinungsbild",f3d:"19 gotische und wikingische Schriftarten, ein anpassbarer Hintergrund, eine Atmosphäre, die zu dir passt.",f4t:"Flüssig und offline",f4d:"Ein lokaler Zwischenspeicher hält deinen Monat griffbereit, auch ohne Verbindung.",ctaTitle:"Bald in deiner Tasche",ctaDesc:"Valhalla Calendar erledigt die letzten Feinabstimmungen, bevor es in den Play Store kommt.",ctaNote:"Verfügbar im Play Store",footerPrivacy:"Datenschutzerklärung",footerTerms:"Nutzungsbedingungen",footerDeletion:"Datenlöschung",footerHome:"← Startseite",footerCopyright:"© 2026 · Geschmiedet in Wut und Blut"},
+    en:{eyebrow:"Viking calendar",subtitle:"Valhalla Calendar is your viking calendar, synced and watched over by the gods of time.",status:"Google Play",featuresTitle:"What Valhalla keeps",f1t:"Google sync",f1d:"Connect your Google account and find all your events again, without re-entering anything.",f2t:"Alarms that wake you",f2d:"Custom ringtones and full-screen alerts so you never miss an appointment.",f3t:"Runic styling",f3d:"19 gothic and viking fonts, a customisable background, an atmosphere that suits you.",f4t:"Smooth and offline",f4d:"A local cache keeps your month at hand, even without a connection.",ctaTitle:"Now in your pocket",ctaDesc:"Valhalla Calendar is putting the finishing touches before joining the Play Store.",ctaNote:"Available on Play Store",footerPrivacy:"Privacy policy",footerTerms:"Terms of use",footerDeletion:"Data deletion",footerHome:"← Home",footerCopyright:"© 2026 · Forged in rage and blood"},
+    es:{eyebrow:"Calendario vikingo",subtitle:"Valhalla Calendar es tu calendario vikingo, sincronizado y custodiado por los dioses del tiempo.",status:"Google Play",featuresTitle:"Lo que guarda Valhalla",f1t:"Sincronización con Google",f1d:"Conecta tu cuenta de Google y recupera todos tus eventos, sin volver a introducir nada.",f2t:"Alarmas que despiertan",f2d:"Tonos personalizados y alertas a pantalla completa para no perder ninguna cita.",f3t:"Estilo rúnico",f3d:"19 tipografías góticas y vikingas, un fondo personalizable, un ambiente que se parece a ti.",f4t:"Fluido y sin conexión",f4d:"Una caché local mantiene tu mes a mano, incluso sin conexión.",ctaTitle:"Pronto en tu bolsillo",ctaDesc:"Valhalla Calendar está terminando sus últimos ajustes antes de llegar a la Play Store.",ctaNote:"Disponible en Play Store",footerPrivacy:"Política de privacidad",footerTerms:"Condiciones de uso",footerDeletion:"Eliminación de datos",footerHome:"← Inicio",footerCopyright:"© 2026 · Forjado en la rabia y la sangre"},
+    hi:{eyebrow:"वाइकिंग कैलेंडर",subtitle:"Valhalla Calendar आपका वाइकिंग कैलेंडर है, जो सिंक है और समय के देवताओं द्वारा सुरक्षित है।",status:"Google Play",featuresTitle:"वाल्हाला क्या सुरक्षित रखता है",f1t:"गूगल सिंक्रोनाइज़ेशन",f1d:"अपना गूगल खाता जोड़ें और बिना कुछ दोबारा टाइप किए अपने सभी इवेंट वापस पाएं।",f2t:"जगाने वाले अलार्म",f2d:"कस्टम रिंगटोन और फुल-स्क्रीन अलर्ट ताकि आप कोई अपॉइंटमेंट न चूकें।",f3t:"रूनिक रूप-सज्जा",f3d:"19 गॉथिक और वाइकिंग फ़ॉन्ट, एक अनुकूलन योग्य पृष्ठभूमि, एक माहौल जो आपको दर्शाता है।",f4t:"तेज़ और ऑफ़लाइन",f4d:"एक स्थानीय कैश आपके महीने को हाथों-हाथ रखता है, बिना कनेक्शन के भी।",ctaTitle:"जल्द ही आपकी जेब में",ctaDesc:"वाल्हाला कैलेंडर प्ले स्टोर पर आने से पहले अपने अंतिम समायोजन पूरे कर रहा है।",ctaNote:"Play Store पर उपलब्ध",footerPrivacy:"गोपनीयता नीति",footerTerms:"उपयोग की शर्तें",footerDeletion:"डेटा हटाना",footerHome:"← मुख पृष्ठ",footerCopyright:"© 2026 · क्रोध और रक्त में गढ़ा गया"},
+    "in":{eyebrow:"Kalender Viking",subtitle:"Valhalla Calendar adalah kalender viking Anda, tersinkron dan dijaga oleh para dewa waktu.",status:"Google Play",featuresTitle:"Apa yang dijaga Valhalla",f1t:"Sinkronisasi Google",f1d:"Hubungkan akun Google-mu dan temukan kembali semua acaramu, tanpa memasukkan ulang apa pun.",f2t:"Alarm yang membangunkan",f2d:"Nada dering khusus dan peringatan layar penuh agar kamu tidak melewatkan janji apa pun.",f3t:"Tampilan rune",f3d:"19 font gotik dan viking, latar belakang yang dapat disesuaikan, suasana yang mencerminkan dirimu.",f4t:"Lancar dan offline",f4d:"Cache lokal menjaga bulanmu tetap siap, bahkan tanpa koneksi.",ctaTitle:"Segera di sakumu",ctaDesc:"Valhalla Calendar sedang menyelesaikan sentuhan akhir sebelum bergabung dengan Play Store.",ctaNote:"Tersedia di Play Store",footerPrivacy:"Kebijakan privasi",footerTerms:"Syarat penggunaan",footerDeletion:"Penghapusan data",footerHome:"← Beranda",footerCopyright:"© 2026 · Ditempa dalam amarah dan darah"},
+    it:{eyebrow:"Calendario vichingo",subtitle:"Valhalla Calendar è il tuo calendario vichingo, sincronizzato e custodito dagli dei del tempo.",status:"Google Play",featuresTitle:"Cosa custodisce Valhalla",f1t:"Sincronizzazione Google",f1d:"Collega il tuo account Google e ritrova tutti i tuoi eventi, senza reinserire nulla.",f2t:"Allarmi che svegliano",f2d:"Suonerie personalizzate e avvisi a schermo intero per non perdere nessun appuntamento.",f3t:"Vestizione runica",f3d:"19 font gotici e vichinghi, uno sfondo personalizzabile, un'atmosfera che ti somiglia.",f4t:"Fluido e offline",f4d:"Una cache locale tiene il tuo mese a portata di mano, anche senza connessione.",ctaTitle:"Presto in tasca",ctaDesc:"Valhalla Calendar sta completando gli ultimi ritocchi prima di arrivare sul Play Store.",ctaNote:"Disponibile su Play Store",footerPrivacy:"Informativa sulla privacy",footerTerms:"Termini di utilizzo",footerDeletion:"Eliminazione dei dati",footerHome:"← Home",footerCopyright:"© 2026 · Forgiato nella rabbia e nel sangue"},
+    pt:{eyebrow:"Calendário viking",subtitle:"Valhalla Calendar é o teu calendário viking, sincronizado e guardado pelos deuses do tempo.",status:"Google Play",featuresTitle:"O que Valhalla guarda",f1t:"Sincronização com o Google",f1d:"Liga a tua conta Google e recupera todos os teus eventos, sem voltar a inserir nada.",f2t:"Alarmes que acordam",f2d:"Toques personalizados e alertas em ecrã inteiro para não perderes nenhum compromisso.",f3t:"Visual rúnico",f3d:"19 tipos de letra góticos e vikings, um fundo personalizável, um ambiente que se parece contigo.",f4t:"Fluido e offline",f4d:"Uma cache local mantém o teu mês à mão, mesmo sem ligação.",ctaTitle:"Em breve no teu bolso",ctaDesc:"O Valhalla Calendar está a terminar os últimos ajustes antes de chegar à Play Store.",ctaNote:"Disponível na Play Store",footerPrivacy:"Política de privacidade",footerTerms:"Termos de utilização",footerDeletion:"Eliminação de dados",footerHome:"← Início",footerCopyright:"© 2026 · Forjado na fúria e no sangue"},
+    ru:{eyebrow:"Календарь викингов",subtitle:"Valhalla Calendar — это ваш календарь викингов, синхронизированный и хранимый богами времени.",status:"Google Play",featuresTitle:"Что хранит Валгалла",f1t:"Синхронизация с Google",f1d:"Подключи свой аккаунт Google и найди все свои события заново, ничего не вводя повторно.",f2t:"Будильники, которые будят",f2d:"Персональные мелодии и полноэкранные уведомления, чтобы не пропустить ни одной встречи.",f3t:"Рунический стиль",f3d:"19 готических и викингских шрифтов, настраиваемый фон, атмосфера, которая тебе подходит.",f4t:"Плавно и офлайн",f4d:"Локальный кэш держит твой месяц под рукой, даже без подключения.",ctaTitle:"Скоро в твоём кармане",ctaDesc:"Valhalla Calendar завершает последние настройки перед выходом в Play Store.",ctaNote:"Доступно в Play Store",footerPrivacy:"Политика конфиденциальности",footerTerms:"Условия использования",footerDeletion:"Удаление данных",footerHome:"← Главная",footerCopyright:"© 2026 · Выковано в ярости и крови"},
+    ur:{eyebrow:"وائکنگ کیلنڈر",subtitle:"Valhalla Calendar آپ کا وائکنگ کیلنڈر ہے، ہم وقت اور وقت کے دیوتاؤں کی نگرانی میں۔",status:"Google Play",featuresTitle:"والہلا کیا محفوظ رکھتا ہے",f1t:"گوگل ہم وقتی",f1d:"اپنا گوگل اکاؤنٹ جوڑیں اور بغیر کچھ دوبارہ درج کیے اپنے تمام ایونٹس دوبارہ حاصل کریں۔",f2t:"جگانے والے الارم",f2d:"حسب ضرورت رنگ ٹونز اور فل اسکرین الرٹس تاکہ آپ کوئی ملاقات نہ چوکیں۔",f3t:"رونی انداز",f3d:"19 گوتھک اور وائکنگ فونٹس، ایک قابل تخصیص پس منظر، ایک ماحول جو آپ سے مشابہت رکھتا ہے۔",f4t:"روان اور آف لائن",f4d:"ایک مقامی کیش آپ کے مہینے کو ہاتھ میں رکھتا ہے، بغیر کنکشن کے بھی۔",ctaTitle:"جلد آپ کی جیب میں",ctaDesc:"والہلا کیلنڈر پلے اسٹور پر آنے سے پہلے اپنی آخری ترتیبات مکمل کر رہا ہے۔",ctaNote:"Play Store پر دستیاب",footerPrivacy:"پرائیویسی پالیسی",footerTerms:"استعمال کی شرائط",footerDeletion:"ڈیٹا کا خاتمہ",footerHome:"← ہوم",footerCopyright:"© 2026 · غضب اور خون میں ڈھالا گیا"},
+    zh:{eyebrow:"维京日历",subtitle:"Valhalla Calendar 是您的维京日历，由时间之神同步守护。",status:"Google Play",featuresTitle:"瓦尔哈拉守护的是什么",f1t:"谷歌同步",f1d:"连接你的谷歌账户，无需重新输入即可找回所有日程。",f2t:"唤醒式闹钟",f2d:"自定义铃声与全屏提醒，让你不错过任何约会。",f3t:"符文风格外观",f3d:"19种哥特与维京字体、可自定义的背景，营造属于你的氛围。",f4t:"流畅且可离线使用",f4d:"本地缓存让你的月历随时可用，即使没有网络连接。",ctaTitle:"即将装进你的口袋",ctaDesc:"Valhalla Calendar 正在做最后的调整，即将上线 Play 商店。",ctaNote:"已在 Play Store 上架",footerPrivacy:"隐私政策",footerTerms:"使用条款",footerDeletion:"数据删除",footerHome:"← 首页",footerCopyright:"© 2026 · 锻造于愤怒与鲜血"}
   };
 
   var purposeTexts = {
@@ -209,18 +197,12 @@
   var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var animationRun=0;
   function randomRune(){return RUNES[Math.floor(Math.random()*RUNES.length)];}
-  function decodeText(el,text,delay,run){
-    var final=text!==undefined?text:el.textContent;
-    if(reduceMotion){el.textContent=final;return;}
-    el.innerHTML='';
-    var chars=Array.from(final),spans=[];
-    chars.forEach(function(ch){if(/\s/u.test(ch)){el.appendChild(document.createTextNode(ch));spans.push(null);return;}var s=document.createElement('span');s.className='rune-char';s.textContent=randomRune();el.appendChild(s);spans.push(s);});
-    var longText=chars.length>90,step=longText?Math.max(3,Math.min(15,1800/Math.max(chars.length,1))):70,interval=longText?45:80;
-    chars.forEach(function(ch,i){var span=spans[i];if(!span)return;var flickers=longText?3:5+Math.floor(Math.random()*4),start=delay+i*step;for(var f=0;f<flickers;f++)(function(f){setTimeout(function(){if(run===animationRun)span.textContent=randomRune();},start+f*interval);})(f);setTimeout(function(){if(run!==animationRun)return;span.textContent=ch;span.classList.add('settling');setTimeout(function(){span.classList.remove('settling');},1000);},start+flickers*interval);});
-  }
+  function decodeText(el,text,delay,run){if(text!==undefined)el.textContent=text;}
   function decodeCascade(){animationRun++;var run=animationRun;document.querySelectorAll('.brand,[data-i18n],.show-kicker').forEach(function(el,idx){setTimeout(function(){decodeText(el,el.textContent,0,run);},idx*180);});}
 
   function applyLang(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='ur'?'rtl':'ltr';
     var dict = translations[lang];
     if(!dict) return;
     animationRun++;
@@ -274,6 +256,6 @@
   }
   decodeCascade();
 </script>
-<script data-goatcounter="https://barbaredestroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script async="" data-goatcounter="https://barbaredestroy.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
